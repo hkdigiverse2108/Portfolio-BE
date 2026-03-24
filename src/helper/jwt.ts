@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken'
 import mongoose from 'mongoose'
 import {  apiResponse } from '../common'
 import { Request, Response } from 'express'
-import { responseMessage } from './response'
+import { responseMessage } from './responseMessage'
 
 const ObjectId = mongoose.Types.ObjectId
 const jwt_token_secret = process.env.JWT_TOKEN_SECRET;

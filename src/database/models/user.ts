@@ -1,17 +1,23 @@
-const mongoose = require('mongoose')
+import mongoose from "mongoose";
+import { IUser } from "../../type";
+import { baseCommonFields, baseSchemaOptions } from "./base";
 
-const userSchema: any = new mongoose.Schema({
-    name: { type: String },
-    email: { type: String, required: true },
-    phoneNumber: { type: String },
+const userSchema = new mongoose.Schema<IUser>(
+  {
+    fullName: { type: String },
+    email: { type: String, lowercase: true, trim: true },
+    phoneNo: {
+      countryCode: { type: String },
+      number: { type: Number },
+    },
     password: { type: String },
-    profilePhoto: { type: String },
-    otp: { type: Number, default: null },
-    otpExpireTime: { type: Date, default: null },
-    isEmailVerified: { type: Boolean, default: false },
-    isActive: { type: Boolean, default: true },
-    isBlock: { type: Boolean, default: false },
-    isLoggedIn: { type: Boolean, default: false },
-}, { timestamps: true })
+    profileImage: { type: String },
+    //   otp: { type: Number, default: null },
+    //   otpExpireTime: { type: Date, default: null },
+    //   isEmailVerified: { type: Boolean, default: false },
+    ...baseCommonFields,
+  },
+  baseSchemaOptions,
+);
 
-export const userModel = mongoose.model('user', userSchema);
+export const userModel = mongoose.model<IUser>("user", userSchema);

@@ -1,29 +1,66 @@
-
-
-
-
+import { apiResponse, generateHash, generateToken, HTTP_STATUS } from "../../common";
+import { userModel } from "../../database";
+import { createOne, getFirstMatch, reqInfo, responseMessage } from "../../helper";
+import { ILoginValidate, IRegisterValidate } from "../../type";
+import { loginSchema, registerSchema } from "../../validation";
+import bcryptjs from "bcryptjs";
 
 export const register = async (req, res) => {
+  reqInfo(req);
+  try {
+    const { error, value }: IRegisterValidate = registerSchema.validate(req.body);
 
-}
+    if (error) return res.status(HTTP_STATUS.BAD_GATEWAY).json(new apiResponse(HTTP_STATUS.BAD_GATEWAY, error?.details[0]?.message, {}, {}));
 
+    let criteria: any = {};
+    if (value?.email) criteria.$or.push({ email: value?.email });
+    if (value?.phoneNo?.number) criteria.$or.push({ "phoneNo.number": value?.phoneNo?.number });
 
+    let existingUser = await getFirstMatch(userModel, criteria, {}, {});
+    if (existingUser) {
+      if (existingUser?.email === value?.email) return res.status(HTTP_STATUS.CONFLICT).json(new apiResponse(HTTP_STATUS.CONFLICT, responseMessage?.dataAlreadyExist("Email"), {}, {}));
+      if (existingUser?.phoneNo?.number === value?.phoneNo?.number) return res.status(HTTP_STATUS.CONFLICT).json(new apiResponse(HTTP_STATUS.CONFLICT, responseMessage?.dataAlreadyExist("Phone Number"), {}, {}));
+      return res.status(HTTP_STATUS.CONFLICT).json(new apiResponse(HTTP_STATUS.CONFLICT, responseMessage?.dataAlreadyExist("User"), {}, {}));
+    }
 
+    value.password = await generateHash(value.password);
 
+    let response = await createOne(userModel, value);
+    if (!response) return res.status(HTTP_STATUS.NOT_IMPLEMENTED).json(new apiResponse(HTTP_STATUS.NOT_IMPLEMENTED, responseMessage?.addDataError, {}, {}));
 
+    const token = await generateToken({ _id: response?._id, status: "register", generatedOn: new Date().getTime() }, { expiresIn: "24h" });
+    delete response.password;
+    response.token = token;
 
+    return res.status(HTTP_STATUS.OK).json(new apiResponse(HTTP_STATUS.OK, responseMessage?.signupSuccess, response, {}));
+  } catch (error) {
+    console.error(error);
+    return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json(new apiResponse(HTTP_STATUS.INTERNAL_SERVER_ERROR, responseMessage?.internalServerError, {}, error));
+  }
+};
 
+export const login = async (req, res) => {
+  reqInfo(req);
+  try {
+    const { error, value }: ILoginValidate = loginSchema.validate(req.body);
+    if (error) return res.status(HTTP_STATUS.BAD_GATEWAY).json(new apiResponse(HTTP_STATUS.BAD_GATEWAY, error?.details[0]?.message, {}, {}));
 
+    let response = await getFirstMatch(userModel, { email: value?.email, isDeleted: false }, {}, {});
 
+    if (!response) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, responseMessage?.invalidUserPasswordEmail, {}, {}));
+    const comparePassword = await bcryptjs.compare(value?.password, response?.password);
+    if (!comparePassword) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, responseMessage?.invalidUserPasswordEmail, {}, {}));
 
-
-
-
-
-
-
-
-
+    const token = await generateToken({ _id: response?._id, status: "login", generatedOn: new Date().getTime() }, { expiresIn: "24h" });
+    const { password: _, ...userData } = response._doc || response;
+    const result = { ...userData, token };
+    console.log("response => ", result);
+    return res.status(HTTP_STATUS.OK).json(new apiResponse(HTTP_STATUS.OK, responseMessage?.loginSuccess, result, {}));
+  } catch (error) {
+    console.error(error);
+    return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json(new apiResponse(HTTP_STATUS.INTERNAL_SERVER_ERROR, responseMessage?.internalServerError, {}, error));
+  }
+};
 
 // import bcryptjs from "bcryptjs";
 // import jwt from "jsonwebtoken";

@@ -7,6 +7,7 @@ import cors from "cors";
 import { mongooseConnection } from "./database";
 import * as packageInfo from "../package.json";
 import { router } from "./routes";
+import { HTTP_STATUS } from "./common";
 
 const app = express();
 
@@ -25,9 +26,6 @@ const health = (req, res) => {
     license: packageInfo.license,
   });
 };
-const bad_gateway = (req, res) => {
-  return res.status(502).json({ status: 502, message: "Project Name Backend API Bad Gateway" });
-};
 
 app.get("/", health);
 app.get("/health", health);
@@ -37,7 +35,12 @@ app.get("/isServerUp", (req, res) => {
 
 app.use(router);
 
-app.all(/.*/, bad_gateway);
+app.use((_, res) => {
+  res.status(HTTP_STATUS.NOT_FOUND).json({
+    status: HTTP_STATUS.NOT_FOUND,
+    message: "Project Name Backend API Bad Gateway",
+  });
+});
 
 let server = new http.Server(app);
 export default server;
