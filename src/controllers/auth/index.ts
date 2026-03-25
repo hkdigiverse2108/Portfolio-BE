@@ -1,9 +1,9 @@
-import { apiResponse, generateHash, generateToken, HTTP_STATUS } from "../../common";
-import { userModel } from "../../database";
-import { createOne, getFirstMatch, reqInfo, responseMessage } from "../../helper";
-import { ILoginValidate, IRegisterValidate } from "../../type";
-import { loginSchema, registerSchema } from "../../validation";
 import bcryptjs from "bcryptjs";
+import { apiResponse, generateHash, generateToken, getOtpExpireTime, getUniqueOtp, HTTP_STATUS } from "../../common";
+import { userModel } from "../../database";
+import { createOne, emailVerificationMail, getFirstMatch, reqInfo, responseMessage, updateData } from "../../helper";
+import { IForgotPasswordValidate, ILoginValidate, IRegisterValidate, IResendOtpValidate, IResetPasswordValidate, IUpdatePasswordValidate, IVerifyOtpValidate } from "../../type";
+import { forgotPasswordSchema, loginSchema, registerSchema, resendOtpSchema, resetPasswordSchema, updatePasswordSchema, verifyOtpSchema } from "../../validation";
 
 export const register = async (req, res) => {
   reqInfo(req);
@@ -12,14 +12,12 @@ export const register = async (req, res) => {
 
     if (error) return res.status(HTTP_STATUS.BAD_GATEWAY).json(new apiResponse(HTTP_STATUS.BAD_GATEWAY, error?.details[0]?.message, {}, {}));
 
-    let criteria: any = {};
+    let criteria = { $or: [] };
     if (value?.email) criteria.$or.push({ email: value?.email });
-    if (value?.phoneNo?.number) criteria.$or.push({ "phoneNo.number": value?.phoneNo?.number });
 
     let existingUser = await getFirstMatch(userModel, criteria, {}, {});
     if (existingUser) {
       if (existingUser?.email === value?.email) return res.status(HTTP_STATUS.CONFLICT).json(new apiResponse(HTTP_STATUS.CONFLICT, responseMessage?.dataAlreadyExist("Email"), {}, {}));
-      if (existingUser?.phoneNo?.number === value?.phoneNo?.number) return res.status(HTTP_STATUS.CONFLICT).json(new apiResponse(HTTP_STATUS.CONFLICT, responseMessage?.dataAlreadyExist("Phone Number"), {}, {}));
       return res.status(HTTP_STATUS.CONFLICT).json(new apiResponse(HTTP_STATUS.CONFLICT, responseMessage?.dataAlreadyExist("User"), {}, {}));
     }
 
@@ -51,290 +49,146 @@ export const login = async (req, res) => {
     const comparePassword = await bcryptjs.compare(value?.password, response?.password);
     if (!comparePassword) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, responseMessage?.invalidUserPasswordEmail, {}, {}));
 
+    if (response?.isActive === false) return res.status(HTTP_STATUS.FORBIDDEN).json(new apiResponse(HTTP_STATUS.FORBIDDEN, responseMessage?.accountBlock, {}, {}));
+
+    // OTP Generation
+    const otp = await getUniqueOtp();
+    if (response?.email) emailVerificationMail(response, otp);
+    const otpExpireTime = getOtpExpireTime();
+    await userModel.findOneAndUpdate({ _id: response?._id }, { otp, otpExpireTime }, { returnDocument: "after" });
+
     const token = await generateToken({ _id: response?._id, status: "login", generatedOn: new Date().getTime() }, { expiresIn: "24h" });
-    const { password: _, ...userData } = response._doc || response;
-    const result = { ...userData, token };
-    console.log("response => ", result);
-    return res.status(HTTP_STATUS.OK).json(new apiResponse(HTTP_STATUS.OK, responseMessage?.loginSuccess, result, {}));
+    delete response.password;
+    response.token = token;
+
+    return res.status(HTTP_STATUS.OK).json(new apiResponse(HTTP_STATUS.OK, responseMessage?.loginSuccess, response, {}));
   } catch (error) {
     console.error(error);
     return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json(new apiResponse(HTTP_STATUS.INTERNAL_SERVER_ERROR, responseMessage?.internalServerError, {}, error));
   }
 };
 
-// import bcryptjs from "bcryptjs";
-// import jwt from "jsonwebtoken";
-// import { Request, Response } from "express";
-// import { userModel, userSessionModel } from "../../database";
-// import { apiResponse } from "../../common";
-// import { email_verification_mail, reqInfo, responseMessage } from "../../helper";
-// const ObjectId = require("mongoose").Types.ObjectId;
-// const jwt_token_secret = process.env.JWT_TOKEN_SECRET;
+export const forgotPassword = async (req, res) => {
+  reqInfo(req);
+  try {
+    const { error, value }: IForgotPasswordValidate = forgotPasswordSchema.validate(req.body);
 
-// export const signUp = async (req: Request, res: Response) => {
-//   reqInfo(req);
-//   try {
-//     let body = req.body,
-//       otp,
-//       otpFlag = 1, // OTP has already assign or not for cross-verification
-//       authToken = 0;
-//     let isAlready: any = await userModel.findOne({ email: body?.email, isActive: true });
-//     if (isAlready) return res.status(409).json(new apiResponse(409, responseMessage?.alreadyEmail, {}, {}));
-//     isAlready = await userModel.findOne({ phoneNumber: body?.phoneNumber, isActive: true });
-//     if (isAlready) return res.status(409).json(new apiResponse(409, "phone number exist already", {}, {}));
+    if (error) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, error?.details[0]?.message, {}, {}));
 
-//     if (isAlready?.isBlock == true) return res.status(403).json(new apiResponse(403, responseMessage?.accountBlock, {}, {}));
+    let response = await getFirstMatch(userModel, { email: value?.email, isDeleted: false }, {}, {});
+    if (!response) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, responseMessage?.getDataNotFound("User"), {}, {}));
+    if (response?.isActive === false) return res.status(HTTP_STATUS.FORBIDDEN).json(new apiResponse(HTTP_STATUS.FORBIDDEN, responseMessage?.accountBlock, {}, {}));
 
-//     const salt = await bcryptjs.genSaltSync(10);
-//     const hashPassword = await bcryptjs.hash(body.password, salt);
-//     delete body.password;
-//     body.password = hashPassword;
-//     let response = await new userModel(body).save();
-//     response = {
-//       userType: response?.userType,
-//       isEmailVerified: response?.isEmailVerified,
-//       _id: response?._id,
-//       email: response?.email,
-//     };
+    const otp = await getUniqueOtp();
+    const otpExpireTime = getOtpExpireTime();
 
-//     while (otpFlag == 1) {
-//       for (let flag = 0; flag < 1; ) {
-//         otp = await Math.round(Math.random() * 1000000);
-//         if (otp.toString().length == 6) {
-//           flag++;
-//         }
-//       }
-//       let isAlreadyAssign = await userModel.findOne({ otp: otp });
-//       if (isAlreadyAssign?.otp != otp) otpFlag = 0;
-//     }
+    if (response?.email) emailVerificationMail(response, otp);
 
-//     let result: any = await email_verification_mail(response, otp);
-//     if (result) {
-//       await userModel.findOneAndUpdate(body, { otp, otpExpireTime: new Date(new Date().setMinutes(new Date().getMinutes() + 10)) });
-//       return res.status(200).json(new apiResponse(200, `${result}`, {}, {}));
-//     } else return res.status(501).json(new apiResponse(501, responseMessage?.errorMail, {}, `${result}`));
-//   } catch (error) {
-//     console.log(error);
-//     return res.status(500).json(new apiResponse(500, responseMessage?.internalServerError, {}, error));
-//   }
-// };
+    response = await updateData(userModel, { _id: response?._id }, { otp, otpExpireTime }, {});
 
-// export const otp_verification = async (req: Request, res: Response) => {
-//   reqInfo(req);
-//   let body = req.body;
-//   try {
-//     body.isActive = true;
-//     let data = await userModel.findOne(body);
-//     if (!data) return res.status(400).json(new apiResponse(400, responseMessage?.invalidOTP, {}, {}));
-//     if (data.isBlock == true) return res.status(403).json(new apiResponse(403, responseMessage?.accountBlock, {}, {}));
-//     if (new Date(data.otpExpireTime).getTime() < new Date().getTime()) return res.status(410).json(new apiResponse(410, responseMessage?.expireOTP, {}, {}));
-//     if (data) {
-//       let response = await userModel.findOneAndUpdate(body, { otp: null, otpExpireTime: null, isEmailVerified: true, isLoggedIn: true }, { new: true });
-//       const token = jwt.sign(
-//         {
-//           _id: response._id,
-//           type: response.userType,
-//           status: "Login",
-//           generatedOn: new Date().getTime(),
-//         },
-//         jwt_token_secret,
-//       );
+    return res.status(HTTP_STATUS.OK).json(new apiResponse(HTTP_STATUS.OK, responseMessage?.resendOtpSuccess, {}, {}));
+  } catch (error) {
+    console.error(error);
+    return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json(new apiResponse(HTTP_STATUS.INTERNAL_SERVER_ERROR, responseMessage?.internalServerError, {}, error));
+  }
+};
 
-//       await new userSessionModel({
-//         createdBy: response._id,
-//       }).save();
+export const updatePassword = async (req, res) => {
+  reqInfo(req);
+  try {
+    const { error, value }: IUpdatePasswordValidate = updatePasswordSchema.validate(req.body);
 
-//       let result = {
-//         isEmailVerified: response?.isEmailVerified,
-//         userType: response?.userType,
-//         _id: response?._id,
-//         email: response?.email,
-//         token,
-//       };
-//       return res.status(200).json(new apiResponse(200, responseMessage?.OTPVerified, result, {}));
-//     }
-//   } catch (error) {
-//     return res.status(500).json(new apiResponse(500, responseMessage?.internalServerError, {}, error));
-//   }
-// };
+    if (error) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, error?.details[0]?.message, {}, {}));
+    if (value.newPassword !== value.confirmPassword) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, responseMessage?.customMessage("Password do not match."), {}, {}));
 
-// export const login = async (req: Request, res: Response) => {
-//   //email or password // phone or password
-//   let body = req.body,
-//     response: any;
-//   reqInfo(req);
-//   try {
-//     response = await userModel.findOneAndUpdate({ email: body?.email, isActive: true, userType: 0 }, { $addToSet: { deviceToken: body?.deviceToken }, isLoggedIn: true }).select("-__v -createdAt -updatedAt");
+    let response = await getFirstMatch(userModel, { email: value?.email, isDeleted: false }, {}, {});
+    if (!response) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, responseMessage?.getDataNotFound("User"), {}, {}));
+    if (response?.isActive === false) return res.status(HTTP_STATUS.FORBIDDEN).json(new apiResponse(HTTP_STATUS.FORBIDDEN, responseMessage?.accountBlock, {}, {}));
 
-//     if (!response) return res.status(400).json(new apiResponse(400, responseMessage?.invalidUserPasswordEmail, {}, {}));
-//     if (response?.isBlock == true) return res.status(403).json(new apiResponse(403, responseMessage?.accountBlock, {}, {}));
+    const hashPassword = await generateHash(value?.newPassword);
 
-//     const passwordMatch = await bcryptjs.compare(body.password, response.password);
-//     if (!passwordMatch) return res.status(400).json(new apiResponse(400, responseMessage?.invalidUserPasswordEmail, {}, {}));
-//     const token = jwt.sign(
-//       {
-//         _id: response._id,
-//         type: response.userType,
-//         status: "Login",
-//         generatedOn: new Date().getTime(),
-//       },
-//       jwt_token_secret,
-//     );
+    await updateData(userModel, { _id: response?._id }, { password: hashPassword, otp: null, otpExpireTime: null }, {});
 
-//     await new userSessionModel({
-//       createdBy: response._id,
-//     }).save();
-//     response = {
-//       isEmailVerified: response?.isEmailVerified,
-//       userType: response?.userType,
-//       _id: response?._id,
-//       email: response?.email,
-//       token,
-//     };
-//     return res.status(200).json(new apiResponse(200, responseMessage?.loginSuccess, response, {}));
-//   } catch (error) {
-//     return res.status(500).json(new apiResponse(500, responseMessage?.internalServerError, {}, error));
-//   }
-// };
+    return res.status(HTTP_STATUS.OK).json(new apiResponse(HTTP_STATUS.OK, responseMessage?.resetPasswordSuccess, {}, {}));
+  } catch (error) {
+    console.error(error);
+    return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json(new apiResponse(HTTP_STATUS.INTERNAL_SERVER_ERROR, responseMessage?.internalServerError, {}, {}));
+  }
+};
 
-// export const forgot_password = async (req: Request, res: Response) => {
-//   reqInfo(req);
-//   let body = req.body, //email or phoneNumber
-//     otpFlag = 1, // OTP has already assign or not for cross-verification
-//     otp = 0;
-//   try {
-//     body.isActive = true;
-//     let data = await userModel.findOne(body);
+export const resetPassword = async (req, res) => {
+  reqInfo(req);
+  try {
+    const { error, value }: IResetPasswordValidate = resetPasswordSchema.validate(req.body);
 
-//     if (!data) {
-//       return res.status(400).json(new apiResponse(400, responseMessage?.invalidEmail, {}, {}));
-//     }
-//     if (data.isBlock == true) {
-//       return res.status(403).json(new apiResponse(403, responseMessage?.accountBlock, {}, {}));
-//     }
+    if (error) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, error?.details[0]?.message, {}, {}));
+    if (value.newPassword !== value.confirmPassword) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, responseMessage?.customMessage("Password do not match."), {}, {}));
 
-//     while (otpFlag == 1) {
-//       for (let flag = 0; flag < 1; ) {
-//         otp = await Math.round(Math.random() * 1000000);
-//         if (otp.toString().length == 6) {
-//           flag++;
-//         }
-//       }
-//       let isAlreadyAssign = await userModel.findOne({ otp: otp });
-//       if (isAlreadyAssign?.otp != otp) otpFlag = 0;
-//     }
-//     let response: any = { sendMail: true };
-//     if (response) {
-//       await userModel.findOneAndUpdate(body, { otp, otpExpireTime: new Date(new Date().setMinutes(new Date().getMinutes() + 10)) });
-//       return res.status(200).json(new apiResponse(200, `${response}`, {}, {}));
-//     } else return res.status(501).json(new apiResponse(501, responseMessage?.errorMail, {}, `${response}`));
-//   } catch (error) {
-//     return res.status(500).json(new apiResponse(500, responseMessage?.internalServerError, {}, error));
-//   }
-// };
+    let response = await getFirstMatch(userModel, { email: value?.email, isDeleted: false }, {}, {});
+    if (!response) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, responseMessage?.getDataNotFound("User"), {}, {}));
+    if (response?.isActive === false) return res.status(HTTP_STATUS.FORBIDDEN).json(new apiResponse(HTTP_STATUS.FORBIDDEN, responseMessage?.accountBlock, {}, {}));
+    if (value?.oldPassword === value?.newPassword) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, responseMessage?.passwordSameError, {}, {}));
 
-// export const reset_password = async (req: Request, res: Response) => {
-//   reqInfo(req);
-//   let body = req.body,
-//     { email } = body;
+    const comparePassword = await bcryptjs.compare(value?.oldPassword, response?.password);
+    if (!comparePassword) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, responseMessage?.invalidUserPasswordEmail, {}, {}));
 
-//   try {
-//     const salt = await bcryptjs.genSaltSync(10);
-//     const hashPassword = await bcryptjs.hash(body.password, salt);
-//     delete body.password;
-//     delete body.id;
-//     body.password = hashPassword;
+    const hashPassword = await generateHash(value?.newPassword);
 
-//     let response = await userModel.findOneAndUpdate({ email: body?.email, isActive: true, otp: null }, body, { new: true });
-//     if (response) {
-//       return res.status(200).json(new apiResponse(200, responseMessage?.resetPasswordSuccess, response, {}));
-//     } else return res.status(501).json(new apiResponse(501, responseMessage?.resetPasswordError, {}, {}));
-//   } catch (error) {
-//     return res.status(500).json(new apiResponse(500, responseMessage?.internalServerError, {}, error));
-//   }
-// };
+    await updateData(userModel, { _id: response?._id }, { password: hashPassword }, {});
 
-// export const adminSignUp = async (req: Request, res: Response) => {
-//   reqInfo(req);
-//   try {
-//     let body = req.body,
-//       otp,
-//       otpFlag = 1; // OTP has already assign or not for cross-verification
-//     let isAlready = await userModel.findOne({ email: body?.email, isActive: true, userType: 1 });
-//     if (isAlready) return res.status(409).json(new apiResponse(409, responseMessage?.alreadyEmail, {}, {}));
+    return res.status(HTTP_STATUS.OK).json(new apiResponse(HTTP_STATUS.OK, responseMessage?.resetPasswordSuccess, {}, {}));
+  } catch (error) {
+    console.error(error);
+    return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json(new apiResponse(HTTP_STATUS.INTERNAL_SERVER_ERROR, responseMessage?.internalServerError, {}, {}));
+  }
+};
 
-//     if (isAlready?.isBlock == true) return res.status(403).json(new apiResponse(403, responseMessage?.accountBlock, {}, {}));
+export const verifyOtp = async (req, res) => {
+  reqInfo(req);
+  try {
+    const { error, value }: IVerifyOtpValidate = verifyOtpSchema.validate(req.body);
 
-//     const salt = await bcryptjs.genSaltSync(10);
-//     const hashPassword = await bcryptjs.hash(body.password, salt);
-//     delete body.password;
-//     body.password = hashPassword;
-//     body.userType = 1; //to specify this user is admin
-//     let response = await new userModel(body).save();
-//     response = {
-//       userType: response?.userType,
-//       isEmailVerified: response?.isEmailVerified,
-//       _id: response?._id,
-//       email: response?.email,
-//     };
+    if (error) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, error?.details[0]?.message, {}, {}));
 
-//     while (otpFlag == 1) {
-//       for (let flag = 0; flag < 1; ) {
-//         otp = await Math.round(Math.random() * 1000000);
-//         if (otp.toString().length == 6) {
-//           flag++;
-//         }
-//       }
-//       let isAlreadyAssign = await userModel.findOne({ otp: otp });
-//       if (isAlreadyAssign?.otp != otp) otpFlag = 0;
-//     }
+    let response = await getFirstMatch(userModel, { email: value?.email, isDeleted: false }, {}, {});
+    if (!response) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, responseMessage?.getDataNotFound("User"), {}, {}));
+    if (response?.isActive === false) return res.status(HTTP_STATUS.FORBIDDEN).json(new apiResponse(HTTP_STATUS.FORBIDDEN, responseMessage?.accountBlock, {}, {}));
 
-//     let result: any = await email_verification_mail(response, otp);
-//     if (result) {
-//       await userModel.findOneAndUpdate(body, { otp, otpExpireTime: new Date(new Date().setMinutes(new Date().getMinutes() + 10)) });
-//       return res.status(200).json(new apiResponse(200, `${result}`, {}, {}));
-//     } else return res.status(501).json(new apiResponse(501, responseMessage?.errorMail, {}, `${result}`));
-//   } catch (error) {
-//     console.log(error);
-//     return res.status(500).json(new apiResponse(500, responseMessage?.internalServerError, {}, error));
-//   }
-// };
+    if (Number(response?.otp) !== Number(value?.otp)) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, responseMessage?.invalidOTP, {}, {}));
 
-// export const adminLogin = async (req: Request, res: Response) => {
-//   //email or password // phone or password
-//   let body = req.body,
-//     response: any;
-//   reqInfo(req);
-//   try {
-//     response = await userModel.findOneAndUpdate({ email: body?.email, userType: 1, isActive: true }, { isLoggedIn: true }).select("-__v -createdAt -updatedAt");
+    if (response?.otpExpireTime < new Date()) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, responseMessage?.expireOTP, {}, {}));
 
-//     if (!response) return res.status(400).json(new apiResponse(400, responseMessage?.invalidUserPasswordEmail, {}, {}));
-//     if (response?.isBlock == true) return res.status(403).json(new apiResponse(403, responseMessage?.accountBlock, {}, {}));
+    ["password", "otp", "otpExpireTime"].forEach((key) => delete response[key]);
 
-//     const passwordMatch = await bcryptjs.compare(body.password, response.password);
-//     if (!passwordMatch) return res.status(400).json(new apiResponse(400, responseMessage?.invalidUserPasswordEmail, {}, {}));
-//     const token = jwt.sign(
-//       {
-//         _id: response._id,
-//         type: response.userType,
-//         status: "Login",
-//         generatedOn: new Date().getTime(),
-//       },
-//       jwt_token_secret,
-//     );
+    return res.status(HTTP_STATUS.OK).json(new apiResponse(HTTP_STATUS.OK, responseMessage?.OTPVerified, response, {}));
+  } catch (error) {
+    console.error(error);
+    return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json(new apiResponse(HTTP_STATUS.INTERNAL_SERVER_ERROR, responseMessage?.internalServerError, {}, {}));
+  }
+};
 
-//     await new userSessionModel({
-//       createdBy: response._id,
-//     }).save();
-//     response = {
-//       isEmailVerified: response?.isEmailVerified,
-//       userType: response?.userType,
-//       _id: response?._id,
-//       email: response?.email,
-//       token,
-//     };
-//     return res.status(200).json(new apiResponse(200, responseMessage?.loginSuccess, response, {}));
-//   } catch (error) {
-//     return res.status(500).json(new apiResponse(500, responseMessage?.internalServerError, {}, error));
-//   }
-// };
+export const resendOtp = async (req, res) => {
+  reqInfo(req);
+  try {
+    const { error, value }: IResendOtpValidate = resendOtpSchema.validate(req.body);
+
+    if (error) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, error?.details[0]?.message, {}, {}));
+
+    let response = await getFirstMatch(userModel, { email: value?.email, isDeleted: false }, {}, {});
+    if (!response) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, responseMessage?.getDataNotFound("User"), {}, {}));
+
+    if (response?.isActive === false) return res.status(HTTP_STATUS.FORBIDDEN).json(new apiResponse(HTTP_STATUS.FORBIDDEN, responseMessage?.accountBlock, {}, {}));
+
+    const otp = await getUniqueOtp();
+    const otpExpireTime = getOtpExpireTime();
+
+    if (response?.email) emailVerificationMail(response, otp);
+
+    response = await updateData(userModel, { _id: response?._id }, { otp, otpExpireTime }, {});
+
+    return res.status(HTTP_STATUS.OK).json(new apiResponse(HTTP_STATUS.OK, responseMessage?.resendOtpSuccess, {}, {}));
+  } catch (error) {
+    console.error(error);
+    return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json(new apiResponse(HTTP_STATUS.INTERNAL_SERVER_ERROR, responseMessage?.internalServerError, {}, {}));
+  }
+};

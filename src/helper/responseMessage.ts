@@ -10,6 +10,17 @@ export const responseMessage = {
   tokenNotFound: "We can't find tokens in header!",
   addDataError: "Oops! Something went wrong!",
   invalidUserPasswordEmail: "You have entered an invalid username or password!",
+  invalidOTP: "Invalid OTP!",
+  expireOTP: "OTP has been expired!",
+  OTPVerified: "OTP has been verified successfully!",
+  otpSendSuccess: "OTP has been sent successfully!",
+  resendOtpSuccess: "OTP has been resent successfully!",
+  resetPasswordSuccess: "Your password has been successfully reset!",
+  passwordSameError: "New password cannot be same as old password!",
 
   dataAlreadyExist: (message: string): string => `Please change ${message}, ${message} is already exists!`,
+  getDataNotFound: (message: string): string => `We couldn't find the ${message.toLowerCase()} you requested!`,
+  customMessage: (message: string): string => `${message[0].toUpperCase() + message.slice(1).toLowerCase()}`,
+  updateDataSuccess: (message: string): any => `${message[0].toUpperCase() + message.slice(1).toLowerCase()} has been successfully updated!`,
+  getDataSuccess: (message: string): any => `${message[0].toUpperCase() + message.slice(1).toLowerCase()} successfully retrieved!`,
 } as const;

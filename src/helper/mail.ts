@@ -1,35 +1,35 @@
-"use strict"
-import nodemailer from 'nodemailer';
+import nodemailer from "nodemailer";
 
+let mail = process.env.MAIL;
+let password = process.env.MAIL_PASSWORD;
 
-const mail: any = process.env.MAIL;
-const option: any = {
-    service: "gmail",
-    host: 'smtp.gmail.com',
-    port: 465,
-    tls: {
-        rejectUnauthorized: false
-    },
-    auth: {
-        user: mail.MAIL,
-        pass: mail.PASSWORD,
-    },
-}
-const transPorter = nodemailer.createTransport(option)
+const options = {
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
+  auth: {
+    user: mail,
+    pass: password,
+  },
+};
 
-export const email_verification_mail = async (user: any, otp: any) => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            const mailOptions = {
-                from: mail.MAIL, // sender address
-                to: user.email, // list of receivers
-                subject: "Email verification",
-                html: `<html lang="en-US">
+const title = "Portfolio";
+
+const transporter = nodemailer.createTransport(options);
+
+export const emailVerificationMail = async (user: any, otp: number) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const mailOptions = {
+        from: mail, // sender address
+        to: user.email, // list of receivers
+        subject: `${title} - Email Verification`,
+        html: `<html lang="en-US">
     
                 <head>
                     <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-                    <title>Email Verification</title>
-                    <meta name="description" content="Email Verification.">
+                    <title>${title} - Email Verification</title>
+                    <meta name="description" content="Email Verification for ${title}.">
                     <style type="text/css">
                         a:hover {
                             text-decoration: underline !important;
@@ -52,7 +52,7 @@ export const email_verification_mail = async (user: any, otp: any) => {
                                         <td style="text-align:center;">
                                             <h1
                                                 style="color:#F43939; font-weight:500; margin:0;font-size:32px;font-family:'Rubik',sans-serif;">
-                                                Zazzi App</h1>
+                                                ${title}</h1>
                                         </td>
                                     </tr>
                                     <tr>
@@ -73,16 +73,16 @@ export const email_verification_mail = async (user: any, otp: any) => {
                                                         <span
                                                             style="display:inline-block; vertical-align:middle; margin:29px 0 26px; border-bottom:1px solid #cecece; width:100px;"></span>
                                                         <p style="color:#455056; font-size:15px;line-height:24px; margin:0;">
-                                                            Hi ${(user.firstName != null ? user.firstName : 'dear')} ${(user.lastName != null ? user.lastName : '')}, 
+                                                            Hi ${user.fullName != null ? user.fullName : "dear"}, 
                                                             <br>
-                                                            Someone, hopefully you, has requested to new account in Zazzi app
+                                                            Welcome to the ${title}! Please verify your email to continue.
                                                             <br>
                                                             OTP will expire in 10 minutes.
                                                             <br>
                                                             Verification code: ${otp}
                                                             <br>
                                                             <br>
-                                                            The Zazzi App Team
+                                                            The ${title} Team
                                                         </p>
     
                                                     </td>
@@ -110,19 +110,19 @@ export const email_verification_mail = async (user: any, otp: any) => {
                     <!--/100% body table-->
                 </body>
     
-                </html>`, // html body
-            };
-            await transPorter.sendMail(mailOptions, function (err, data) {
-                if (err) {
-                    console.log(err)
-                    reject(err)
-                } else {
-                    resolve(`Email has been sent to ${user.email}, kindly follow the instructions`)
-                }
-            })
-        } catch (error) {
-            console.log(error)
-            reject(error)
+                </html>`,
+      };
+      await transporter.sendMail(mailOptions, function (err, data) {
+        if (err) {
+          console.error(err);
+          reject(err);
+        } else {
+          resolve(`Email has been sent to ${user.email}, kindly follow the instructions`);
         }
-    });
-}
+      });
+    } catch (error) {
+      console.error(error);
+      reject(error);
+    }
+  });
+};

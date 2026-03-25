@@ -11,3 +11,8 @@ export const baseSchemaOptions: SchemaOptions<any> = {
   timestamps: true,
   versionKey: false,
 };
+
+export const phoneNoSchema = {
+  countryCode: { type: String },
+  number: { type: Number },
+};

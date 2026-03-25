@@ -1,20 +1,24 @@
 import mongoose from "mongoose";
-import { IUser } from "../../type";
-import { baseCommonFields, baseSchemaOptions } from "./base";
+import { ISocialMediaLink, IUser } from "../../type";
+import { baseCommonFields, baseSchemaOptions, phoneNoSchema } from "./base";
+
+const socialMediaLinkSchema = new mongoose.Schema<ISocialMediaLink>({
+  title: { type: String },
+  link: { type: String },
+  icon: { type: String },
+  isActive: { type: Boolean, default: true },
+});
 
 const userSchema = new mongoose.Schema<IUser>(
   {
     fullName: { type: String },
     email: { type: String, lowercase: true, trim: true },
-    phoneNo: {
-      countryCode: { type: String },
-      number: { type: Number },
-    },
+    phoneNo: phoneNoSchema,
     password: { type: String },
     profileImage: { type: String },
-    //   otp: { type: Number, default: null },
-    //   otpExpireTime: { type: Date, default: null },
-    //   isEmailVerified: { type: Boolean, default: false },
+    otp: { type: Number, default: null },
+    otpExpireTime: { type: Date, default: null },
+    socialMediaLinks: { type: [socialMediaLinkSchema], default: [] },
     ...baseCommonFields,
   },
   baseSchemaOptions,
