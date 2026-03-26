@@ -19,3 +19,5 @@ export interface IPhoneNo {
 export interface IValidate {
   error: Joi.ValidationError;
 }
+
+export type ICommonIdValidate = IValidate & { value: { id: string } };

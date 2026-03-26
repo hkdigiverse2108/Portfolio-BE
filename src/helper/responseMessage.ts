@@ -17,10 +17,17 @@ export const responseMessage = {
   resendOtpSuccess: "OTP has been resent successfully!",
   resetPasswordSuccess: "Your password has been successfully reset!",
   passwordSameError: "New password cannot be same as old password!",
+  fileUploadSuccess: "Your requested file uploaded successfully!",
+  noFileUploaded: "No files uploaded",
+  unsupportedFileType: "Unsupported file type in URL",
 
   dataAlreadyExist: (message: string): string => `Please change ${message}, ${message} is already exists!`,
   getDataNotFound: (message: string): string => `We couldn't find the ${message.toLowerCase()} you requested!`,
   customMessage: (message: string): string => `${message[0].toUpperCase() + message.slice(1).toLowerCase()}`,
   updateDataSuccess: (message: string): any => `${message[0].toUpperCase() + message.slice(1).toLowerCase()} has been successfully updated!`,
+  updateDataError: (message: string): any => `${message[0].toUpperCase() + message.slice(1).toLowerCase()} updating time getting an error!`,
   getDataSuccess: (message: string): any => `${message[0].toUpperCase() + message.slice(1).toLowerCase()} successfully retrieved!`,
+  addDataSuccess: (message: string): any => `${message[0].toUpperCase() + message.slice(1).toLowerCase()} successfully added!`,
+  deleteDataSuccess: (message: string): any => `Your ${message.toLowerCase()} has been successfully deleted!`,
+  deleteDataError: (message: string): any => `${message[0].toUpperCase() + message.slice(1).toLowerCase()} deleting time getting an error!`,
 } as const;

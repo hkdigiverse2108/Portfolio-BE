@@ -1,0 +1,16 @@
+import Joi from "joi";
+import { objectId } from "./common";
+import { IClientLogo } from "../type";
+
+export const addClientLogoSchema = Joi.object<IClientLogo>({
+  name: Joi.string().required(),
+  image: Joi.string().required(),
+  link: Joi.string().required(),
+});
+
+export const editClientLogoSchema = Joi.object<IClientLogo>({
+  clientLogoId: objectId().required(),
+  name: Joi.string().optional(),
+  image: Joi.string().optional(),
+  link: Joi.string().optional(),
+});

@@ -2,16 +2,22 @@ import mongoose from "mongoose";
 import { ISocialMediaLink, IUser } from "../../type";
 import { baseCommonFields, baseSchemaOptions, phoneNoSchema } from "./base";
 
-const socialMediaLinkSchema = new mongoose.Schema<ISocialMediaLink>({
-  title: { type: String },
-  link: { type: String },
-  icon: { type: String },
-  isActive: { type: Boolean, default: true },
-});
+const socialMediaLinkSchema = new mongoose.Schema<ISocialMediaLink>(
+  {
+    title: { type: String },
+    link: { type: String },
+    icon: { type: String },
+    isActive: { type: Boolean, default: true },
+  },
+  {
+    _id: false,
+  },
+);
 
 const userSchema = new mongoose.Schema<IUser>(
   {
-    fullName: { type: String },
+    firstName: { type: String, capitalize: true },
+    lastName: { type: String, capitalize: true },
     email: { type: String, lowercase: true, trim: true },
     phoneNo: phoneNoSchema,
     password: { type: String },
@@ -19,6 +25,7 @@ const userSchema = new mongoose.Schema<IUser>(
     otp: { type: Number, default: null },
     otpExpireTime: { type: Date, default: null },
     socialMediaLinks: { type: [socialMediaLinkSchema], default: [] },
+    offers: { type: [String], default: [] },
     ...baseCommonFields,
   },
   baseSchemaOptions,

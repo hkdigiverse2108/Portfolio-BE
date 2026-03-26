@@ -73,7 +73,7 @@ export const emailVerificationMail = async (user: any, otp: number) => {
                                                         <span
                                                             style="display:inline-block; vertical-align:middle; margin:29px 0 26px; border-bottom:1px solid #cecece; width:100px;"></span>
                                                         <p style="color:#455056; font-size:15px;line-height:24px; margin:0;">
-                                                            Hi ${user.fullName != null ? user.fullName : "dear"}, 
+                                                            Hi ${user.firstName + " " + user.lastName != null ? user.firstName + " " + user.lastName : "dear"}, 
                                                             <br>
                                                             Welcome to the ${title}! Please verify your email to continue.
                                                             <br>

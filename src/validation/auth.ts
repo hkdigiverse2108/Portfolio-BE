@@ -2,7 +2,8 @@ import Joi from "joi";
 import { commonContactSchema, objectId } from "./common";
 
 export const registerSchema = Joi.object().keys({
-  fullName: Joi.string().required(),
+  firstName: Joi.string().required(),
+  lastName: Joi.string().required(),
   email: Joi.string().email().lowercase().required(),
   password: Joi.string().required(),
   profileImage: Joi.string().optional().allow(""),

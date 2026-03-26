@@ -1,9 +1,10 @@
 import { Router } from "express";
 import { userController } from "../controllers";
-import { adminJWT } from "../helper";
+import { adminJWT, userJWT } from "../helper";
 
 const router = Router();
 
-router.get("/get", adminJWT, userController.getUserSection);
+router.post("/update", adminJWT, userController.updateUserSection);
+router.get("/get", userJWT, userController.getUserSection);
 
 export const userRoute = router;

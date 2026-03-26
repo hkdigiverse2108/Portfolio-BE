@@ -24,3 +24,7 @@ export const commonContactSchema = Joi.object().keys({
     .optional()
     .allow("", null),
 });
+
+export const commonIdSchema = Joi.object({
+  id: objectId().required(),
+});

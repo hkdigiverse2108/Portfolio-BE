@@ -1,4 +1,4 @@
-import { IBase, IPhoneNo } from "./base";
+import { IBase, IPhoneNo, IValidate } from "./base";
 export interface ISocialMediaLink {
   title: string;
   link: string;
@@ -7,7 +7,8 @@ export interface ISocialMediaLink {
 }
 
 export interface IUser extends IBase {
-  fullName?: string;
+  firstName?: string;
+  lastName?: string;
   email?: string;
   phoneNo?: IPhoneNo;
   profileImage?: string;
@@ -16,4 +17,7 @@ export interface IUser extends IBase {
   otp?: number;
   otpExpireTime?: Date;
   socialMediaLinks?: ISocialMediaLink[];
+  offers?: string[];
 }
+
+export type IUserValidate = IValidate & { value: IUser };

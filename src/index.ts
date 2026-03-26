@@ -7,14 +7,19 @@ import cors from "cors";
 import { mongooseConnection } from "./database";
 import * as packageInfo from "../package.json";
 import { router } from "./routes";
-import { HTTP_STATUS } from "./common";
+import { apiResponse, HTTP_STATUS } from "./common";
+import path from "path";
+import { responseMessage } from "./helper";
 
 const app = express();
+
+app.use("/public", express.static(path.join(__dirname, "..", "..", "public")));
 
 app.use(cors());
 app.use(mongooseConnection);
 app.use(bodyParser.json({ limit: "200mb" }));
 app.use(bodyParser.urlencoded({ limit: "200mb", extended: true }));
+app.use(express.static(path.join(__dirname, "public")));
 
 const health = (req, res) => {
   return res.status(200).json({
@@ -34,6 +39,17 @@ app.get("/isServerUp", (req, res) => {
 });
 
 app.use(router);
+
+app.use((err, req, res, next) => {
+  if (err.name === "MulterError") {
+    return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, err.message, {}, err));
+  }
+  if (err) {
+    console.error(err);
+    return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json(new apiResponse(HTTP_STATUS.INTERNAL_SERVER_ERROR, responseMessage.internalServerError, {}, err));
+  }
+  next();
+});
 
 app.use((_, res) => {
   res.status(HTTP_STATUS.NOT_FOUND).json({

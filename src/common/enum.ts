@@ -1,4 +1,9 @@
-export const LOGIN_SOURCES = {
-  ADMIN_PANEL: "admin-panel",
-  WEBSITE: "website",
+export const SOCIAL_MEDIA_TYPE = {
+  FACEBOOK: "facebook",
+  INSTAGRAM: "instagram",
+  WHATSAPP: "whatsapp",
+  TWITTER: "twitter",
+  LINKEDIN: "linkedin",
+  YOUTUBE: "youtube",
+  TELEGRAM: "telegram",
 } as const;
