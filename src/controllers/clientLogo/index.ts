@@ -90,7 +90,7 @@ export const getAllClientLogo = async (req, res) => {
 
     if (search) criteria.name = { $regex: search, $options: "si" };
 
-    const options = { sort: { name: 1 }, skip: (page - 1) * limit, limit };
+    const options = { sort: { createdAt: -1 }, skip: (page - 1) * limit, limit };
 
     const response = await getData(clientLogoModel, criteria, {}, options);
     const totalData = await countData(clientLogoModel, criteria);

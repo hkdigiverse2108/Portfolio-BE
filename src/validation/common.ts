@@ -12,8 +12,6 @@ export const objectId = () =>
     .allow(null);
 
 export const baseApiSchema = {
-  companyId: objectId().optional().allow("", null),
-  branchId: objectId().optional().allow("", null),
   isActive: Joi.boolean().optional(),
 };
 

@@ -4,3 +4,6 @@ export * from "./heroSection";
 export * from "./workCount";
 export * from "./clientLogo";
 export * from "./service";
+export * from "./ourService";
+export * from "./portfolio";
+export * from "./workExperience";

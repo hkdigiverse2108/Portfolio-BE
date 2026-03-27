@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { commonContactSchema } from "./common";
+import { baseApiSchema, commonContactSchema } from "./common";
 import { SOCIAL_MEDIA_TYPE } from "../common/enum";
 
 const socialMediaLinkSchema = Joi.object({
@@ -9,7 +9,7 @@ const socialMediaLinkSchema = Joi.object({
     .optional(),
   link: Joi.string().required().allow(""),
   icon: Joi.string().required().allow(""),
-  isActive: Joi.boolean().required(),
+  ...baseApiSchema,
 });
 
 export const updateUserSchema = Joi.object({
@@ -23,4 +23,5 @@ export const updateUserSchema = Joi.object({
   otpExpireTime: Joi.date().optional().allow(null),
   socialMediaLinks: Joi.array().items(socialMediaLinkSchema).optional(),
   offers: Joi.array().items(Joi.string()).optional(),
+  ...baseApiSchema,
 });

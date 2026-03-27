@@ -90,7 +90,7 @@ export const getAllWorkCount = async (req, res) => {
 
     if (search) criteria.title = { $regex: search, $options: "si" };
 
-    const options = { sort: { name: 1 }, skip: (page - 1) * limit, limit };
+    const options = { sort: { createdAt: -1 }, skip: (page - 1) * limit, limit };
 
     const response = await getData(workCountModel, criteria, {}, options);
     const totalData = await countData(workCountModel, criteria);

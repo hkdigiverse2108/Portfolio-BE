@@ -5,4 +5,6 @@ export * as workCountController from "./workCount";
 export * as uploadController from "./upload";
 export * as clientLogoController from "./clientLogo";
 export * as serviceController from "./service";
-
+export * as ourServiceController from "./ourService";
+export * as portfolioController from "./portfolio";
+export * as workExperienceController from "./workExperience";

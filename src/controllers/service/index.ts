@@ -13,7 +13,7 @@ export const addService = async (req, res) => {
     const { error, value }: IServiceValidate = addServiceSchema.validate(req.body);
     if (error) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, error?.details[0]?.message, {}, {}));
 
-    const isExisting = await getFirstMatch(serviceModel, { name: value.name, isDelete: false }, {}, {});
+    const isExisting = await getFirstMatch(serviceModel, { name: value.name, isDeleted: false }, {}, {});
     if (isExisting) return res.status(HTTP_STATUS.CONFLICT).json(new apiResponse(HTTP_STATUS.CONFLICT, responseMessage?.dataAlreadyExist("Service Name"), {}, {}));
 
     value.createdBy = user?._id;
@@ -36,8 +36,13 @@ export const editService = async (req, res) => {
     const { error, value }: IServiceValidate = editServiceSchema.validate(req.body);
     if (error) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, error?.details[0]?.message, {}, {}));
 
-    const isExisting = await getFirstMatch(serviceModel, { _id: value?.serviceId, isDelete: false }, {}, {});
+    const isExisting = await getFirstMatch(serviceModel, { _id: value?.serviceId, isDeleted: false }, {}, {});
     if (!isExisting) return res.status(HTTP_STATUS.NOT_FOUND).json(new apiResponse(HTTP_STATUS.NOT_FOUND, responseMessage?.getDataNotFound("Service"), {}, {}));
+
+    if (value.name) {
+      let isDuplicate = await getFirstMatch(serviceModel, { name: value.name, isDeleted: false, _id: { $ne: value?.serviceId } }, {}, {});
+      if (isDuplicate) return res.status(HTTP_STATUS.CONFLICT).json(new apiResponse(HTTP_STATUS.CONFLICT, responseMessage?.dataAlreadyExist("Service Name"), {}, {}));
+    }
 
     value.updatedBy = user?._id;
 
@@ -58,10 +63,10 @@ export const deleteService = async (req, res) => {
     const { error, value }: ICommonIdValidate = commonIdSchema.validate(req.params);
     if (error) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, error?.details[0]?.message, {}, {}));
 
-    const isExisting = await getFirstMatch(serviceModel, { _id: value?.id, isDelete: false }, {}, {});
+    const isExisting = await getFirstMatch(serviceModel, { _id: value?.id, isDeleted: false }, {}, {});
     if (!isExisting) return res.status(HTTP_STATUS.NOT_FOUND).json(new apiResponse(HTTP_STATUS.NOT_FOUND, responseMessage?.getDataNotFound("Service"), {}, {}));
 
-    const response = await updateData(serviceModel, { _id: new ObjectId(value?.id) }, { isDelete: true, updatedBy: user?._id }, {});
+    const response = await updateData(serviceModel, { _id: new ObjectId(value?.id) }, { isDeleted: true, updatedBy: user?._id }, {});
     if (!response) return res.status(HTTP_STATUS.NOT_IMPLEMENTED).json(new apiResponse(HTTP_STATUS.NOT_IMPLEMENTED, responseMessage?.deleteDataError("Service"), {}, {}));
 
     return res.status(HTTP_STATUS.OK).json(new apiResponse(HTTP_STATUS.OK, responseMessage?.deleteDataSuccess("Service"), response, {}));
@@ -77,13 +82,13 @@ export const getAllService = async (req, res) => {
     let { page, limit, search, activeFilter } = req.query;
     page = Number(page);
     limit = Number(limit);
-    let criteria: any = { isDelete: false };
+    let criteria: any = { isDeleted: false };
 
     if (activeFilter !== undefined) criteria.isActive = activeFilter == "true";
 
     if (search) criteria.name = { $regex: search, $options: "si" };
 
-    const options = { sort: { name: 1 }, skip: (page - 1) * limit, limit };
+    const options = { sort: { createdAt: -1 }, skip: (page - 1) * limit, limit };
 
     const response = await getData(serviceModel, criteria, {}, options);
     const totalData = await countData(serviceModel, criteria);

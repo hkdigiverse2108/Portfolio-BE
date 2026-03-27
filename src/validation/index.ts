@@ -6,3 +6,6 @@ export * from "./workCount";
 export * from "./upload";
 export * from "./clientLogo";
 export * from "./service";
+export * from "./ourService";
+export * from "./portfolio";
+export * from "./workExperience";
