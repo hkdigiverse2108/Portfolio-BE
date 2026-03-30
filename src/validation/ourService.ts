@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { ICommonGetValidate, IGetOurService, IGetOurServiceValidate, IOurService } from "../type";
+import { IGetOurService, IOurService } from "../type";
 import { baseApiSchema, baseCommonFieldSchema, objectId } from "./common";
 
 export const addOurServiceSchema = Joi.object<IOurService>({

@@ -4,7 +4,7 @@ import { getFirstMatch, reqInfo, responseMessage, updateData } from "../../helpe
 import { IUserValidate } from "../../type";
 import { updateUserSchema } from "../../validation";
 
-export const updateUserSection = async (req, res) => {
+export const updateUser = async (req, res) => {
   reqInfo(req);
   let { user } = req.headers;
   try {
@@ -22,7 +22,7 @@ export const updateUserSection = async (req, res) => {
   }
 };
 
-export const getUserSection = async (req, res) => {
+export const getUser = async (req, res) => {
   reqInfo(req);
   try {
     let userdata = await getFirstMatch(userModel, { isDeleted: false }, {}, {});

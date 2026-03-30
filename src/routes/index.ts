@@ -14,6 +14,7 @@ import { workExperienceRouter } from "./workExperience";
 import { awardsRouter } from "./awards";
 import { testimonialDescriptionRouter } from "./testimonialDescription";
 import { testimonialRouter } from "./testimonial";
+import { blogRouter } from "./blog";
 
 const router = Router();
 
@@ -31,5 +32,6 @@ router.use("/skill", skillRouter);
 router.use("/awards", awardsRouter);
 router.use("/testimonial-description", testimonialDescriptionRouter);
 router.use("/testimonial", testimonialRouter);
+router.use("/blog", blogRouter);
 
 export { router };

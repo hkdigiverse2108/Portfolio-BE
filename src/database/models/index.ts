@@ -11,3 +11,4 @@ export * from "./skill";
 export * from "./awards";
 export * from "./testimonialDescription";
 export * from "./testimonial";
+export * from "./blog";
