@@ -79,7 +79,7 @@ function getBasePaths() {
   const content = fs.readFileSync(indexFile, "utf-8");
 
   const basePaths: Record<string, string> = {};
-  const regex = /router\.use\(["']([^"']+)["']\s*,\s*(\w+)Router\)/g;
+  const regex = /router\.use\(["']([^"']+)["']\s*,\s*(\w+)(?:Router|Route)\)/g;
 
   let match;
   while ((match = regex.exec(content)) !== null) {

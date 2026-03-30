@@ -1,7 +1,1433 @@
 {
   "item": [
     {
-      "id": "af7d3e73-f3d8-47e5-affd-050ac7e77f15",
+      "id": "f0be5d5a-85cb-48dd-bdc5-c105b94809d7",
+      "name": "AUTH",
+      "description": {
+        "content": "Routes for auth",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "be7c06af-d889-4c69-9252-db9224e791f1",
+          "name": "Register",
+          "request": {
+            "description": {
+              "content": "Controller: register\nSchema: registerSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| firstName | string | Required |\n| lastName | string | Required |\n| email | string | Required |\n| password | string | Required |\n| profileImage | string | Optional |\n| role | string | Optional |\n| phoneNo | object | Optional |\n| phoneNo.countryCode | string | Optional |\n| phoneNo.number | string | Optional |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "auth",
+                "register"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"sample_firstName\",\n  \"lastName\": \"sample_lastName\",\n  \"email\": \"test@example.com\",\n  \"password\": \"Password123!\",\n  \"profileImage\": \"sample_profileImage\",\n  \"role\": \"sample_role\",\n  \"phoneNo\": {\n    \"countryCode\": \"sample_countryCode\",\n    \"number\": \"sample_number\"\n  }\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "674ea3eb-13c6-465d-8dce-8822f21794e6",
+          "name": "Login",
+          "request": {
+            "description": {
+              "content": "Controller: login\nSchema: loginSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| email | string | Required |\n| password | string | Required |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "auth",
+                "login"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"Password123!\"\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "b801ac18-a10c-4e7d-8610-9ee1167fad63",
+          "name": "Forgot Password",
+          "request": {
+            "description": {
+              "content": "Controller: forgotPassword\nSchema: forgotPasswordSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| email | string | Required |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "auth",
+                "forgot-password"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@example.com\"\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "788e5475-1fd0-473e-aa7f-372f61c64598",
+          "name": "Update Password",
+          "request": {
+            "description": {
+              "content": "Controller: updatePassword\nSchema: updatePasswordSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| email | string | Required |\n| newPassword | string | Required |\n| confirmPassword | string | Required |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "auth",
+                "update-password"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@example.com\",\n  \"newPassword\": \"Password123!\",\n  \"confirmPassword\": \"Password123!\"\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "7c7a92c5-b97e-47aa-a7b4-92e40b0cf705",
+          "name": "Reset Password",
+          "request": {
+            "description": {
+              "content": "Controller: resetPassword\nSchema: resetPasswordSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| email | string | Required |\n| oldPassword | string | Required |\n| newPassword | string | Required |\n| confirmPassword | string | Required |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "auth",
+                "reset-password"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@example.com\",\n  \"oldPassword\": \"Password123!\",\n  \"newPassword\": \"Password123!\",\n  \"confirmPassword\": \"Password123!\"\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "ff14395f-a8e0-40f3-bbb0-4f336817f26a",
+          "name": "Verify Otp",
+          "request": {
+            "description": {
+              "content": "Controller: verifyOtp\nSchema: verifyOtpSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| email | string | Required |\n| otp | string | Required |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "auth",
+                "verify-otp"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@example.com\",\n  \"otp\": \"sample_otp\"\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "b0209786-b973-4fe3-9d9d-770a1286e097",
+          "name": "Resend Otp",
+          "request": {
+            "description": {
+              "content": "Controller: resendOtp\nSchema: resendOtpSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| email | string | Required |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "auth",
+                "resend-otp"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@example.com\"\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "08a69e81-fbf1-4eb3-b0ee-3957aca65875",
+      "name": "HEROSECTION",
+      "description": {
+        "content": "Routes for heroSection",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6ca6ae57-e197-4bf4-ac7a-3e689b54b1d1",
+          "name": "Update Hero Section",
+          "request": {
+            "description": {
+              "content": "Controller: updateHeroSection\nSchema: updateHeroSectionSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| title | string | Required |\n| subTitles | array | Required |\n| description | string | Optional |\n| link | string | Optional |\n| linkTitle | string | Optional |\n| isActive | boolean | Optional |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "hero-section",
+                "update"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"sample_title\",\n  \"subTitles\": [\n    \"sample_string\"\n  ],\n  \"description\": \"sample_description\",\n  \"link\": \"sample_link\",\n  \"linkTitle\": \"sample_linkTitle\",\n  \"isActive\": true\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "b707fa5d-5228-45f8-a18c-c1f8f8b3d562",
+          "name": "Get Get",
+          "request": {
+            "description": {
+              "content": "Controller: getHeroSection",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "hero-section",
+                "get"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        }
+      ],
+      "event": [],
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "TOKEN",
+            "value": "{{TOKEN}}",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "id": "f2dda9f9-0403-4bb4-b717-a04af0f0ecd7",
+      "name": "USER",
+      "description": {
+        "content": "Routes for user",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0c8f0634-96b0-4b9c-a155-cfbf7b5cfefc",
+          "name": "Update User",
+          "request": {
+            "description": {
+              "content": "Controller: updateUserSection\nSchema: updateUserSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| firstName | string | Optional |\n| lastName | string | Optional |\n| email | string | Optional |\n| phoneNo | object | Optional |\n| phoneNo.countryCode | string | Optional |\n| phoneNo.number | string | Optional |\n| password | string | Optional |\n| profileImage | string | Optional |\n| otp | number | Optional |\n| otpExpireTime | date | Optional |\n| socialMediaLinks | array | Optional |\n| socialMediaLinks[].title | string | Optional |\n| socialMediaLinks[].link | string | Required |\n| socialMediaLinks[].icon | string | Required |\n| socialMediaLinks[].isActive | boolean | Optional |\n| offers | array | Optional |\n| isActive | boolean | Optional |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "user",
+                "update"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"sample_firstName\",\n  \"lastName\": \"sample_lastName\",\n  \"email\": \"test@example.com\",\n  \"phoneNo\": {\n    \"countryCode\": \"sample_countryCode\",\n    \"number\": \"sample_number\"\n  },\n  \"password\": \"Password123!\",\n  \"profileImage\": \"sample_profileImage\",\n  \"otp\": 123,\n  \"otpExpireTime\": \"\",\n  \"socialMediaLinks\": [\n    {\n      \"title\": \"sample_title\",\n      \"link\": \"sample_link\",\n      \"icon\": \"sample_icon\",\n      \"isActive\": true\n    }\n  ],\n  \"offers\": [\n    \"sample_string\"\n  ],\n  \"isActive\": true\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "71b2d3ab-6374-4b61-be42-449f27376ace",
+          "name": "Get Get",
+          "request": {
+            "description": {
+              "content": "Controller: getUserSection",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "user",
+                "get"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        }
+      ],
+      "event": [],
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "TOKEN",
+            "value": "{{TOKEN}}",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "id": "721588f3-9e44-43bd-8848-dcd441d13e0c",
+      "name": "WORKCOUNT",
+      "description": {
+        "content": "Routes for workCount",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "86d41913-ff66-4e05-b042-b7ce246f0fbd",
+          "name": "Add Work Count",
+          "request": {
+            "description": {
+              "content": "Controller: addWorkCount\nSchema: addWorkCountSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| number | string | Required |\n| title | string | Required |\n| isActive | boolean | Optional |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "work-count",
+                "add"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"number\": \"sample_number\",\n  \"title\": \"sample_title\",\n  \"isActive\": true\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "003dbb20-842d-4aa7-ad15-6fc5507deb21",
+          "name": "Edit Work Count",
+          "request": {
+            "description": {
+              "content": "Controller: editWorkCount\nSchema: editWorkCountSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| workCountId | string | Required |\n| number | string | Optional |\n| title | string | Optional |\n| isActive | boolean | Optional |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "work-count",
+                "edit"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"workCountId\": \"sample_workCountId\",\n  \"number\": \"sample_number\",\n  \"title\": \"sample_title\",\n  \"isActive\": true\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "1a03717a-d159-4fb5-9aaf-c70efffa93a0",
+          "name": "Get All",
+          "request": {
+            "description": {
+              "content": "Controller: getAllWorkCount",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "work-count",
+                "all"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "02fb83e5-0da4-4f82-aa0e-aaa0709ce0dc",
+          "name": "Common Id",
+          "request": {
+            "description": {
+              "content": "Controller: deleteWorkCount\nSchema: commonIdSchema",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "work-count",
+                ":id"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "type": "any",
+                  "key": "id"
+                },
+                {
+                  "type": "any",
+                  "value": "sample_id",
+                  "key": "id"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        }
+      ],
+      "event": [],
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "TOKEN",
+            "value": "{{TOKEN}}",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "id": "96155b6e-cc6c-48a3-8eae-57b70fd5f27b",
+      "name": "UPLOAD",
+      "description": {
+        "content": "Routes for upload",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b7a8015e-ca48-4f5b-bfcc-df3a65bb30b5",
+          "name": "Create Item",
+          "request": {
+            "description": {
+              "content": "Controller: uploadFile",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "upload"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "2b3b53d7-be4d-4c17-9155-4b5da92f8b31",
+          "name": "Delete Image",
+          "request": {
+            "description": {
+              "content": "Controller: deleteUploadedFile\nSchema: deleteImageSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| fileUrl | string | Required |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "upload"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [
+                {
+                  "key": "fileUrl",
+                  "value": "sample_fileUrl"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fileUrl\": \"sample_fileUrl\"\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "bcb5a81f-8099-45dc-a3ea-62eb49bd653b",
+          "name": "Get Images",
+          "request": {
+            "description": {
+              "content": "Controller: getAllImages",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "upload",
+                "images"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "15514b80-3327-44c6-9aa7-1791b338a5e8",
+          "name": "Get Pdfs",
+          "request": {
+            "description": {
+              "content": "Controller: getAllPdfs",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "upload",
+                "pdfs"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "6b29bab1-bf31-4597-ae31-345a504e6964",
+      "name": "CLIENTLOGO",
+      "description": {
+        "content": "Routes for clientLogo",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8601c8ae-2f74-4014-b937-1089b37db276",
+          "name": "Add Client Logo",
+          "request": {
+            "description": {
+              "content": "Controller: addClientLogo\nSchema: addClientLogoSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| name | string | Required |\n| image | string | Required |\n| link | string | Required |\n| isActive | boolean | Optional |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "client-logo",
+                "add"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"sample_name\",\n  \"image\": \"sample_image\",\n  \"link\": \"sample_link\",\n  \"isActive\": true\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "4b89147a-f5f7-4047-a287-49c4965b6771",
+          "name": "Edit Client Logo",
+          "request": {
+            "description": {
+              "content": "Controller: editClientLogo\nSchema: editClientLogoSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| clientLogoId | string | Required |\n| name | string | Optional |\n| image | string | Optional |\n| link | string | Optional |\n| isActive | boolean | Optional |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "client-logo",
+                "edit"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clientLogoId\": \"sample_clientLogoId\",\n  \"name\": \"sample_name\",\n  \"image\": \"sample_image\",\n  \"link\": \"sample_link\",\n  \"isActive\": true\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "367db00b-3386-4b89-a16f-2088f5f6aec8",
+          "name": "Get All",
+          "request": {
+            "description": {
+              "content": "Controller: getAllClientLogo",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "client-logo",
+                "all"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "2df7cd02-4ff2-431e-a596-ebd7418d8937",
+          "name": "Common Id",
+          "request": {
+            "description": {
+              "content": "Controller: deleteClientLogo\nSchema: commonIdSchema",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "client-logo",
+                ":id"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "type": "any",
+                  "key": "id"
+                },
+                {
+                  "type": "any",
+                  "value": "sample_id",
+                  "key": "id"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        }
+      ],
+      "event": [],
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "TOKEN",
+            "value": "{{TOKEN}}",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "id": "89447ef5-6258-4a2e-b7b6-f5ccbb1e4886",
+      "name": "SERVICE",
+      "description": {
+        "content": "Routes for service",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e68cbbdf-1500-4e64-ac98-ecdc1163d70e",
+          "name": "Add Service",
+          "request": {
+            "description": {
+              "content": "Controller: addService\nSchema: addServiceSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| name | string | Required |\n| isActive | boolean | Optional |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "service",
+                "add"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"sample_name\",\n  \"isActive\": true\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "5cb64cbc-4579-4d5a-b0a1-f84b5e610bff",
+          "name": "Edit Service",
+          "request": {
+            "description": {
+              "content": "Controller: editService\nSchema: editServiceSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| name | string | Required |\n| serviceId | string | Required |\n| isActive | boolean | Optional |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "service",
+                "edit"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"sample_name\",\n  \"serviceId\": \"sample_serviceId\",\n  \"isActive\": true\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "4a0d0378-c0b4-4962-8b99-47923f7a7eb8",
+          "name": "Get All",
+          "request": {
+            "description": {
+              "content": "Controller: getAllService",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "service",
+                "all"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "05982d98-469d-4746-af07-04cceb16f742",
+          "name": "Common Id",
+          "request": {
+            "description": {
+              "content": "Controller: deleteService\nSchema: commonIdSchema",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "service",
+                ":id"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "type": "any",
+                  "key": "id"
+                },
+                {
+                  "type": "any",
+                  "value": "sample_id",
+                  "key": "id"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        }
+      ],
+      "event": [],
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "TOKEN",
+            "value": "{{TOKEN}}",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b597b4fd-6346-46c5-b044-e7985461619e",
+      "name": "OURSERVICE",
+      "description": {
+        "content": "Routes for ourService",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "aafc1bc8-b675-4778-bda3-22283d0dbad5",
+          "name": "Add Our Service",
+          "request": {
+            "description": {
+              "content": "Controller: addOurService\nSchema: addOurServiceSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| priority | number | Required |\n| title | string | Required |\n| shortDescription | string | Optional |\n| description | string | Optional |\n| thumbnailImage | string | Optional |\n| serviceIds | array | Optional |\n| images | array | Optional |\n| tagLine | string | Optional |\n| whyChoose | object | Optional |\n| whyChoose.title | string | Optional |\n| whyChoose.description | string | Optional |\n| isActive | boolean | Optional |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "our-service",
+                "add"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"priority\": 123,\n  \"title\": \"sample_title\",\n  \"shortDescription\": \"sample_shortDescription\",\n  \"description\": \"sample_description\",\n  \"thumbnailImage\": \"sample_thumbnailImage\",\n  \"serviceIds\": [\n    \"sample_string\"\n  ],\n  \"images\": [\n    \"sample_string\"\n  ],\n  \"tagLine\": \"sample_tagLine\",\n  \"whyChoose\": {\n    \"title\": \"sample_title\",\n    \"description\": \"sample_description\"\n  },\n  \"isActive\": true\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "e3adda44-4bfc-428b-bb34-248c184a3192",
+          "name": "Edit Our Service",
+          "request": {
+            "description": {
+              "content": "Controller: editOurService\nSchema: editOurServiceSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| ourServiceId | string | Required |\n| priority | number | Optional |\n| title | string | Optional |\n| shortDescription | string | Optional |\n| description | string | Optional |\n| thumbnailImage | string | Optional |\n| serviceIds | array | Optional |\n| images | array | Optional |\n| tagLine | string | Optional |\n| whyChoose | object | Optional |\n| whyChoose.title | string | Optional |\n| whyChoose.description | string | Optional |\n| isActive | boolean | Optional |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "our-service",
+                "edit"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ourServiceId\": \"sample_ourServiceId\",\n  \"priority\": 123,\n  \"title\": \"sample_title\",\n  \"shortDescription\": \"sample_shortDescription\",\n  \"description\": \"sample_description\",\n  \"thumbnailImage\": \"sample_thumbnailImage\",\n  \"serviceIds\": [\n    \"sample_string\"\n  ],\n  \"images\": [\n    \"sample_string\"\n  ],\n  \"tagLine\": \"sample_tagLine\",\n  \"whyChoose\": {\n    \"title\": \"sample_title\",\n    \"description\": \"sample_description\"\n  },\n  \"isActive\": true\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "d8225515-da3c-45f1-a46c-b29f58ae0ade",
+          "name": "Get All",
+          "request": {
+            "description": {
+              "content": "Controller: getAllOurService",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "our-service",
+                "all"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "52a320ff-a02a-4516-bf25-b52726db4732",
+          "name": "Common Id",
+          "request": {
+            "description": {
+              "content": "Controller: deleteOurService\nSchema: commonIdSchema",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "our-service",
+                ":id"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "type": "any",
+                  "key": "id"
+                },
+                {
+                  "type": "any",
+                  "value": "sample_id",
+                  "key": "id"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        }
+      ],
+      "event": [],
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "TOKEN",
+            "value": "{{TOKEN}}",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "id": "c72e3322-27d3-47b8-90cc-b3e72aa1b99a",
+      "name": "PORTFOLIO",
+      "description": {
+        "content": "Routes for portfolio",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d6f3deef-eaac-4609-89c3-75fbe9070c37",
+          "name": "Add Portfolio",
+          "request": {
+            "description": {
+              "content": "Controller: addPortfolio\nSchema: addPortfolioSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| thumbnailImage | string | Required |\n| title | string | Required |\n| subTitle | string | Optional |\n| serviceIds | array | Optional |\n| isFeatured | boolean | Optional |\n| link | string | Optional |\n| description | string | Optional |\n| images | array | Optional |\n| projectName | string | Optional |\n| client | string | Optional |\n| technology | string | Optional |\n| date | date | Optional |\n| socialLinks | array | Optional |\n| socialLinks[].title | string | Optional |\n| socialLinks[].link | string | Required |\n| socialLinks[].icon | string | Required |\n| socialLinks[].isActive | boolean | Optional |\n| isActive | boolean | Optional |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "portfolio",
+                "add"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"thumbnailImage\": \"sample_thumbnailImage\",\n  \"title\": \"sample_title\",\n  \"subTitle\": \"sample_subTitle\",\n  \"serviceIds\": [\n    \"sample_string\"\n  ],\n  \"isFeatured\": true,\n  \"link\": \"sample_link\",\n  \"description\": \"sample_description\",\n  \"images\": [\n    \"sample_string\"\n  ],\n  \"projectName\": \"sample_projectName\",\n  \"client\": \"sample_client\",\n  \"technology\": \"sample_technology\",\n  \"date\": \"\",\n  \"socialLinks\": [\n    {\n      \"title\": \"sample_title\",\n      \"link\": \"sample_link\",\n      \"icon\": \"sample_icon\",\n      \"isActive\": true\n    }\n  ],\n  \"isActive\": true\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "5ad0d1c1-a30b-4628-b82f-0df3e3c1bb62",
+          "name": "Edit Portfolio",
+          "request": {
+            "description": {
+              "content": "Controller: editPortfolio\nSchema: editPortfolioSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| portfolioId | string | Required |\n| thumbnailImage | string | Optional |\n| title | string | Optional |\n| subTitle | string | Optional |\n| serviceIds | array | Optional |\n| isFeatured | boolean | Optional |\n| link | string | Optional |\n| description | string | Optional |\n| images | array | Optional |\n| projectName | string | Optional |\n| client | string | Optional |\n| technology | string | Optional |\n| date | date | Optional |\n| socialLinks | array | Optional |\n| socialLinks[].title | string | Optional |\n| socialLinks[].link | string | Required |\n| socialLinks[].icon | string | Required |\n| socialLinks[].isActive | boolean | Optional |\n| isActive | boolean | Optional |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "portfolio",
+                "edit"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"portfolioId\": \"sample_portfolioId\",\n  \"thumbnailImage\": \"sample_thumbnailImage\",\n  \"title\": \"sample_title\",\n  \"subTitle\": \"sample_subTitle\",\n  \"serviceIds\": [\n    \"sample_string\"\n  ],\n  \"isFeatured\": true,\n  \"link\": \"sample_link\",\n  \"description\": \"sample_description\",\n  \"images\": [\n    \"sample_string\"\n  ],\n  \"projectName\": \"sample_projectName\",\n  \"client\": \"sample_client\",\n  \"technology\": \"sample_technology\",\n  \"date\": \"\",\n  \"socialLinks\": [\n    {\n      \"title\": \"sample_title\",\n      \"link\": \"sample_link\",\n      \"icon\": \"sample_icon\",\n      \"isActive\": true\n    }\n  ],\n  \"isActive\": true\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "ac709ddc-9b5a-4aaf-b480-5eb853ae61b5",
+          "name": "Get All",
+          "request": {
+            "description": {
+              "content": "Controller: getAllPortfolio",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "portfolio",
+                "all"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "2cb564ce-4a7b-422b-a212-c9e242b6809a",
+          "name": "Common Id",
+          "request": {
+            "description": {
+              "content": "Controller: deletePortfolio\nSchema: commonIdSchema",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "portfolio",
+                ":id"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "type": "any",
+                  "key": "id"
+                },
+                {
+                  "type": "any",
+                  "value": "sample_id",
+                  "key": "id"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        }
+      ],
+      "event": [],
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "TOKEN",
+            "value": "{{TOKEN}}",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "id": "14119cd9-decf-4c69-aff7-5f0b82d4b701",
+      "name": "WORKEXPERIENCE",
+      "description": {
+        "content": "Routes for workExperience",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "99bf3a5b-fa81-4a01-bdcf-d10803a7ec99",
+          "name": "Add Work Experience",
+          "request": {
+            "description": {
+              "content": "Controller: addWorkExperience\nSchema: addWorkExperienceSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| year | number | Required |\n| title | string | Required |\n| subTitle | string | Required |\n| isActive | boolean | Optional |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "work-experience",
+                "add"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"year\": 123,\n  \"title\": \"sample_title\",\n  \"subTitle\": \"sample_subTitle\",\n  \"isActive\": true\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "2f9f5c79-ab59-4eae-aa4e-61f730da5d96",
+          "name": "Edit Work Experience",
+          "request": {
+            "description": {
+              "content": "Controller: editWorkExperience\nSchema: editWorkExperienceSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| workExperienceId | string | Required |\n| year | number | Optional |\n| title | string | Optional |\n| subTitle | string | Optional |\n| isActive | boolean | Optional |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "work-experience",
+                "edit"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"workExperienceId\": \"sample_workExperienceId\",\n  \"year\": 123,\n  \"title\": \"sample_title\",\n  \"subTitle\": \"sample_subTitle\",\n  \"isActive\": true\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "001daf50-7fed-4f3a-9b47-13c0c2d66a2d",
+          "name": "Get All",
+          "request": {
+            "description": {
+              "content": "Controller: getAllWorkExperience",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "work-experience",
+                "all"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "b073a5ea-2aa8-4c38-83fc-49390b9a7e36",
+          "name": "Common Id",
+          "request": {
+            "description": {
+              "content": "Controller: deleteWorkExperience\nSchema: commonIdSchema",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "work-experience",
+                ":id"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "type": "any",
+                  "key": "id"
+                },
+                {
+                  "type": "any",
+                  "value": "sample_id",
+                  "key": "id"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        }
+      ],
+      "event": [],
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "TOKEN",
+            "value": "{{TOKEN}}",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "id": "aa99b2f5-417c-4af6-a126-4f345655513d",
       "name": "SKILL",
       "description": {
         "content": "Routes for skill",
@@ -9,7 +1435,7 @@
       },
       "item": [
         {
-          "id": "44241393-69c0-4577-b2d5-0d8068cbcb04",
+          "id": "6c4fae53-0606-42d2-8885-7066fba3e1d3",
           "name": "Add Skill",
           "request": {
             "description": {
@@ -43,7 +1469,7 @@
           "event": []
         },
         {
-          "id": "afd3c765-37c1-44c3-b672-aaa66475e86c",
+          "id": "22258a0c-8f6d-488c-b3b9-e690ff611bd2",
           "name": "Edit Skill",
           "request": {
             "description": {
@@ -77,7 +1503,7 @@
           "event": []
         },
         {
-          "id": "d1f553e3-6b7a-4990-8df1-1618a70fd2e9",
+          "id": "a3bb2c83-3b8c-4810-92f4-20727450bc8b",
           "name": "Get All",
           "request": {
             "description": {
@@ -102,7 +1528,7 @@
           "event": []
         },
         {
-          "id": "6f0a99d0-0f42-4874-b927-5b5762056cb5",
+          "id": "344f812d-8f22-4d10-9f35-b28ef996904d",
           "name": "Common Id",
           "request": {
             "description": {
@@ -164,7 +1590,7 @@
     }
   ],
   "info": {
-    "_postman_id": "8e6c0cdc-9bed-46a1-94ff-14dac71570f0",
+    "_postman_id": "5b62441d-3e93-4082-9ef9-4d1c9c21e5f8",
     "name": "Delvoura API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {
