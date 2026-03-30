@@ -1,0 +1,175 @@
+{
+  "item": [
+    {
+      "id": "af7d3e73-f3d8-47e5-affd-050ac7e77f15",
+      "name": "SKILL",
+      "description": {
+        "content": "Routes for skill",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "44241393-69c0-4577-b2d5-0d8068cbcb04",
+          "name": "Add Skill",
+          "request": {
+            "description": {
+              "content": "Controller: addSkill\nSchema: addSkillSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| image | string | Required |\n| title | string | Required |\n| percentage | number | Required |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "skill",
+                "add"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"image\": \"Changes\",\n  \"title\": \"sample_title\",\n  \"percentage\": 123\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "afd3c765-37c1-44c3-b672-aaa66475e86c",
+          "name": "Edit Skill",
+          "request": {
+            "description": {
+              "content": "Controller: editSkill\nSchema: editSkillSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| skillId | string | Required |\n| image | string | Optional |\n| title | string | Optional |\n| percentage | number | Optional |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "skill",
+                "edit"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"skillId\": \"sample_skillId\",\n  \"image\": \"sample_image\",\n  \"title\": \"sample_title\",\n  \"percentage\": 123\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "d1f553e3-6b7a-4990-8df1-1618a70fd2e9",
+          "name": "Get All",
+          "request": {
+            "description": {
+              "content": "Controller: getAllSkill",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "skill",
+                "all"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "6f0a99d0-0f42-4874-b927-5b5762056cb5",
+          "name": "Common Id",
+          "request": {
+            "description": {
+              "content": "Controller: deleteSkill\nSchema: commonIdSchema",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "skill",
+                ":id"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "type": "any",
+                  "key": "id"
+                },
+                {
+                  "type": "any",
+                  "value": "sample_id",
+                  "key": "id"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        }
+      ],
+      "event": [],
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "TOKEN",
+            "value": "{{TOKEN}}",
+            "type": "string"
+          }
+        ]
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "any",
+      "value": "http://localhost:5000",
+      "key": "BASE_URL"
+    },
+    {
+      "type": "any",
+      "value": "",
+      "key": "TOKEN"
+    }
+  ],
+  "info": {
+    "_postman_id": "8e6c0cdc-9bed-46a1-94ff-14dac71570f0",
+    "name": "Delvoura API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Auto generated API collection",
+      "type": "text/plain"
+    }
+  }
+}

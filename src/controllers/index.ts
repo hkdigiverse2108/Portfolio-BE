@@ -8,3 +8,4 @@ export * as serviceController from "./service";
 export * as ourServiceController from "./ourService";
 export * as portfolioController from "./portfolio";
 export * as workExperienceController from "./workExperience";
+export * as skillController from "./skill";
