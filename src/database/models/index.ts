@@ -7,3 +7,4 @@ export * from "./service";
 export * from "./ourService";
 export * from "./portfolio";
 export * from "./workExperience";
+export * from "./skill";

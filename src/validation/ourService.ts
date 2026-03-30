@@ -19,7 +19,7 @@ export const addOurServiceSchema = Joi.object<IOurService>({
 });
 
 export const editOurServiceSchema = Joi.object<IOurService>({
-  ourServiceId: Joi.string().required(),
+  ourServiceId: objectId().required(),
   priority: Joi.number().optional(),
   title: Joi.string().optional(),
   shortDescription: Joi.string().optional(),

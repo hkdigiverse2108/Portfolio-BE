@@ -31,7 +31,7 @@ export const addPortfolioSchema = Joi.object<IPortfolio>({
 });
 
 export const editPortfolioSchema = Joi.object<IPortfolio>({
-  portfolioId: Joi.string().required(),
+  portfolioId: objectId().required(),
   thumbnailImage: Joi.string().optional(),
   title: Joi.string().optional(),
   subTitle: Joi.string().optional(),
