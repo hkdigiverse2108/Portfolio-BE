@@ -1,6 +1,6 @@
 import Joi from "joi";
-import { IWorkCount } from "../type";
-import { baseApiSchema, objectId } from "./common";
+import { ICommonGetValidate, IWorkCount } from "../type";
+import { baseApiSchema, baseCommonFieldSchema, objectId } from "./common";
 
 export const addWorkCountSchema = Joi.object<IWorkCount>({
   number: Joi.string().required(),
@@ -13,4 +13,8 @@ export const editWorkCountSchema = Joi.object<IWorkCount>({
   number: Joi.string().optional(),
   title: Joi.string().optional(),
   ...baseApiSchema,
+});
+
+export const getWorkCountSchema = Joi.object<ICommonGetValidate>({
+  ...baseCommonFieldSchema,
 });

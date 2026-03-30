@@ -1,6 +1,6 @@
 import Joi from "joi";
-import { IOurService } from "../type";
-import { baseApiSchema, objectId } from "./common";
+import { ICommonGetValidate, IGetOurService, IGetOurServiceValidate, IOurService } from "../type";
+import { baseApiSchema, baseCommonFieldSchema, objectId } from "./common";
 
 export const addOurServiceSchema = Joi.object<IOurService>({
   priority: Joi.number().required(),
@@ -33,4 +33,9 @@ export const editOurServiceSchema = Joi.object<IOurService>({
     description: Joi.string().optional(),
   }).optional(),
   ...baseApiSchema,
+});
+
+export const getOurServiceSchema = Joi.object<IGetOurService>({
+  serviceFilter: objectId().optional(),
+  ...baseCommonFieldSchema,
 });

@@ -1,8 +1,8 @@
 import { apiResponse, HTTP_STATUS } from "../../common";
 import { serviceModel } from "../../database";
 import { countData, createOne, getData, getFirstMatch, reqInfo, responseMessage, updateData } from "../../helper";
-import { ICommonIdValidate, IServiceValidate } from "../../type";
-import { addServiceSchema, commonIdSchema, editServiceSchema } from "../../validation";
+import { ICommonCriteria, ICommonIdValidate, IGetCommonValidate, IServiceValidate } from "../../type";
+import { addServiceSchema, commonIdSchema, editServiceSchema, getServiceSchema } from "../../validation";
 
 const ObjectId = require("mongoose").Types.ObjectId;
 
@@ -79,19 +79,21 @@ export const deleteService = async (req, res) => {
 export const getAllService = async (req, res) => {
   reqInfo(req);
   try {
-    let { page, limit, search, activeFilter } = req.query;
+    const { error, value }: IGetCommonValidate = await getServiceSchema.validate(req.query);
+    if (error) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, error?.details[0]?.message, {}, {}));
+
+    let { page, limit, search, activeFilter } = value;
     page = Number(page);
     limit = Number(limit);
-    let criteria: any = { isDeleted: false };
 
-    if (activeFilter !== undefined) criteria.isActive = activeFilter == "true";
-
-    if (search) criteria.name = { $regex: search, $options: "si" };
+    const criteria: ICommonCriteria = {
+      isDeleted: false,
+      ...(activeFilter !== undefined && { isActive: activeFilter === true }),
+      ...(search && { name: { $regex: search, $options: "si" } }),
+    };
 
     const options = { sort: { createdAt: -1 }, skip: (page - 1) * limit, limit };
-
-    const response = await getData(serviceModel, criteria, {}, options);
-    const totalData = await countData(serviceModel, criteria);
+    const [response, totalData] = await Promise.all([getData(serviceModel, criteria, {}, options), countData(serviceModel, criteria)]);
     const totalPages = Math.ceil(totalData / limit) || 1;
     const state = { page, limit, totalPages };
 

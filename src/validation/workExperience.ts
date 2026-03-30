@@ -1,6 +1,6 @@
 import Joi from "joi";
-import { IWorkExperience } from "../type";
-import { baseApiSchema, objectId } from "./common";
+import { ICommonGetValidate, IWorkExperience } from "../type";
+import { baseApiSchema, baseCommonFieldSchema, objectId } from "./common";
 
 export const addWorkExperienceSchema = Joi.object<IWorkExperience>({
   year: Joi.number().required(),
@@ -15,4 +15,8 @@ export const editWorkExperienceSchema = Joi.object<IWorkExperience>({
   title: Joi.string().optional(),
   subTitle: Joi.string().optional(),
   ...baseApiSchema,
+});
+
+export const getWorkExperienceSchema = Joi.object<ICommonGetValidate>({
+  ...baseCommonFieldSchema,
 });

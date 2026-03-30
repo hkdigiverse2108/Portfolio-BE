@@ -1,4 +1,4 @@
-import { IBase, IValidate } from "./base";
+import { IBase, ICommonCriteria, ICommonGetValidate, IValidate } from "./base";
 
 export interface IPortfolioSocialLink {
   title?: string;
@@ -25,3 +25,9 @@ export interface IPortfolio extends IBase {
 }
 
 export type IPortfolioValidate = IValidate & { value: IPortfolio };
+
+export type IGetPortfolio = ICommonGetValidate & { serviceFilter?: string; featuredFilter?: boolean };
+
+export type IGetPortfolioValidate = IValidate & { value: IGetPortfolio };
+
+export type IPortfolioCriteria = ICommonCriteria & { serviceIds: { $in: string[] }; featuredFilter?: boolean };

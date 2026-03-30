@@ -1,6 +1,6 @@
 import Joi from "joi";
-import { ITestimonial } from "../type";
-import { baseApiSchema, objectId } from "./common";
+import { ICommonGetValidate, ITestimonial } from "../type";
+import { baseApiSchema, baseCommonFieldSchema, objectId } from "./common";
 
 export const addTestimonialSchema = Joi.object<ITestimonial>({
   name: Joi.string().required(),
@@ -17,4 +17,8 @@ export const editTestimonialSchema = Joi.object<ITestimonial>({
   description: Joi.string().optional(),
   image: Joi.string().optional(),
   ...baseApiSchema,
+});
+
+export const getTestimonialSchema = Joi.object<ICommonGetValidate>({
+  ...baseCommonFieldSchema,
 });

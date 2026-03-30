@@ -1,6 +1,6 @@
 import Joi from "joi";
-import { IAwards } from "../type";
-import { baseApiSchema, objectId } from "./common";
+import { IAwards, ICommonGetValidate } from "../type";
+import { baseApiSchema, baseCommonFieldSchema, objectId } from "./common";
 
 export const addAwardsSchema = Joi.object<IAwards>({
   image: Joi.string().optional(),
@@ -17,4 +17,8 @@ export const editAwardsSchema = Joi.object<IAwards>({
   title: Joi.string().optional(),
   date: Joi.date().optional(),
   ...baseApiSchema,
+});
+
+export const getAwardsSchema = Joi.object<ICommonGetValidate>({
+  ...baseCommonFieldSchema,
 });

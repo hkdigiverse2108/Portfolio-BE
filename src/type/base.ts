@@ -36,4 +36,4 @@ export type IRegexFilter = { $regex?: string; $options?: string };
 
 export type ICriteria<T = {}> = { isDeleted: boolean; isActive?: boolean } & T;
 
-export type ICommonCriteria = ICriteria<{ name?: IRegexFilter }>;
+export type ICommonCriteria = ICriteria<{ name?: IRegexFilter; title?: IRegexFilter }>;

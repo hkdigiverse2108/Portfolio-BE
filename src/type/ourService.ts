@@ -1,4 +1,4 @@
-import { IBase, IValidate } from "./base";
+import { IBase, ICommonCriteria, ICommonGetValidate, IValidate } from "./base";
 
 export interface IWhyChoose {
   title?: string;
@@ -19,3 +19,9 @@ export interface IOurService extends IBase {
 }
 
 export type IOurServiceValidate = IValidate & { value: IOurService };
+
+export type IGetOurService = ICommonGetValidate & { serviceFilter?: string };
+
+export type IGetOurServiceValidate = IValidate & { value: IGetOurService };
+
+export type IOurServiceCriteria = ICommonCriteria & { serviceIds: { $in: string[] } };

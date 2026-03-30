@@ -1,8 +1,8 @@
 import { apiResponse, HTTP_STATUS } from "../../common";
 import { skillModel } from "../../database";
 import { countData, createOne, getData, getFirstMatch, reqInfo, responseMessage, updateData } from "../../helper";
-import { ICommonIdValidate, ISkillValidate } from "../../type";
-import { addSkillSchema, commonIdSchema, editSkillSchema } from "../../validation";
+import { ICommonCriteria, ICommonIdValidate, IGetCommonValidate, ISkillValidate } from "../../type";
+import { addSkillSchema, commonIdSchema, editSkillSchema, getSkillSchema } from "../../validation";
 
 const ObjectId = require("mongoose").Types.ObjectId;
 
@@ -79,19 +79,22 @@ export const deleteSkill = async (req, res) => {
 export const getAllSkill = async (req, res) => {
   reqInfo(req);
   try {
-    let { page, limit, search, activeFilter } = req.query;
+    const { error, value }: IGetCommonValidate = await getSkillSchema.validate(req.query);
+    if (error) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, error?.details[0]?.message, {}, {}));
+
+    let { page, limit, search, activeFilter } = value;
     page = Number(page);
     limit = Number(limit);
-    let criteria: any = { isDeleted: false };
 
-    if (activeFilter !== undefined) criteria.isActive = activeFilter == "true";
-
-    if (search) criteria.title = { $regex: search, $options: "si" };
+    const criteria: ICommonCriteria = {
+      isDeleted: false,
+      ...(activeFilter !== undefined && { isActive: activeFilter === true }),
+      ...(search && { title: { $regex: search, $options: "si" } }),
+    };
 
     const options = { sort: { createdAt: -1 }, skip: (page - 1) * limit, limit };
 
-    const response = await getData(skillModel, criteria, {}, options);
-    const totalData = await countData(skillModel, criteria);
+    const [response, totalData] = await Promise.all([getData(skillModel, criteria, {}, options), countData(skillModel, criteria)]);
     const totalPages = Math.ceil(totalData / limit) || 1;
     const state = { page, limit, totalPages };
 

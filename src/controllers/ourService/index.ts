@@ -1,8 +1,8 @@
 import { apiResponse, HTTP_STATUS } from "../../common";
 import { ourServiceModel, serviceModel } from "../../database";
 import { checkIdExist, countData, createOne, findAllAndPopulate, getFirstMatch, reqInfo, responseMessage, updateData } from "../../helper";
-import { ICommonIdValidate, IOurServiceValidate } from "../../type";
-import { addOurServiceSchema, commonIdSchema, editOurServiceSchema } from "../../validation";
+import { ICommonIdValidate, IGetOurServiceValidate, IOurServiceCriteria, IOurServiceValidate } from "../../type";
+import { addOurServiceSchema, commonIdSchema, editOurServiceSchema, getOurServiceSchema } from "../../validation";
 
 const ObjectId = require("mongoose").Types.ObjectId;
 
@@ -78,20 +78,22 @@ export const deleteOurService = async (req, res) => {
 export const getAllOurService = async (req, res) => {
   reqInfo(req);
   try {
-    let { page, limit, search, activeFilter, serviceFilter } = req.query;
+    const { error, value }: IGetOurServiceValidate = await getOurServiceSchema.validate(req.query);
+    if (error) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, error?.details[0]?.message, {}, {}));
+
+    let { page, limit, search, activeFilter, serviceFilter } = value;
     page = Number(page);
     limit = Number(limit);
-    let criteria: any = { isDeleted: false };
+
+    const criteria: IOurServiceCriteria = {
+      isDeleted: false,
+      ...(activeFilter !== undefined && { isActive: activeFilter === true }),
+      ...(search && { name: { $regex: search, $options: "si" } }),
+      ...(serviceFilter && { serviceIds: { $in: [new ObjectId(serviceFilter)] } }),
+    };
+
     const options = { sort: { priority: 1 }, skip: (page - 1) * limit, limit };
-
-    if (activeFilter !== undefined) criteria.isActive = activeFilter == "true";
-
-    if (search) criteria.name = { $regex: search, $options: "si" };
-
-    if (serviceFilter) criteria.serviceIds = { $in: [new ObjectId(serviceFilter)] };
-
-    const response = await findAllAndPopulate(ourServiceModel, criteria, {}, options, { path: "serviceIds", select: "_id name" });
-    const totalData = await countData(ourServiceModel, criteria);
+    const [response, totalData] = await Promise.all([findAllAndPopulate(ourServiceModel, criteria, {}, options, { path: "serviceIds", select: "_id name" }), countData(ourServiceModel, criteria)]);
     const totalPages = Math.ceil(totalData / limit) || 1;
     const state = { page, limit, totalPages };
 

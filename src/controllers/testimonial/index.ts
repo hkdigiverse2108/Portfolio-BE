@@ -2,7 +2,7 @@ import { apiResponse, HTTP_STATUS } from "../../common";
 import { testimonialModel } from "../../database";
 import { countData, createOne, getData, getFirstMatch, reqInfo, responseMessage, updateData } from "../../helper";
 import { ICommonCriteria, ICommonIdValidate, IGetCommonValidate, ITestimonialValidate } from "../../type";
-import { addTestimonialSchema, commonIdSchema, editTestimonialSchema, getCommonSchema } from "../../validation";
+import { addTestimonialSchema, commonIdSchema, editTestimonialSchema, getTestimonialSchema } from "../../validation";
 
 const ObjectId = require("mongoose").Types.ObjectId;
 
@@ -71,7 +71,7 @@ export const deleteTestimonial = async (req, res) => {
 export const getAllTestimonial = async (req, res) => {
   reqInfo(req);
   try {
-    const { error, value }: IGetCommonValidate = await getCommonSchema.validate(req.query);
+    const { error, value }: IGetCommonValidate = await getTestimonialSchema.validate(req.query);
     if (error) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, error?.details[0]?.message, {}, {}));
 
     let { page, limit, search, activeFilter } = value;

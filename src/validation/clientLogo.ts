@@ -1,6 +1,6 @@
 import Joi from "joi";
-import { baseApiSchema, objectId } from "./common";
-import { IClientLogo } from "../type";
+import { baseApiSchema, baseCommonFieldSchema, objectId } from "./common";
+import { IClientLogo, ICommonGetValidate } from "../type";
 
 export const addClientLogoSchema = Joi.object<IClientLogo>({
   name: Joi.string().required(),
@@ -15,4 +15,8 @@ export const editClientLogoSchema = Joi.object<IClientLogo>({
   image: Joi.string().optional(),
   link: Joi.string().optional(),
   ...baseApiSchema,
+});
+
+export const getClientLogoSchema = Joi.object<ICommonGetValidate>({
+  ...baseCommonFieldSchema,
 });

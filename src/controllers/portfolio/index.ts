@@ -1,8 +1,8 @@
 import { apiResponse, HTTP_STATUS } from "../../common";
 import { portfolioModel, serviceModel } from "../../database";
 import { checkIdExist, countData, createOne, findAllAndPopulate, getFirstMatch, reqInfo, responseMessage, updateData } from "../../helper";
-import { ICommonIdValidate, IPortfolioValidate } from "../../type";
-import { addPortfolioSchema, commonIdSchema, editPortfolioSchema } from "../../validation";
+import { ICommonIdValidate, IGetPortfolioValidate, IPortfolioCriteria, IPortfolioValidate } from "../../type";
+import { addPortfolioSchema, commonIdSchema, editPortfolioSchema, getPortfolioSchema } from "../../validation";
 
 const ObjectId = require("mongoose").Types.ObjectId;
 
@@ -72,22 +72,23 @@ export const deletePortfolio = async (req, res) => {
 export const getAllPortfolio = async (req, res) => {
   reqInfo(req);
   try {
-    let { page, limit, search, activeFilter, serviceFilter, featuredFilter } = req.query;
+    const { error, value }: IGetPortfolioValidate = await getPortfolioSchema.validate(req.query);
+    if (error) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, error?.details[0]?.message, {}, {}));
+
+    let { page, limit, search, activeFilter, serviceFilter, featuredFilter } = value;
     page = Number(page);
     limit = Number(limit);
-    let criteria: any = { isDeleted: false };
+
+    const criteria: IPortfolioCriteria = {
+      isDeleted: false,
+      ...(activeFilter !== undefined && { isActive: activeFilter === true }),
+      ...(featuredFilter !== undefined && { isFeatured: featuredFilter === true }),
+      ...(search && { title: { $regex: search, $options: "si" } }),
+      ...(serviceFilter && { serviceIds: { $in: [new ObjectId(serviceFilter)] } }),
+    };
     const options = { sort: { priority: 1 }, skip: (page - 1) * limit, limit };
 
-    if (activeFilter !== undefined) criteria.isActive = activeFilter == "true";
-
-    if (featuredFilter !== undefined) criteria.isFeatured = featuredFilter == "true";
-
-    if (search) criteria.name = { $regex: search, $options: "si" };
-
-    if (serviceFilter) criteria.serviceIds = { $in: [new ObjectId(serviceFilter)] };
-
-    const response = await findAllAndPopulate(portfolioModel, criteria, {}, options, { path: "serviceIds", select: "_id name" });
-    const totalData = await countData(portfolioModel, criteria);
+    const [response, totalData] = await Promise.all([findAllAndPopulate(portfolioModel, criteria, {}, options, { path: "serviceIds", select: "_id name" }), countData(portfolioModel, criteria)]);
     const totalPages = Math.ceil(totalData / limit) || 1;
     const state = { page, limit, totalPages };
 

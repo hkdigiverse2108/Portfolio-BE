@@ -33,7 +33,3 @@ export const baseCommonFieldSchema = {
   search: Joi.string().optional(),
   activeFilter: Joi.boolean().optional(),
 };
-
-export const getCommonSchema = Joi.object({
-  ...baseCommonFieldSchema,
-});

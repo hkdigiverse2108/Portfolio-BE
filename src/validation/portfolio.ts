@@ -1,6 +1,6 @@
 import Joi from "joi";
-import { IPortfolio } from "../type";
-import { baseApiSchema, objectId } from "./common";
+import { ICommonGetValidate, IGetPortfolio, IPortfolio } from "../type";
+import { baseApiSchema, baseCommonFieldSchema, objectId } from "./common";
 import { SOCIAL_MEDIA_TYPE } from "../common";
 
 const portfolioSocialLinkSchema = Joi.object({
@@ -46,4 +46,10 @@ export const editPortfolioSchema = Joi.object<IPortfolio>({
   date: Joi.date().optional().allow(null),
   socialLinks: Joi.array().items(portfolioSocialLinkSchema).optional(),
   ...baseApiSchema,
+});
+
+export const getPortfolioSchema = Joi.object<IGetPortfolio>({
+  serviceFilter: objectId().optional(),
+  featuredFilter: Joi.boolean().optional(),
+  ...baseCommonFieldSchema,
 });

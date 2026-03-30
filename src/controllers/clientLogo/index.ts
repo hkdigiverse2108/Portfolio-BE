@@ -1,8 +1,8 @@
 import { apiResponse, HTTP_STATUS } from "../../common";
 import { clientLogoModel } from "../../database";
 import { countData, createOne, getData, getFirstMatch, reqInfo, responseMessage, updateData } from "../../helper";
-import { IClientLogoValidate, ICommonIdValidate } from "../../type";
-import { addClientLogoSchema, commonIdSchema, editClientLogoSchema } from "../../validation";
+import { IClientLogoValidate, ICommonCriteria, ICommonIdValidate, IGetCommonValidate } from "../../type";
+import { addClientLogoSchema, commonIdSchema, editClientLogoSchema, getClientLogoSchema } from "../../validation";
 
 const ObjectId = require("mongoose").Types.ObjectId;
 
@@ -81,19 +81,22 @@ export const deleteClientLogo = async (req, res) => {
 export const getAllClientLogo = async (req, res) => {
   reqInfo(req);
   try {
-    let { page, limit, search, activeFilter } = req.query;
+    const { error, value }: IGetCommonValidate = await getClientLogoSchema.validate(req.query);
+    if (error) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, error?.details[0]?.message, {}, {}));
+
+    let { page, limit, search, activeFilter } = value;
     page = Number(page);
     limit = Number(limit);
-    let criteria: any = { isDeleted: false };
 
-    if (activeFilter !== undefined) criteria.isActive = activeFilter == "true";
-
-    if (search) criteria.name = { $regex: search, $options: "si" };
+    const criteria: ICommonCriteria = {
+      isDeleted: false,
+      ...(activeFilter !== undefined && { isActive: activeFilter === true }),
+      ...(search && { name: { $regex: search, $options: "si" } }),
+    };
 
     const options = { sort: { createdAt: -1 }, skip: (page - 1) * limit, limit };
 
-    const response = await getData(clientLogoModel, criteria, {}, options);
-    const totalData = await countData(clientLogoModel, criteria);
+    const [response, totalData] = await Promise.all([getData(clientLogoModel, criteria, {}, options), countData(clientLogoModel, criteria)])
     const totalPages = Math.ceil(totalData / limit) || 1;
     const state = { page, limit, totalPages };
 
