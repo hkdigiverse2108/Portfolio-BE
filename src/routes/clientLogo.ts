@@ -9,4 +9,4 @@ router.put("/edit", adminJWT, clientLogoController.editClientLogo);
 router.get("/all", userJWT, clientLogoController.getAllClientLogo);
 router.delete("/:id", adminJWT, clientLogoController.deleteClientLogo);
 
-export const clientLogoRoute = router;
+export const clientLogoRouter = router;

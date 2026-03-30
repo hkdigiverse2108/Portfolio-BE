@@ -9,4 +9,4 @@ router.put("/edit", adminJWT, portfolioController.editPortfolio);
 router.get("/all", userJWT, portfolioController.getAllPortfolio);
 router.delete("/:id", adminJWT, portfolioController.deletePortfolio);
 
-export const portfolioRoute = router;
+export const portfolioRouter = router;

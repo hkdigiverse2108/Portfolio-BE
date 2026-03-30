@@ -9,3 +9,6 @@ export * as ourServiceController from "./ourService";
 export * as portfolioController from "./portfolio";
 export * as workExperienceController from "./workExperience";
 export * as skillController from "./skill";
+export * as awardsController from "./awards";
+export * as testimonialDescriptionController from "./testimonialDescription";
+export * as testimonialController from "./testimonial";

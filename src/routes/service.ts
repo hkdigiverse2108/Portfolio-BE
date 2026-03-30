@@ -9,4 +9,4 @@ router.put("/edit", adminJWT, serviceController.editService);
 router.get("/all", userJWT, serviceController.getAllService);
 router.delete("/:id", adminJWT, serviceController.deleteService);
 
-export const serviceRoute = router;
+export const serviceRouter = router;

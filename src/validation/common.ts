@@ -26,3 +26,14 @@ export const commonContactSchema = Joi.object().keys({
 export const commonIdSchema = Joi.object({
   id: objectId().required(),
 });
+
+export const baseCommonFieldSchema = {
+  page: Joi.number().optional(),
+  limit: Joi.number().optional(),
+  search: Joi.string().optional(),
+  activeFilter: Joi.boolean().optional(),
+};
+
+export const getCommonSchema = Joi.object({
+  ...baseCommonFieldSchema,
+});

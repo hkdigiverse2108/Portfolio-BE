@@ -9,4 +9,4 @@ router.put("/edit", adminJWT, workCountController.editWorkCount);
 router.get("/all", userJWT, workCountController.getAllWorkCount);
 router.delete("/:id", adminJWT, workCountController.deleteWorkCount);
 
-export const workCountRoute = router;
+export const workCountRouter = router;

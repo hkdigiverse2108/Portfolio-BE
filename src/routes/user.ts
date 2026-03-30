@@ -7,4 +7,4 @@ const router = Router();
 router.post("/update", adminJWT, userController.updateUserSection);
 router.get("/get", userJWT, userController.getUserSection);
 
-export const userRoute = router;
+export const userRouter = router;

@@ -9,3 +9,6 @@ export * from "./ourService";
 export * from "./portfolio";
 export * from "./workExperience";
 export * from "./skill";
+export * from "./awards";
+export * from "./testimonialDescription";
+export * from "./testimonial";

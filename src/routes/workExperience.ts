@@ -9,4 +9,4 @@ router.put("/edit", adminJWT, workExperienceController.editWorkExperience);
 router.get("/all", userJWT, workExperienceController.getAllWorkExperience);
 router.delete("/:id", adminJWT, workExperienceController.deleteWorkExperience);
 
-export const workExperienceRoute = router;
+export const workExperienceRouter = router;

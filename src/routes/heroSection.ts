@@ -7,4 +7,4 @@ const router = Router();
 router.post("/update", adminJWT, heroSectionController.updateHeroSection);
 router.get("/get", userJWT, heroSectionController.getHeroSection);
 
-export const heroSectionRoute = router;
+export const heroSectionRouter = router;

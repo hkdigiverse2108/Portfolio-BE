@@ -15,4 +15,4 @@ router.delete("/", uploadController.deleteUploadedFile);
 router.get("/images", uploadController.getAllImages);
 router.get("/pdfs", uploadController.getAllPdfs);
 
-export const uploadRoute = router;
+export const uploadRouter = router;

@@ -1,7 +1,7 @@
 {
   "item": [
     {
-      "id": "f0be5d5a-85cb-48dd-bdc5-c105b94809d7",
+      "id": "4c0bf329-3b60-4f8f-b460-fa2225228426",
       "name": "AUTH",
       "description": {
         "content": "Routes for auth",
@@ -9,7 +9,7 @@
       },
       "item": [
         {
-          "id": "be7c06af-d889-4c69-9252-db9224e791f1",
+          "id": "e38b54ba-1974-4a96-81bb-2bb8ecc3e255",
           "name": "Register",
           "request": {
             "description": {
@@ -43,7 +43,7 @@
           "event": []
         },
         {
-          "id": "674ea3eb-13c6-465d-8dce-8822f21794e6",
+          "id": "125b85ba-a90b-4ee3-b24a-100952d770c4",
           "name": "Login",
           "request": {
             "description": {
@@ -70,14 +70,14 @@
             "method": "POST",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"Password123!\"\n}"
+              "raw": "{\n  \"email\": \"harshithkdigiverse@gmail.com\",\n  \"password\": \"Admin@123\"\n}"
             }
           },
           "response": [],
           "event": []
         },
         {
-          "id": "b801ac18-a10c-4e7d-8610-9ee1167fad63",
+          "id": "41757339-f8fc-4e4b-964d-b943f27b0196",
           "name": "Forgot Password",
           "request": {
             "description": {
@@ -111,7 +111,7 @@
           "event": []
         },
         {
-          "id": "788e5475-1fd0-473e-aa7f-372f61c64598",
+          "id": "602bc260-010d-4b50-b138-b3cdcef663ca",
           "name": "Update Password",
           "request": {
             "description": {
@@ -145,7 +145,7 @@
           "event": []
         },
         {
-          "id": "7c7a92c5-b97e-47aa-a7b4-92e40b0cf705",
+          "id": "3931b62f-6025-4daa-a7e6-e3c2fc773a3d",
           "name": "Reset Password",
           "request": {
             "description": {
@@ -179,7 +179,7 @@
           "event": []
         },
         {
-          "id": "ff14395f-a8e0-40f3-bbb0-4f336817f26a",
+          "id": "2ad5cacd-1334-496c-8065-7a8c8ce5c056",
           "name": "Verify Otp",
           "request": {
             "description": {
@@ -213,7 +213,7 @@
           "event": []
         },
         {
-          "id": "b0209786-b973-4fe3-9d9d-770a1286e097",
+          "id": "fa16eebb-6ed5-4fbf-ab7f-21a1f43c984f",
           "name": "Resend Otp",
           "request": {
             "description": {
@@ -250,7 +250,7 @@
       "event": []
     },
     {
-      "id": "08a69e81-fbf1-4eb3-b0ee-3957aca65875",
+      "id": "eec7e975-b6cb-49df-8adb-84db85a6139c",
       "name": "HEROSECTION",
       "description": {
         "content": "Routes for heroSection",
@@ -258,7 +258,7 @@
       },
       "item": [
         {
-          "id": "6ca6ae57-e197-4bf4-ac7a-3e689b54b1d1",
+          "id": "ae5624df-c9fb-469b-9ae4-2bc130c82bd4",
           "name": "Update Hero Section",
           "request": {
             "description": {
@@ -285,14 +285,14 @@
             "method": "POST",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"title\": \"sample_title\",\n  \"subTitles\": [\n    \"sample_string\"\n  ],\n  \"description\": \"sample_description\",\n  \"link\": \"sample_link\",\n  \"linkTitle\": \"sample_linkTitle\",\n  \"isActive\": true\n}"
+              "raw": "{\n  \"title\": \"I'm Shakil Gaha\",\n  \"subTitles\": [\n    \"web developer\",\n    \"full stack developer\",\n    \"frontend Developer\",\n    \"Backend Developer\",\n    \"MERN Developer\"\n  ],\n  \"description\": \"We’re a team of strategic working globally with largest brands, We believe that progress only you to play things safe.\",\n  \"link\": \"https://www.youtube.com/watch?v=-sAOWhvheK8\",\n  \"linkTitle\": \"Show Reel\",\n  \"isActive\": true\n}"
             }
           },
           "response": [],
           "event": []
         },
         {
-          "id": "b707fa5d-5228-45f8-a18c-c1f8f8b3d562",
+          "id": "25364320-c3d6-4947-8110-49b667481c62",
           "name": "Get Get",
           "request": {
             "description": {
@@ -330,7 +330,7 @@
       }
     },
     {
-      "id": "f2dda9f9-0403-4bb4-b717-a04af0f0ecd7",
+      "id": "cb6329e3-1222-49e7-8836-641b88448923",
       "name": "USER",
       "description": {
         "content": "Routes for user",
@@ -338,7 +338,7 @@
       },
       "item": [
         {
-          "id": "0c8f0634-96b0-4b9c-a155-cfbf7b5cfefc",
+          "id": "3a3476ee-d91e-41fe-8144-39e9c60349e2",
           "name": "Update User",
           "request": {
             "description": {
@@ -365,14 +365,14 @@
             "method": "POST",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"firstName\": \"sample_firstName\",\n  \"lastName\": \"sample_lastName\",\n  \"email\": \"test@example.com\",\n  \"phoneNo\": {\n    \"countryCode\": \"sample_countryCode\",\n    \"number\": \"sample_number\"\n  },\n  \"password\": \"Password123!\",\n  \"profileImage\": \"sample_profileImage\",\n  \"otp\": 123,\n  \"otpExpireTime\": \"\",\n  \"socialMediaLinks\": [\n    {\n      \"title\": \"sample_title\",\n      \"link\": \"sample_link\",\n      \"icon\": \"sample_icon\",\n      \"isActive\": true\n    }\n  ],\n  \"offers\": [\n    \"sample_string\"\n  ],\n  \"isActive\": true\n}"
+              "raw": "{\n  \"firstName\": \"sample_firstName\",\n  \"lastName\": \"sample_lastName\",\n  \"email\": \"test@example.com\",\n  \"phoneNo\": {\n    \"countryCode\": \"sample_countryCode\",\n    \"number\": \"sample_number\"\n  },\n  \"password\": \"Password123!\",\n  \"profileImage\": \"sample_profileImage\",\n  \"otp\": 123,\n  \"otpExpireTime\": \"\",\n  \"socialMediaLinks\": [\n    {\n      \"title\": \"sample_title\",\n      \"link\": \"sample_link\",\n      \"icon\": \"sample_icon\",\n      \"isActive\": true\n    }\n  ],\n  \"offers\": [\n    \"sample_string\"\n  ],\n  \"isActive\": true,\n  \"title\": \"I'm Shakil Gaha\",\n  \"subTitles\": [\n    \"web developer\",\n    \"full stack developer\",\n    \"frontend Developer\",\n    \"Backend Developer\",\n    \"MERN Developer\"\n  ],\n  \"description\": \"We’re a team of strategic working globally with largest brands, We believe that progress only you to play things safe.\",\n  \"link\": \"https://www.youtube.com/watch?v=-sAOWhvheK8\",\n  \"linkTitle\": \"Show Reel\"\n}"
             }
           },
           "response": [],
           "event": []
         },
         {
-          "id": "71b2d3ab-6374-4b61-be42-449f27376ace",
+          "id": "061b8d67-8d75-427a-8bb8-ef3378d76e89",
           "name": "Get Get",
           "request": {
             "description": {
@@ -410,7 +410,7 @@
       }
     },
     {
-      "id": "721588f3-9e44-43bd-8848-dcd441d13e0c",
+      "id": "d5a2cf57-33cc-4ab8-95d4-b5dabddb9925",
       "name": "WORKCOUNT",
       "description": {
         "content": "Routes for workCount",
@@ -418,7 +418,7 @@
       },
       "item": [
         {
-          "id": "86d41913-ff66-4e05-b042-b7ce246f0fbd",
+          "id": "eeaa6c10-9dd4-403a-9dc3-cdcf2d0894f0",
           "name": "Add Work Count",
           "request": {
             "description": {
@@ -452,7 +452,7 @@
           "event": []
         },
         {
-          "id": "003dbb20-842d-4aa7-ad15-6fc5507deb21",
+          "id": "f98f0876-2752-425d-a867-34d385b5ffd4",
           "name": "Edit Work Count",
           "request": {
             "description": {
@@ -486,7 +486,7 @@
           "event": []
         },
         {
-          "id": "1a03717a-d159-4fb5-9aaf-c70efffa93a0",
+          "id": "1cb3d0b4-93fd-4ef3-937b-bfce4ceac9b5",
           "name": "Get All",
           "request": {
             "description": {
@@ -511,7 +511,7 @@
           "event": []
         },
         {
-          "id": "02fb83e5-0da4-4f82-aa0e-aaa0709ce0dc",
+          "id": "c03bbab7-71a9-4ab8-9959-441f1ecefde8",
           "name": "Common Id",
           "request": {
             "description": {
@@ -559,7 +559,7 @@
       }
     },
     {
-      "id": "96155b6e-cc6c-48a3-8eae-57b70fd5f27b",
+      "id": "53b8f99a-2d90-4fde-beb7-477b4109ba93",
       "name": "UPLOAD",
       "description": {
         "content": "Routes for upload",
@@ -567,7 +567,7 @@
       },
       "item": [
         {
-          "id": "b7a8015e-ca48-4f5b-bfcc-df3a65bb30b5",
+          "id": "5f60ce80-83bb-4f46-992f-ebf4523cc12d",
           "name": "Create Item",
           "request": {
             "description": {
@@ -591,7 +591,7 @@
           "event": []
         },
         {
-          "id": "2b3b53d7-be4d-4c17-9155-4b5da92f8b31",
+          "id": "30a88df6-ae65-4fad-aa08-e26745496dc4",
           "name": "Delete Image",
           "request": {
             "description": {
@@ -629,7 +629,7 @@
           "event": []
         },
         {
-          "id": "bcb5a81f-8099-45dc-a3ea-62eb49bd653b",
+          "id": "22d9e381-e9eb-42cb-a999-01afa29004d2",
           "name": "Get Images",
           "request": {
             "description": {
@@ -654,7 +654,7 @@
           "event": []
         },
         {
-          "id": "15514b80-3327-44c6-9aa7-1791b338a5e8",
+          "id": "93d18c8e-8da4-46a1-a8be-9f8a002029a4",
           "name": "Get Pdfs",
           "request": {
             "description": {
@@ -682,7 +682,7 @@
       "event": []
     },
     {
-      "id": "6b29bab1-bf31-4597-ae31-345a504e6964",
+      "id": "a5d0ca7a-1a00-43f1-8f5f-6a1e7769615b",
       "name": "CLIENTLOGO",
       "description": {
         "content": "Routes for clientLogo",
@@ -690,7 +690,7 @@
       },
       "item": [
         {
-          "id": "8601c8ae-2f74-4014-b937-1089b37db276",
+          "id": "b477340d-88a6-4039-a77a-47d74b8a59e9",
           "name": "Add Client Logo",
           "request": {
             "description": {
@@ -724,7 +724,7 @@
           "event": []
         },
         {
-          "id": "4b89147a-f5f7-4047-a287-49c4965b6771",
+          "id": "71d57d0c-1ac7-4f87-b9f2-70738a77abe1",
           "name": "Edit Client Logo",
           "request": {
             "description": {
@@ -758,7 +758,7 @@
           "event": []
         },
         {
-          "id": "367db00b-3386-4b89-a16f-2088f5f6aec8",
+          "id": "002f193e-da8f-470c-934f-bceb380cbfa8",
           "name": "Get All",
           "request": {
             "description": {
@@ -783,7 +783,7 @@
           "event": []
         },
         {
-          "id": "2df7cd02-4ff2-431e-a596-ebd7418d8937",
+          "id": "f26832a4-c8bc-4c35-ad07-d9967ec38968",
           "name": "Common Id",
           "request": {
             "description": {
@@ -831,7 +831,7 @@
       }
     },
     {
-      "id": "89447ef5-6258-4a2e-b7b6-f5ccbb1e4886",
+      "id": "a7155fa0-1b48-4905-b851-9709eb62b76d",
       "name": "SERVICE",
       "description": {
         "content": "Routes for service",
@@ -839,7 +839,7 @@
       },
       "item": [
         {
-          "id": "e68cbbdf-1500-4e64-ac98-ecdc1163d70e",
+          "id": "914bfed7-47e2-4022-ba09-e48e86c46032",
           "name": "Add Service",
           "request": {
             "description": {
@@ -873,7 +873,7 @@
           "event": []
         },
         {
-          "id": "5cb64cbc-4579-4d5a-b0a1-f84b5e610bff",
+          "id": "8d3e6b87-ae67-4f7b-b952-7ef7575f55e4",
           "name": "Edit Service",
           "request": {
             "description": {
@@ -907,7 +907,7 @@
           "event": []
         },
         {
-          "id": "4a0d0378-c0b4-4962-8b99-47923f7a7eb8",
+          "id": "979a214f-11fe-4103-af75-fdc65933a4ca",
           "name": "Get All",
           "request": {
             "description": {
@@ -932,7 +932,7 @@
           "event": []
         },
         {
-          "id": "05982d98-469d-4746-af07-04cceb16f742",
+          "id": "d41aff17-6beb-493b-9369-a1e6e1e65942",
           "name": "Common Id",
           "request": {
             "description": {
@@ -980,7 +980,7 @@
       }
     },
     {
-      "id": "b597b4fd-6346-46c5-b044-e7985461619e",
+      "id": "2f8503ab-9d8c-4aa1-b57f-ea2c7b5d6d04",
       "name": "OURSERVICE",
       "description": {
         "content": "Routes for ourService",
@@ -988,7 +988,7 @@
       },
       "item": [
         {
-          "id": "aafc1bc8-b675-4778-bda3-22283d0dbad5",
+          "id": "0a312aab-ed02-4387-8533-c17462f81de1",
           "name": "Add Our Service",
           "request": {
             "description": {
@@ -1022,7 +1022,7 @@
           "event": []
         },
         {
-          "id": "e3adda44-4bfc-428b-bb34-248c184a3192",
+          "id": "a7da9e3d-94c9-4185-93ab-7115acf339a7",
           "name": "Edit Our Service",
           "request": {
             "description": {
@@ -1056,7 +1056,7 @@
           "event": []
         },
         {
-          "id": "d8225515-da3c-45f1-a46c-b29f58ae0ade",
+          "id": "46798e67-83e7-40d4-9328-53f032b72f57",
           "name": "Get All",
           "request": {
             "description": {
@@ -1081,7 +1081,7 @@
           "event": []
         },
         {
-          "id": "52a320ff-a02a-4516-bf25-b52726db4732",
+          "id": "e773f14d-24c7-4ad9-b1d2-e877384c3756",
           "name": "Common Id",
           "request": {
             "description": {
@@ -1129,7 +1129,7 @@
       }
     },
     {
-      "id": "c72e3322-27d3-47b8-90cc-b3e72aa1b99a",
+      "id": "acc44360-5ad0-4d67-a773-4f602e6edfff",
       "name": "PORTFOLIO",
       "description": {
         "content": "Routes for portfolio",
@@ -1137,7 +1137,7 @@
       },
       "item": [
         {
-          "id": "d6f3deef-eaac-4609-89c3-75fbe9070c37",
+          "id": "ea988f37-8b9c-4961-8e1c-c8d2fabdbe11",
           "name": "Add Portfolio",
           "request": {
             "description": {
@@ -1171,7 +1171,7 @@
           "event": []
         },
         {
-          "id": "5ad0d1c1-a30b-4628-b82f-0df3e3c1bb62",
+          "id": "77b59284-b767-4520-b9ff-eddc9bcfdacc",
           "name": "Edit Portfolio",
           "request": {
             "description": {
@@ -1205,7 +1205,7 @@
           "event": []
         },
         {
-          "id": "ac709ddc-9b5a-4aaf-b480-5eb853ae61b5",
+          "id": "144ac0e5-7f89-41fc-b9d2-ffb5f46216f5",
           "name": "Get All",
           "request": {
             "description": {
@@ -1230,7 +1230,7 @@
           "event": []
         },
         {
-          "id": "2cb564ce-4a7b-422b-a212-c9e242b6809a",
+          "id": "96ddd7f4-83f2-4410-9e53-e37b3e4dfed2",
           "name": "Common Id",
           "request": {
             "description": {
@@ -1278,7 +1278,7 @@
       }
     },
     {
-      "id": "14119cd9-decf-4c69-aff7-5f0b82d4b701",
+      "id": "3dbb20b5-6526-4de9-a364-7a1308c01740",
       "name": "WORKEXPERIENCE",
       "description": {
         "content": "Routes for workExperience",
@@ -1286,7 +1286,7 @@
       },
       "item": [
         {
-          "id": "99bf3a5b-fa81-4a01-bdcf-d10803a7ec99",
+          "id": "76e34ee4-b1d3-4088-a4bb-c66fbb93e717",
           "name": "Add Work Experience",
           "request": {
             "description": {
@@ -1320,7 +1320,7 @@
           "event": []
         },
         {
-          "id": "2f9f5c79-ab59-4eae-aa4e-61f730da5d96",
+          "id": "90c90de3-5ac5-4630-8289-3625c2d732e2",
           "name": "Edit Work Experience",
           "request": {
             "description": {
@@ -1354,7 +1354,7 @@
           "event": []
         },
         {
-          "id": "001daf50-7fed-4f3a-9b47-13c0c2d66a2d",
+          "id": "2ed5bb20-67a9-407e-ae37-5459787783eb",
           "name": "Get All",
           "request": {
             "description": {
@@ -1379,7 +1379,7 @@
           "event": []
         },
         {
-          "id": "b073a5ea-2aa8-4c38-83fc-49390b9a7e36",
+          "id": "249a5e96-1760-4428-b3e9-7dd3bbb9eba3",
           "name": "Common Id",
           "request": {
             "description": {
@@ -1427,7 +1427,7 @@
       }
     },
     {
-      "id": "aa99b2f5-417c-4af6-a126-4f345655513d",
+      "id": "364e9b6a-87b5-446a-8ed1-b12eb21eb2df",
       "name": "SKILL",
       "description": {
         "content": "Routes for skill",
@@ -1435,11 +1435,11 @@
       },
       "item": [
         {
-          "id": "6c4fae53-0606-42d2-8885-7066fba3e1d3",
+          "id": "062758dd-7ec5-455d-b639-7e1a4b6a2baf",
           "name": "Add Skill",
           "request": {
             "description": {
-              "content": "Controller: addSkill\nSchema: addSkillSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| image | string | Required |\n| title | string | Required |\n| percentage | number | Required |\n",
+              "content": "Controller: addSkill\nSchema: addSkillSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| image | string | Required |\n| title | string | Required |\n| percentage | number | Required |\n| isActive | boolean | Optional |\n",
               "type": "text/markdown"
             },
             "url": {
@@ -1462,18 +1462,18 @@
             "method": "POST",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"image\": \"Changes\",\n  \"title\": \"sample_title\",\n  \"percentage\": 123\n}"
+              "raw": "{\n  \"image\": \"Changes\",\n  \"title\": \"sample_title\",\n  \"percentage\": 123,\n  \"isActive\": true\n}"
             }
           },
           "response": [],
           "event": []
         },
         {
-          "id": "22258a0c-8f6d-488c-b3b9-e690ff611bd2",
+          "id": "dd2267d6-4d79-4c79-aa24-a3fb1b438e0e",
           "name": "Edit Skill",
           "request": {
             "description": {
-              "content": "Controller: editSkill\nSchema: editSkillSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| skillId | string | Required |\n| image | string | Optional |\n| title | string | Optional |\n| percentage | number | Optional |\n",
+              "content": "Controller: editSkill\nSchema: editSkillSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| skillId | string | Required |\n| image | string | Optional |\n| title | string | Optional |\n| percentage | number | Optional |\n| isActive | boolean | Optional |\n",
               "type": "text/markdown"
             },
             "url": {
@@ -1496,14 +1496,14 @@
             "method": "PUT",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"skillId\": \"sample_skillId\",\n  \"image\": \"sample_image\",\n  \"title\": \"sample_title\",\n  \"percentage\": 123\n}"
+              "raw": "{\n  \"skillId\": \"sample_skillId\",\n  \"image\": \"sample_image\",\n  \"title\": \"sample_title\",\n  \"percentage\": 123,\n  \"isActive\": true\n}"
             }
           },
           "response": [],
           "event": []
         },
         {
-          "id": "a3bb2c83-3b8c-4810-92f4-20727450bc8b",
+          "id": "37dad840-f05b-4da7-9325-d27650fb968e",
           "name": "Get All",
           "request": {
             "description": {
@@ -1528,7 +1528,7 @@
           "event": []
         },
         {
-          "id": "344f812d-8f22-4d10-9f35-b28ef996904d",
+          "id": "28c86d2f-f0c5-4ac1-a99d-a9aa30fea401",
           "name": "Common Id",
           "request": {
             "description": {
@@ -1538,6 +1538,384 @@
             "url": {
               "path": [
                 "skill",
+                ":id"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "type": "any",
+                  "key": "id"
+                },
+                {
+                  "type": "any",
+                  "value": "sample_id",
+                  "key": "id"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        }
+      ],
+      "event": [],
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "TOKEN",
+            "value": "{{TOKEN}}",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "id": "c83ee727-0023-44c2-a534-42c898943260",
+      "name": "AWARDS",
+      "description": {
+        "content": "Routes for awards",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9af393f5-2f29-491b-9b24-0684973f3b17",
+          "name": "Add Awards",
+          "request": {
+            "description": {
+              "content": "Controller: addAwards\nSchema: addAwardsSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| image | string | Optional |\n| icon | string | Optional |\n| title | string | Optional |\n| date | date | Optional |\n| isActive | boolean | Optional |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "awards",
+                "add"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"image\": \"sample_image\",\n  \"icon\": \"sample_icon\",\n  \"title\": \"sample_title\",\n  \"date\": \"\",\n  \"isActive\": true\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "f39e0dc6-4daf-437d-8870-08482974061f",
+          "name": "Edit Awards",
+          "request": {
+            "description": {
+              "content": "Controller: editAwards\nSchema: editAwardsSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| awardsId | string | Required |\n| image | string | Optional |\n| icon | string | Optional |\n| title | string | Optional |\n| date | date | Optional |\n| isActive | boolean | Optional |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "awards",
+                "edit"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"awardsId\": \"sample_awardsId\",\n  \"image\": \"sample_image\",\n  \"icon\": \"sample_icon\",\n  \"title\": \"sample_title\",\n  \"date\": \"\",\n  \"isActive\": true\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "967aae12-973a-4dcb-b9af-f671db727a34",
+          "name": "Get All",
+          "request": {
+            "description": {
+              "content": "Controller: getAllAwards",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "awards",
+                "all"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "7d57e23d-faa2-420b-bfe2-d5e5c85d18a1",
+          "name": "Common Id",
+          "request": {
+            "description": {
+              "content": "Controller: deleteAwards\nSchema: commonIdSchema",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "awards",
+                ":id"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "type": "any",
+                  "key": "id"
+                },
+                {
+                  "type": "any",
+                  "value": "sample_id",
+                  "key": "id"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        }
+      ],
+      "event": [],
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "TOKEN",
+            "value": "{{TOKEN}}",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "id": "533bcb8a-29b8-4a6c-a003-a335a1c47a64",
+      "name": "TESTIMONIALDESCRIPTION",
+      "description": {
+        "content": "Routes for testimonialDescription",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "abd4db22-76c1-4eaa-98d6-677f99cfb483",
+          "name": "Update Testimonial Description",
+          "request": {
+            "description": {
+              "content": "Controller: updateTestimonialDescription\nSchema: updateTestimonialDescriptionSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| title | string | Optional |\n| subTitle | string | Optional |\n| rating | number | Optional |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "testimonial-description",
+                "update"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"sample title\",\n  \"subTitle\": \"sample_subTitle\",\n  \"rating\": 123\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "b1522111-c9a5-41c3-a46c-08dc27e1fecc",
+          "name": "Get Get",
+          "request": {
+            "description": {
+              "content": "Controller: getTestimonialDescription",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "testimonial-description",
+                "get"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        }
+      ],
+      "event": [],
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "TOKEN",
+            "value": "{{TOKEN}}",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "id": "c651d7d4-1940-45c7-88e0-e311e677c16b",
+      "name": "TESTIMONIAL",
+      "description": {
+        "content": "Routes for testimonial",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fa2aa6f2-094f-4c32-b5fa-627c36b42d70",
+          "name": "Add Testimonial",
+          "request": {
+            "description": {
+              "content": "Controller: addTestimonial\nSchema: addTestimonialSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| name | string | Required |\n| designation | string | Optional |\n| description | string | Optional |\n| image | string | Optional |\n| isActive | boolean | Optional |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "testimonial",
+                "add"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"sample_name\",\n  \"designation\": \"sample_designation\",\n  \"description\": \"sample_description\",\n  \"image\": \"http://localhost:5000/public/images/1774523128024_Image-from-iOS.jpg\",\n  \"isActive\": true\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "0f0a01ad-3b1d-49fc-ab8d-07afe79b09b5",
+          "name": "Edit Testimonial",
+          "request": {
+            "description": {
+              "content": "Controller: editTestimonial\nSchema: editTestimonialSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| testimonialId | string | Required |\n| name | string | Optional |\n| designation | string | Optional |\n| description | string | Optional |\n| image | string | Optional |\n| isActive | boolean | Optional |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "testimonial",
+                "edit"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"testimonialId\": \"69ca3b2b93f643ec305b5856\",\n  \"name\": \"sample_name\",\n  \"designation\": \"sample_designation\",\n  \"description\": \"sample_description\",\n  \"image\": \"http://localhost:5000/public/images/1774523128024_Image-from-iOS.jpg\",\n  \"isActive\": true\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "53a2e1a0-d305-4c9e-ad05-cc6c063cd25e",
+          "name": "Get Common",
+          "request": {
+            "description": {
+              "content": "Controller: getAllTestimonial\nSchema: getCommonSchema",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "testimonial",
+                "all"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "70c31bf2-6903-43d4-8dea-d7d5bd05866a",
+          "name": "Common Id",
+          "request": {
+            "description": {
+              "content": "Controller: deleteTestimonial\nSchema: commonIdSchema",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "testimonial",
                 ":id"
               ],
               "host": [
@@ -1590,7 +1968,7 @@
     }
   ],
   "info": {
-    "_postman_id": "5b62441d-3e93-4082-9ef9-4d1c9c21e5f8",
+    "_postman_id": "69570796-9433-4d1e-88f1-d96c2c5e467d",
     "name": "Delvoura API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {

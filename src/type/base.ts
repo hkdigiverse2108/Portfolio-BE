@@ -16,8 +16,24 @@ export interface IPhoneNo {
   number: string;
 }
 
-export interface IValidate {
-  error: Joi.ValidationError;
-}
+/* --------------------------------------
+              Validate
+-------------------------------------- */
+
+export type IValidate = { error: Joi.ValidationError };
 
 export type ICommonIdValidate = IValidate & { value: { id: string } };
+
+export type ICommonGetValidate = { page?: number; limit?: number; search?: string; activeFilter?: boolean };
+
+export type IGetCommonValidate = IValidate & { value: ICommonGetValidate };
+
+/* --------------------------------------
+              Criteria
+-------------------------------------- */
+
+export type IRegexFilter = { $regex?: string; $options?: string };
+
+export type ICriteria<T = {}> = { isDeleted: boolean; isActive?: boolean } & T;
+
+export type ICommonCriteria = ICriteria<{ name?: IRegexFilter }>;

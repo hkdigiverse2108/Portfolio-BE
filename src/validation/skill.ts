@@ -1,15 +1,18 @@
 import Joi from "joi";
-import { objectId } from "./common";
+import { baseApiSchema, objectId } from "./common";
+import { ISkill } from "../type";
 
-export const addSkillSchema = Joi.object({
+export const addSkillSchema = Joi.object<ISkill>({
   image: Joi.string().required(),
   title: Joi.string().required(),
   percentage: Joi.number().required(),
+  ...baseApiSchema,
 });
 
-export const editSkillSchema = Joi.object({
+export const editSkillSchema = Joi.object<ISkill>({
   skillId: objectId().required(),
   image: Joi.string().optional(),
   title: Joi.string().optional(),
   percentage: Joi.number().optional(),
+  ...baseApiSchema,
 });
