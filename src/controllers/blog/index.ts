@@ -100,7 +100,7 @@ export const getBlogById = async (req, res) => {
     const { error, value }: ICommonIdValidate = getBlogByIdSchema.validate(req.params);
     if (error) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, error?.details[0]?.message, {}, {}));
 
-    const response = await getFirstMatch(blogModel, { _id: value?.id, isDeleted: false }, {}, { populate: { path: "serviceIds", select: "_id name" } });
+    const response = await getFirstMatch(blogModel, { _id: value?.id, isDeleted: false }, {}, { populate: { path: "serviceId", select: "_id name" } });
     if (!response) return res.status(HTTP_STATUS.NOT_FOUND).json(new apiResponse(HTTP_STATUS.NOT_FOUND, responseMessage?.getDataNotFound("Blog"), {}, {}));
 
     return res.status(HTTP_STATUS.OK).json(new apiResponse(HTTP_STATUS.OK, responseMessage?.getDataSuccess("Blog"), response, {}));
