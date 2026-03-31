@@ -8,7 +8,7 @@ export const addServiceSchema = Joi.object<IService>({
 });
 
 export const editServiceSchema = Joi.object<IService>({
-  name: Joi.string().required(),
+  name: Joi.string().optional(),
   serviceId: objectId().required(),
   ...baseApiSchema,
 });

@@ -15,7 +15,7 @@ export const editContactUsSchema = Joi.object<IContactUs>({
   contactUsId: objectId().required(),
   name: Joi.string().optional(),
   phoneNo: Joi.number().optional(),
-  email: Joi.string().email().lowercase().required(),
+  email: Joi.string().email().lowercase().optional(),
   message: Joi.string().optional(),
   ...baseApiSchema,
 });
