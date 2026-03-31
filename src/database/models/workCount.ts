@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { IWorkCount } from "../../type/workCount";
+import { IWorkCount } from "../../type";
 import { baseCommonFields, baseSchemaOptions } from "./base";
 
 const workCountSchema = new mongoose.Schema<IWorkCount>(

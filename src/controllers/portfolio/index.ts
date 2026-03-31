@@ -2,7 +2,7 @@ import { apiResponse, HTTP_STATUS } from "../../common";
 import { portfolioModel, serviceModel } from "../../database";
 import { checkIdExist, countData, createOne, findAllAndPopulate, getFirstMatch, reqInfo, responseMessage, updateData } from "../../helper";
 import { ICommonIdValidate, IGetPortfolioValidate, IPortfolioCriteria, IPortfolioValidate } from "../../type";
-import { addPortfolioSchema, commonIdSchema, editPortfolioSchema, getPortfolioSchema } from "../../validation";
+import { addPortfolioSchema, commonIdSchema as deletePortfolioSchema, commonIdSchema as getPortfolioByIdSchema, editPortfolioSchema, getPortfolioSchema } from "../../validation";
 
 const ObjectId = require("mongoose").Types.ObjectId;
 
@@ -53,7 +53,7 @@ export const deletePortfolio = async (req, res) => {
   reqInfo(req);
   try {
     const { user } = req.headers;
-    const { error, value }: ICommonIdValidate = commonIdSchema.validate(req.params);
+    const { error, value }: ICommonIdValidate = deletePortfolioSchema.validate(req.params);
     if (error) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, error?.details[0].message, {}, {}));
 
     const isExisting = await getFirstMatch(portfolioModel, { _id: value?.id, isDeleted: false }, {}, {});
@@ -93,6 +93,22 @@ export const getAllPortfolio = async (req, res) => {
     const state = { page, limit, totalPages };
 
     return res.status(HTTP_STATUS.OK).json(new apiResponse(HTTP_STATUS.OK, responseMessage?.getDataSuccess("Portfolio"), { portfolio_data: response, totalData, state }, {}));
+  } catch (error) {
+    console.error(error);
+    return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json(new apiResponse(HTTP_STATUS.INTERNAL_SERVER_ERROR, responseMessage.internalServerError, {}, {}));
+  }
+};
+
+export const getPortfolioById = async (req, res) => {
+  reqInfo(req);
+  try {
+    const { error, value }: ICommonIdValidate = getPortfolioByIdSchema.validate(req.params);
+    if (error) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, error?.details[0]?.message, {}, {}));
+
+    const response = await getFirstMatch(portfolioModel, { _id: value?.id, isDeleted: false }, {}, { populate: { path: "serviceIds", select: "_id name" } });
+    if (!response) return res.status(HTTP_STATUS.NOT_FOUND).json(new apiResponse(HTTP_STATUS.NOT_FOUND, responseMessage?.getDataNotFound("Portfolio"), {}, {}));
+
+    return res.status(HTTP_STATUS.OK).json(new apiResponse(HTTP_STATUS.OK, responseMessage?.getDataSuccess("Portfolio"), response, {}));
   } catch (error) {
     console.error(error);
     return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json(new apiResponse(HTTP_STATUS.INTERNAL_SERVER_ERROR, responseMessage.internalServerError, {}, {}));

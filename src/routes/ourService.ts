@@ -8,5 +8,6 @@ router.post("/add", adminJWT, ourServiceController.addOurService);
 router.put("/edit", adminJWT, ourServiceController.editOurService);
 router.get("/all", userJWT, ourServiceController.getAllOurService);
 router.delete("/:id", adminJWT, ourServiceController.deleteOurService);
+router.get("/:id", userJWT, ourServiceController.getOurServiceById);
 
 export const ourServiceRouter = router;

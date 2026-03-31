@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { IContactUs } from "../../type/contactUs";
+import { IContactUs } from "../../type";
 import { baseCommonFields, baseSchemaOptions } from "./base";
 
 const contactUsSchema = new mongoose.Schema<IContactUs>(

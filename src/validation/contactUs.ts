@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { IContactUs } from "../type/contactUs";
+import { IContactUs } from "../type";
 import { baseApiSchema, baseCommonFieldSchema, objectId } from "./common";
 import { ICommonGetValidate } from "../type";
 

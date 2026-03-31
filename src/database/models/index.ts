@@ -13,3 +13,5 @@ export * from "./testimonialDescription";
 export * from "./testimonial";
 export * from "./blog";
 export * from "./contactUs";
+export * from "./myAchievement";
+export * from "./aboutUs";

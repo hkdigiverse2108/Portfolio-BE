@@ -14,3 +14,5 @@ export * as testimonialDescriptionController from "./testimonialDescription";
 export * as testimonialController from "./testimonial";
 export * as blogController from "./blog";
 export * as contactUsController from "./contactUs";
+export * as myAchievementController from "./myAchievement";
+export * as aboutUsController from "./aboutUs";

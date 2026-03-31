@@ -8,5 +8,6 @@ router.post("/add", adminJWT, portfolioController.addPortfolio);
 router.put("/edit", adminJWT, portfolioController.editPortfolio);
 router.get("/all", userJWT, portfolioController.getAllPortfolio);
 router.delete("/:id", adminJWT, portfolioController.deletePortfolio);
+router.get("/:id", userJWT, portfolioController.getPortfolioById);
 
 export const portfolioRouter = router;

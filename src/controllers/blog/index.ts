@@ -2,7 +2,7 @@ import { apiResponse, HTTP_STATUS } from "../../common";
 import { blogModel, serviceModel } from "../../database";
 import { checkIdExist, countData, createOne, findAllAndPopulate, getFirstMatch, reqInfo, responseMessage, updateData } from "../../helper";
 import { IBlogCriteria, IBlogValidate, ICommonIdValidate, IGetBlogValidate } from "../../type";
-import { addBlogSchema, commonIdSchema, editBlogSchema, getBlogSchema } from "../../validation";
+import { addBlogSchema, commonIdSchema as deleteBlogSchema, commonIdSchema as getBlogByIdSchema, editBlogSchema, getBlogSchema } from "../../validation";
 
 const ObjectId = require("mongoose").Types.ObjectId;
 
@@ -53,7 +53,7 @@ export const deleteBlog = async (req, res) => {
   reqInfo(req);
   try {
     const { user } = req.headers;
-    const { error, value }: ICommonIdValidate = commonIdSchema.validate(req.params);
+    const { error, value }: ICommonIdValidate = deleteBlogSchema.validate(req.params);
     if (error) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, error?.details[0]?.message, {}, {}));
 
     const isExisting = await getFirstMatch(blogModel, { _id: value?.id, isDeleted: false }, {}, {});
@@ -92,6 +92,22 @@ export const allBlog = async (req, res) => {
     const state = { page, limit, totalPages };
 
     return res.status(HTTP_STATUS.OK).json(new apiResponse(HTTP_STATUS.OK, responseMessage?.getDataSuccess("Blog"), { blog_data: response, totalData, state }, {}));
+  } catch (error) {
+    console.error(error);
+    return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json(new apiResponse(HTTP_STATUS.INTERNAL_SERVER_ERROR, responseMessage.internalServerError, {}, {}));
+  }
+};
+
+export const getBlogById = async (req, res) => {
+  reqInfo(req);
+  try {
+    const { error, value }: ICommonIdValidate = getBlogByIdSchema.validate(req.params);
+    if (error) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, error?.details[0]?.message, {}, {}));
+
+    const response = await getFirstMatch(blogModel, { _id: value?.id, isDeleted: false }, {}, { populate: { path: "serviceIds", select: "_id name" } });
+    if (!response) return res.status(HTTP_STATUS.NOT_FOUND).json(new apiResponse(HTTP_STATUS.NOT_FOUND, responseMessage?.getDataNotFound("Blog"), {}, {}));
+
+    return res.status(HTTP_STATUS.OK).json(new apiResponse(HTTP_STATUS.OK, responseMessage?.getDataSuccess("Blog"), response, {}));
   } catch (error) {
     console.error(error);
     return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json(new apiResponse(HTTP_STATUS.INTERNAL_SERVER_ERROR, responseMessage.internalServerError, {}, {}));

@@ -2,7 +2,7 @@ import { apiResponse, HTTP_STATUS } from "../../common";
 import { ourServiceModel, serviceModel } from "../../database";
 import { checkIdExist, countData, createOne, findAllAndPopulate, getFirstMatch, reqInfo, responseMessage, updateData } from "../../helper";
 import { ICommonIdValidate, IGetOurServiceValidate, IOurServiceCriteria, IOurServiceValidate } from "../../type";
-import { addOurServiceSchema, commonIdSchema, editOurServiceSchema, getOurServiceSchema } from "../../validation";
+import { addOurServiceSchema, commonIdSchema as deleteOurServiceSchema, commonIdSchema as getOurServiceByIdSchema, editOurServiceSchema, getOurServiceSchema } from "../../validation";
 
 const ObjectId = require("mongoose").Types.ObjectId;
 
@@ -59,7 +59,7 @@ export const deleteOurService = async (req, res) => {
   reqInfo(req);
   try {
     const { user } = req.headers;
-    const { error, value }: ICommonIdValidate = commonIdSchema.validate(req.params);
+    const { error, value }: ICommonIdValidate = deleteOurServiceSchema.validate(req.params);
     if (error) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, error?.details[0]?.message, {}, {}));
 
     const isExisting = await getFirstMatch(ourServiceModel, { _id: value?.id, isDeleted: false }, {}, {});
@@ -98,6 +98,22 @@ export const getAllOurService = async (req, res) => {
     const state = { page, limit, totalPages };
 
     return res.status(HTTP_STATUS.OK).json(new apiResponse(HTTP_STATUS.OK, responseMessage?.getDataSuccess("Our Service"), { ourService_data: response, totalData, state }, {}));
+  } catch (error) {
+    console.error(error);
+    return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json(new apiResponse(HTTP_STATUS.INTERNAL_SERVER_ERROR, responseMessage.internalServerError, {}, {}));
+  }
+};
+
+export const getOurServiceById = async (req, res) => {
+  reqInfo(req);
+  try {
+    const { error, value }: ICommonIdValidate = getOurServiceByIdSchema.validate(req.params);
+    if (error) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, error?.details[0]?.message, {}, {}));
+
+    const response = await getFirstMatch(ourServiceModel, { _id: value?.id, isDeleted: false }, {}, { populate: { path: "serviceIds", select: "_id name" } });
+    if (!response) return res.status(HTTP_STATUS.NOT_FOUND).json(new apiResponse(HTTP_STATUS.NOT_FOUND, responseMessage?.getDataNotFound("Our Service"), {}, {}));
+
+    return res.status(HTTP_STATUS.OK).json(new apiResponse(HTTP_STATUS.OK, responseMessage?.getDataSuccess("Our Service"), response, {}));
   } catch (error) {
     console.error(error);
     return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json(new apiResponse(HTTP_STATUS.INTERNAL_SERVER_ERROR, responseMessage.internalServerError, {}, {}));

@@ -11,7 +11,7 @@ const upload = multer({ storage: fileStorage, fileFilter }).fields([
 ]);
 
 router.post("/", upload, uploadController.uploadFile);
-router.delete("/", uploadController.deleteUploadedFile);
+router.delete("/delete", uploadController.deleteUploadedFile);
 router.get("/images", uploadController.getAllImages);
 router.get("/pdfs", uploadController.getAllPdfs);
 
