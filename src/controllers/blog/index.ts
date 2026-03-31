@@ -13,8 +13,6 @@ export const addBlog = async (req, res) => {
     const { error, value }: IBlogValidate = addBlogSchema.validate(req.body);
     if (error) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, error?.details[0]?.message, {}, {}));
 
-    if (value?.serviceIds?.length && !(await Promise.all(value.serviceIds.map((s) => checkIdExist(serviceModel, s, "Service", res)))).every(Boolean)) return;
-
     value.createdBy = user?._id;
     value.updatedBy = user?._id;
 
@@ -34,8 +32,6 @@ export const editBlog = async (req, res) => {
     const { user } = req.headers;
     const { error, value }: IBlogValidate = editBlogSchema.validate(req.body);
     if (error) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, error?.details[0]?.message, {}, {}));
-
-    if (value?.serviceIds?.length && !(await Promise.all(value.serviceIds.map((s) => checkIdExist(serviceModel, s, "Service", res)))).every(Boolean)) return;
 
     value.updatedBy = user?._id;
 
@@ -83,11 +79,11 @@ export const allBlog = async (req, res) => {
       isDeleted: false,
       ...(activeFilter !== undefined && { isActive: activeFilter === true }),
       ...(search && { title: { $regex: search, $options: "si" } }),
-      ...(serviceFilter && { serviceIds: { $in: [new ObjectId(serviceFilter)] } }),
+      ...(serviceFilter && { serviceId: new ObjectId(serviceFilter) }),
     };
 
     const options = { sort: { priority: 1 }, skip: (page - 1) * limit, limit };
-    const [response, totalData] = await Promise.all([findAllAndPopulate(blogModel, criteria, {}, options, { path: "serviceIds", select: "_id name" }), countData(blogModel, criteria)]);
+    const [response, totalData] = await Promise.all([findAllAndPopulate(blogModel, criteria, {}, options, { path: "serviceId", select: "_id name" }), countData(blogModel, criteria)]);
     const totalPages = Math.ceil(totalData / limit) || 1;
     const state = { page, limit, totalPages };
 

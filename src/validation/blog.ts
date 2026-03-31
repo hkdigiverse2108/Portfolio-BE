@@ -4,7 +4,7 @@ import { baseApiSchema, baseCommonFieldSchema, objectId } from "./common";
 
 export const addBlogSchema = Joi.object<IBlog>({
   thumbnailImage: Joi.string().optional(),
-  serviceIds: Joi.array().items(objectId()).optional(),
+  serviceId: objectId().optional(),
   date: Joi.date().optional(),
   title: Joi.string().optional(),
   description: Joi.string().optional(),
@@ -17,7 +17,7 @@ export const addBlogSchema = Joi.object<IBlog>({
 export const editBlogSchema = Joi.object<IBlog>({
   blogId: objectId().required(),
   thumbnailImage: Joi.string().optional(),
-  serviceIds: Joi.array().items(objectId()).optional(),
+  serviceId: objectId().optional(),
   date: Joi.date().optional(),
   title: Joi.string().optional(),
   description: Joi.string().optional(),

@@ -14,4 +14,6 @@ export * from "./testimonial";
 export * from "./blog";
 export * from "./contactUs";
 export * from "./myAchievement";
-export * from "./aboutUs";
+export * from "./privacyPolicy";
+export * from "./termsConditions";
+export * from "./setting";

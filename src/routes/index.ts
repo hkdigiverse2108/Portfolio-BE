@@ -17,7 +17,9 @@ import { testimonialRouter } from "./testimonial";
 import { blogRouter } from "./blog";
 import { contactUsRouter } from "./contactUs";
 import { myAchievementRouter } from "./myAchievement";
-import { aboutUsRouter } from "./aboutUs";
+import { privacyPolicyRouter } from "./privacyPolicy";
+import { termsConditionsRouter } from "./termsConditions";
+import { settingRouter } from "./setting";
 
 const router = Router();
 
@@ -38,6 +40,8 @@ router.use("/testimonial", testimonialRouter);
 router.use("/blog", blogRouter);
 router.use("/contact-us", contactUsRouter);
 router.use("/my-achievement", myAchievementRouter);
-router.use("/about-us", aboutUsRouter);
+router.use("/privacy-policy", privacyPolicyRouter);
+router.use("/terms-conditions", termsConditionsRouter);
+router.use("/setting", settingRouter);
 
 export { router };

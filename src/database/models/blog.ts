@@ -5,7 +5,7 @@ import { baseCommonFields, baseSchemaOptions } from "./base";
 const blogSchema = new mongoose.Schema<IBlog>(
   {
     thumbnailImage: { type: String },
-    serviceIds: [{ type: Schema.Types.ObjectId, ref: "service" }],
+    serviceId: { type: Schema.Types.ObjectId, ref: "service" },
     date: { type: Date },
     title: { type: String },
     description: { type: String },
