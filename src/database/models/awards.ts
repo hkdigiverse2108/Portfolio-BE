@@ -5,7 +5,7 @@ import { baseCommonFields, baseSchemaOptions } from "./base";
 const awardsSchema = new mongoose.Schema<IAwards>(
   {
     image: { type: String },
-    icon: { type: String },
+    iconImage: { type: String },
     title: { type: String },
     date: { type: Date },
     ...baseCommonFields,
