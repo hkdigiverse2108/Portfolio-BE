@@ -1,3 +1,4 @@
+import { Schema } from "mongoose";
 import { IBase, ICommonCriteria, ICommonGetValidate, IValidate } from "./base";
 
 export interface IWhyChoose {
@@ -11,17 +12,17 @@ export interface IOurService extends IBase {
   shortDescription?: string;
   description?: string;
   thumbnailImage?: string;
-  serviceIds?: string[];
+  serviceIds?: Schema.Types.ObjectId[];
   images?: string[];
   tagLine?: string;
   whyChoose?: IWhyChoose;
-  ourServiceId?: string;
+  ourServiceId?: Schema.Types.ObjectId;
 }
 
 export type IOurServiceValidate = IValidate & { value: IOurService };
 
-export type IGetOurService = ICommonGetValidate & { serviceFilter?: string };
+export type IGetOurService = ICommonGetValidate & { serviceFilter?: Schema.Types.ObjectId };
 
 export type IGetOurServiceValidate = IValidate & { value: IGetOurService };
 
-export type IOurServiceCriteria = ICommonCriteria & { serviceIds: { $in: string[] } };
+export type IOurServiceCriteria = ICommonCriteria & { serviceIds: { $in: Schema.Types.ObjectId[] } };

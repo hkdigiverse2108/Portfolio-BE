@@ -22,7 +22,7 @@ export interface IPhoneNo {
 
 export type IValidate = { error: Joi.ValidationError };
 
-export type ICommonIdValidate = IValidate & { value: { id: string } };
+export type ICommonIdValidate = IValidate & { value: { id: Schema.Types.ObjectId } };
 
 export type ICommonGetValidate = { page?: number; limit?: number; search?: string; activeFilter?: boolean };
 

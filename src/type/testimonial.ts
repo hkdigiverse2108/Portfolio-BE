@@ -1,3 +1,4 @@
+import { Schema } from "mongoose";
 import { IBase, IValidate } from "./base";
 
 export interface ITestimonial extends IBase {
@@ -5,7 +6,7 @@ export interface ITestimonial extends IBase {
   designation?: string;
   description?: string;
   image?: string;
-  testimonialId?: string;
+  testimonialId?: Schema.Types.ObjectId;
 }
 
 export type ITestimonialValidate = IValidate & { value: ITestimonial };

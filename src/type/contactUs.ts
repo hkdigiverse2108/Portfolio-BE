@@ -1,7 +1,8 @@
+import { Schema } from "mongoose";
 import { IBase, IValidate } from "./base";
 
 export interface IContactUs extends IBase {
-  contactUsId?: string;
+  contactUsId?: Schema.Types.ObjectId;
   name?: string;
   phoneNo?: number;
   email?: string;

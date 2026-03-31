@@ -1,3 +1,4 @@
+import { Schema } from "mongoose";
 import { IBase, IValidate } from "./base";
 
 export interface IMyAchievement extends IBase {
@@ -7,7 +8,7 @@ export interface IMyAchievement extends IBase {
   link?: string;
   btnTitle?: string;
   btnLink?: string;
-  myAchievementId?: string;
+  myAchievementId?: Schema.Types.ObjectId;
 }
 
 export type IMyAchievementValidate = IValidate & { value: IMyAchievement };

@@ -1,7 +1,7 @@
 {
   "item": [
     {
-      "id": "0f2f3943-5132-47df-8177-8063b884f424",
+      "id": "b922cebd-e01e-469c-a882-002c028fab4b",
       "name": "AUTH",
       "description": {
         "content": "Routes for auth",
@@ -9,7 +9,7 @@
       },
       "item": [
         {
-          "id": "bda6014b-a256-4fc9-af09-2966469db8a3",
+          "id": "5a19d0cf-a256-4c84-ad32-9c21bd48d414",
           "name": "Register",
           "request": {
             "description": {
@@ -43,7 +43,7 @@
           "event": []
         },
         {
-          "id": "03dee690-c3c7-41b4-84d8-84d8b00c1719",
+          "id": "3d228556-5f47-416a-86be-8e8f12b78eeb",
           "name": "Login",
           "request": {
             "description": {
@@ -77,7 +77,7 @@
           "event": []
         },
         {
-          "id": "2e31de56-3e9a-4f89-bd2e-29b0fe72ec46",
+          "id": "c5dedc5c-e9c8-4e18-9128-8d0073382962",
           "name": "Forgot Password",
           "request": {
             "description": {
@@ -111,7 +111,7 @@
           "event": []
         },
         {
-          "id": "6a585334-238c-4922-af14-9013126c97ac",
+          "id": "35efdac1-bea1-460e-8231-1b9a09a68967",
           "name": "Update Password",
           "request": {
             "description": {
@@ -145,7 +145,7 @@
           "event": []
         },
         {
-          "id": "9fea261e-f46f-44ed-8c7a-913c4c6c0754",
+          "id": "76b41a3c-178e-4195-903d-98406845321a",
           "name": "Reset Password",
           "request": {
             "description": {
@@ -179,7 +179,7 @@
           "event": []
         },
         {
-          "id": "7e859c36-bb64-4d02-b494-394fb86d3c57",
+          "id": "581a7f20-5910-4a5b-9b52-46c699792bcc",
           "name": "Verify Otp",
           "request": {
             "description": {
@@ -213,7 +213,7 @@
           "event": []
         },
         {
-          "id": "7f1a2a44-e313-4602-87d1-d3cb696a5fce",
+          "id": "896285c8-d0f8-46e3-8a0c-fa7d2c3c8a98",
           "name": "Resend Otp",
           "request": {
             "description": {
@@ -250,7 +250,7 @@
       "event": []
     },
     {
-      "id": "9e8b1bae-e378-4461-8129-dc548c210463",
+      "id": "9f7ac0ec-cbee-454d-bc0d-edf0507539b9",
       "name": "HEROSECTION",
       "description": {
         "content": "Routes for heroSection",
@@ -258,7 +258,7 @@
       },
       "item": [
         {
-          "id": "93eef9ae-caec-4056-a716-65fa02057cf9",
+          "id": "d2d31a34-3a4c-4b75-9365-6824eb16e17f",
           "name": "Update Hero Section",
           "request": {
             "description": {
@@ -292,7 +292,7 @@
           "event": []
         },
         {
-          "id": "bb693928-1fb7-44df-855e-070451779b77",
+          "id": "54645b02-701a-490d-9f9f-abdb209724c2",
           "name": "Get Get",
           "request": {
             "description": {
@@ -330,7 +330,7 @@
       }
     },
     {
-      "id": "aa60e21c-b347-49d7-bca5-0b6ac1d9521a",
+      "id": "78355198-df70-49c5-94a7-b99b2484d1af",
       "name": "USER",
       "description": {
         "content": "Routes for user",
@@ -338,7 +338,7 @@
       },
       "item": [
         {
-          "id": "15b29ef1-0a78-43a1-bd4f-42d906d61190",
+          "id": "67096b16-ae0c-4481-b335-72ec5722e920",
           "name": "Update User",
           "request": {
             "description": {
@@ -372,7 +372,7 @@
           "event": []
         },
         {
-          "id": "57c48d6e-6921-4295-b8b7-06f0b117e048",
+          "id": "197e6468-4d3d-4d43-9702-dcba0ffd7d3d",
           "name": "Get Get",
           "request": {
             "description": {
@@ -410,7 +410,7 @@
       }
     },
     {
-      "id": "eee04774-7f23-4bf7-b34b-571688bc7293",
+      "id": "c5386a06-92f0-4c25-afbf-baf0b5fdba15",
       "name": "WORKCOUNT",
       "description": {
         "content": "Routes for workCount",
@@ -418,7 +418,7 @@
       },
       "item": [
         {
-          "id": "ddc760ef-cb59-4fd8-9981-6ba96b82069e",
+          "id": "7941be62-0f51-4453-831e-4f82fcd7d56f",
           "name": "Add Work Count",
           "request": {
             "description": {
@@ -452,7 +452,7 @@
           "event": []
         },
         {
-          "id": "05725605-be72-4dca-8dee-e1d165689848",
+          "id": "96f7d1a5-ed29-4644-ba11-df532755d28d",
           "name": "Edit Work Count",
           "request": {
             "description": {
@@ -486,7 +486,7 @@
           "event": []
         },
         {
-          "id": "ec5e8fb2-5456-4823-9293-a1c6a367ea97",
+          "id": "d888747b-af79-4cdc-886b-f6ac6f034e0b",
           "name": "Get Work Count",
           "request": {
             "description": {
@@ -528,7 +528,7 @@
           "event": []
         },
         {
-          "id": "7e89ea8a-c12c-4f58-81d2-dfc1e05f8fbe",
+          "id": "f9824268-5585-4237-bb53-aa302a9bfd7f",
           "name": "Common Id",
           "request": {
             "description": {
@@ -576,7 +576,7 @@
       }
     },
     {
-      "id": "914191df-a44d-4fac-aa97-4a3698ea0473",
+      "id": "5bea1b91-f3d1-4288-a13d-5aadb537c483",
       "name": "UPLOAD",
       "description": {
         "content": "Routes for upload",
@@ -584,7 +584,7 @@
       },
       "item": [
         {
-          "id": "b1d15a0b-0dfc-489f-bd46-e9fbc6405955",
+          "id": "1bc35439-1bf5-4be9-99ef-f023b709e46b",
           "name": "Create Item",
           "request": {
             "description": {
@@ -608,7 +608,7 @@
           "event": []
         },
         {
-          "id": "2e15675b-7ef0-4c74-aff1-4871477d66fb",
+          "id": "21cd1fcb-a9af-403d-9921-2954242f2c01",
           "name": "Delete Image",
           "request": {
             "description": {
@@ -647,7 +647,7 @@
           "event": []
         },
         {
-          "id": "d65551f4-ddc9-40d8-9fea-87dc98a42938",
+          "id": "487a9cee-a739-4ec6-9e3b-0cdaf76c6f77",
           "name": "Get Images",
           "request": {
             "description": {
@@ -672,7 +672,7 @@
           "event": []
         },
         {
-          "id": "e214b87a-ddb5-45c6-a31a-c84164f9c71d",
+          "id": "2921def6-118c-4e4d-b446-b9215dcfe508",
           "name": "Get Pdfs",
           "request": {
             "description": {
@@ -700,7 +700,7 @@
       "event": []
     },
     {
-      "id": "8d0bb696-c449-4d92-90d6-150ca8d3dde5",
+      "id": "127763eb-1f30-4b7d-8813-ad444c7ca982",
       "name": "CLIENTLOGO",
       "description": {
         "content": "Routes for clientLogo",
@@ -708,7 +708,7 @@
       },
       "item": [
         {
-          "id": "636f2557-84af-423b-881b-c31723954b74",
+          "id": "9c93f749-9e15-4e8a-8666-7215e49f0b84",
           "name": "Add Client Logo",
           "request": {
             "description": {
@@ -742,7 +742,7 @@
           "event": []
         },
         {
-          "id": "449b8176-8624-4af7-9659-6b5f22874a76",
+          "id": "02e1ab34-2c6f-4ac2-a432-87533e537a9a",
           "name": "Edit Client Logo",
           "request": {
             "description": {
@@ -776,7 +776,7 @@
           "event": []
         },
         {
-          "id": "a44452a7-d4f1-4c85-b015-06b04e626784",
+          "id": "6eadfb86-fef5-4c05-b6b3-6cbe2818fc84",
           "name": "Get Client Logo",
           "request": {
             "description": {
@@ -818,7 +818,7 @@
           "event": []
         },
         {
-          "id": "3a84cb59-d46f-4cd5-9668-6ef10b7e6cd7",
+          "id": "9383d7a6-b2b3-459c-8633-75479a1a26d0",
           "name": "Common Id",
           "request": {
             "description": {
@@ -866,7 +866,7 @@
       }
     },
     {
-      "id": "8b6381ba-0548-43f6-a8af-5fbba70e7451",
+      "id": "90d88a78-ea74-401f-b843-8e243bb71829",
       "name": "SERVICE",
       "description": {
         "content": "Routes for service",
@@ -874,7 +874,7 @@
       },
       "item": [
         {
-          "id": "e9af5712-45a5-478a-a354-e7a08e968435",
+          "id": "3cf822a2-fd32-41a8-b6e2-897a3bc648c2",
           "name": "Add Service",
           "request": {
             "description": {
@@ -908,7 +908,7 @@
           "event": []
         },
         {
-          "id": "28fd4692-a895-41d5-95ec-c147b27388fa",
+          "id": "022b8639-6db2-409f-b7d7-0630811a06a8",
           "name": "Edit Service",
           "request": {
             "description": {
@@ -942,7 +942,7 @@
           "event": []
         },
         {
-          "id": "c09c874a-d9f1-4906-a1b6-0bf08963d391",
+          "id": "af527d06-66d1-418c-9f48-4f8be68805e5",
           "name": "Get Service",
           "request": {
             "description": {
@@ -984,7 +984,7 @@
           "event": []
         },
         {
-          "id": "2e3d319e-1abc-498e-9d14-d6568a0c8cc6",
+          "id": "4582b045-e31f-45fe-89a9-1408a29601cb",
           "name": "Common Id",
           "request": {
             "description": {
@@ -1032,7 +1032,7 @@
       }
     },
     {
-      "id": "2be2391c-ead3-4207-9fdb-257de2768bd9",
+      "id": "ff142a5a-a2bc-4a28-b58d-baecce2c2ea5",
       "name": "OURSERVICE",
       "description": {
         "content": "Routes for ourService",
@@ -1040,7 +1040,7 @@
       },
       "item": [
         {
-          "id": "b06e2cd6-ac52-42ec-ba6a-69a244a53634",
+          "id": "3c96558d-b5b8-499f-a012-930ff423e070",
           "name": "Add Our Service",
           "request": {
             "description": {
@@ -1074,7 +1074,7 @@
           "event": []
         },
         {
-          "id": "0451eb8b-a93b-41b4-b82d-26fe0a836857",
+          "id": "ed33a3ac-3027-4dfd-90b9-932f647236da",
           "name": "Edit Our Service",
           "request": {
             "description": {
@@ -1108,7 +1108,7 @@
           "event": []
         },
         {
-          "id": "86fd6e2b-ead8-4a31-b414-4c04c7eb396e",
+          "id": "09ed5c44-0265-4a8b-8051-a1b925d52b26",
           "name": "Get Our Service",
           "request": {
             "description": {
@@ -1154,7 +1154,7 @@
           "event": []
         },
         {
-          "id": "8206d692-08f8-45ff-8160-9473526342ba",
+          "id": "8e58ef63-9bff-4e8f-ae61-b8473df77bc5",
           "name": "Delete Our Service",
           "request": {
             "description": {
@@ -1189,7 +1189,7 @@
           "event": []
         },
         {
-          "id": "69489d9a-f0d2-4e38-884e-1a8a5e6d553a",
+          "id": "ffd4f00b-7014-4bf6-8846-2bba9f948499",
           "name": "Get Our Service By Id",
           "request": {
             "description": {
@@ -1237,7 +1237,7 @@
       }
     },
     {
-      "id": "e71a9721-2c07-4651-aa29-5f157dcdcd0d",
+      "id": "743a4383-bd66-4c40-a9cd-6db64b14d0c1",
       "name": "PORTFOLIO",
       "description": {
         "content": "Routes for portfolio",
@@ -1245,7 +1245,7 @@
       },
       "item": [
         {
-          "id": "4ee82d80-f705-4e05-a44a-3faf939bd3ff",
+          "id": "ee27ba7b-5d6f-459c-bbdf-346fa609f969",
           "name": "Add Portfolio",
           "request": {
             "description": {
@@ -1279,7 +1279,7 @@
           "event": []
         },
         {
-          "id": "944d59d6-02a0-489f-8b37-91db12f9c5b2",
+          "id": "fc7741eb-fb13-4dea-b11c-80affef7724d",
           "name": "Edit Portfolio",
           "request": {
             "description": {
@@ -1313,7 +1313,7 @@
           "event": []
         },
         {
-          "id": "3cf9035c-b626-4cb0-b16f-95a3a154bc83",
+          "id": "683179eb-4316-44e1-b62f-15004b8ee367",
           "name": "Get Portfolio",
           "request": {
             "description": {
@@ -1363,7 +1363,7 @@
           "event": []
         },
         {
-          "id": "ba58e762-b301-428f-aa4c-1e44cc196b5f",
+          "id": "defe38ff-0068-4dc3-9e20-78901d45ca51",
           "name": "Delete Portfolio",
           "request": {
             "description": {
@@ -1398,7 +1398,7 @@
           "event": []
         },
         {
-          "id": "5e415632-7ae1-4041-953b-2a4821ec35e5",
+          "id": "42870695-0cb3-4a35-b744-6a65d0e4fdbc",
           "name": "Get Portfolio By Id",
           "request": {
             "description": {
@@ -1446,7 +1446,7 @@
       }
     },
     {
-      "id": "89c54d24-8e43-4759-9bf5-61e7f17d78ce",
+      "id": "5fb6038f-a7f4-4b2e-9837-dbcc0229e978",
       "name": "WORKEXPERIENCE",
       "description": {
         "content": "Routes for workExperience",
@@ -1454,7 +1454,7 @@
       },
       "item": [
         {
-          "id": "0b9c6fba-05f7-4696-b205-91ca7a84336c",
+          "id": "af4cc435-e9da-4d0e-a901-80a14f65acd5",
           "name": "Add Work Experience",
           "request": {
             "description": {
@@ -1488,7 +1488,7 @@
           "event": []
         },
         {
-          "id": "ab6a20c8-5959-4ade-bd78-c1a51750343c",
+          "id": "7577e909-0a9e-4d3d-a50f-8f5e88e0a4eb",
           "name": "Edit Work Experience",
           "request": {
             "description": {
@@ -1522,7 +1522,7 @@
           "event": []
         },
         {
-          "id": "57760843-bae1-4d04-bd83-2a795f6ac1b5",
+          "id": "c5630925-7609-4963-896b-b03e44b63b3b",
           "name": "Get Work Experience",
           "request": {
             "description": {
@@ -1564,7 +1564,7 @@
           "event": []
         },
         {
-          "id": "0b0d4320-0ef2-4e27-b8e7-68dbbc469012",
+          "id": "9d31db87-b43e-4b32-b5df-0238f07afb69",
           "name": "Common Id",
           "request": {
             "description": {
@@ -1612,7 +1612,7 @@
       }
     },
     {
-      "id": "bcfe9f11-61ce-483e-8562-a675e5bb1e92",
+      "id": "e5f58625-13c3-4839-8916-b09f5b805dfd",
       "name": "SKILL",
       "description": {
         "content": "Routes for skill",
@@ -1620,7 +1620,7 @@
       },
       "item": [
         {
-          "id": "e3433115-e7e7-4b84-9303-7fe8305af1be",
+          "id": "17c7f53a-4e0a-4bcd-8ccf-4be296a41a1e",
           "name": "Add Skill",
           "request": {
             "description": {
@@ -1654,7 +1654,7 @@
           "event": []
         },
         {
-          "id": "0c3eb45e-ed78-435c-b9f6-4e68bba99036",
+          "id": "83dcc567-d488-45e3-a846-5fdd2b1cbbf5",
           "name": "Edit Skill",
           "request": {
             "description": {
@@ -1688,7 +1688,7 @@
           "event": []
         },
         {
-          "id": "bff6c606-e88e-4405-9f66-f00d890ee082",
+          "id": "bf8713f8-31ab-43b5-801c-93ec83c8c6b4",
           "name": "Get Skill",
           "request": {
             "description": {
@@ -1730,7 +1730,7 @@
           "event": []
         },
         {
-          "id": "3f8f88a1-7ec1-4fce-98de-df2eceb270d2",
+          "id": "7b720e5f-9803-44d1-88d6-bf117e999005",
           "name": "Common Id",
           "request": {
             "description": {
@@ -1778,7 +1778,7 @@
       }
     },
     {
-      "id": "3d7b5f1f-694c-44b5-a94a-20821611bc31",
+      "id": "7567b4c4-3ed1-4003-8125-d9a6b3272bfd",
       "name": "AWARDS",
       "description": {
         "content": "Routes for awards",
@@ -1786,7 +1786,7 @@
       },
       "item": [
         {
-          "id": "57e92646-bfb5-4b3a-ade7-32d1e02bfd04",
+          "id": "dffbf150-62fc-45ca-9bc1-08073251063e",
           "name": "Add Awards",
           "request": {
             "description": {
@@ -1820,7 +1820,7 @@
           "event": []
         },
         {
-          "id": "037f755a-3e2d-4926-b612-0cdb25fe78f3",
+          "id": "7ea72c03-89ea-4862-9ad5-eb879e500cd3",
           "name": "Edit Awards",
           "request": {
             "description": {
@@ -1854,7 +1854,7 @@
           "event": []
         },
         {
-          "id": "2e0acbd4-c692-4c37-ab74-8256e6023b51",
+          "id": "573c4e03-adfe-47c8-b895-b043de171df2",
           "name": "Get Awards",
           "request": {
             "description": {
@@ -1896,7 +1896,7 @@
           "event": []
         },
         {
-          "id": "4b667e53-f865-4645-a3a4-4b6c29d91794",
+          "id": "f39c6f97-d4ba-4d19-9cf1-1539f4eb1689",
           "name": "Common Id",
           "request": {
             "description": {
@@ -1944,7 +1944,7 @@
       }
     },
     {
-      "id": "7098df4e-131d-42c6-bb22-a0e1879c7f31",
+      "id": "1f288f32-20a3-4707-aba3-97294de407fb",
       "name": "TESTIMONIALDESCRIPTION",
       "description": {
         "content": "Routes for testimonialDescription",
@@ -1952,7 +1952,7 @@
       },
       "item": [
         {
-          "id": "089a0421-465f-40a0-b6ea-47a0ffc593dd",
+          "id": "778f9499-ffc8-45e4-8d89-b9fc54acb3f3",
           "name": "Update Testimonial Description",
           "request": {
             "description": {
@@ -1986,7 +1986,7 @@
           "event": []
         },
         {
-          "id": "35bc2dc6-de29-46aa-b496-dd866683097c",
+          "id": "4d19ee7f-5f71-4be5-b562-c61a5fbbc6de",
           "name": "Get Get",
           "request": {
             "description": {
@@ -2024,7 +2024,7 @@
       }
     },
     {
-      "id": "1d4ceaba-fe1a-44c5-a919-548556dc5b4a",
+      "id": "ab3d2227-d849-4ca5-ac53-34fec39a8248",
       "name": "TESTIMONIAL",
       "description": {
         "content": "Routes for testimonial",
@@ -2032,7 +2032,7 @@
       },
       "item": [
         {
-          "id": "bd274aac-ec4b-4812-aa4f-b0fe00ad0e01",
+          "id": "f48a7349-8ea4-4339-98ad-4820b951e52a",
           "name": "Add Testimonial",
           "request": {
             "description": {
@@ -2066,7 +2066,7 @@
           "event": []
         },
         {
-          "id": "c0a65064-2c7e-40aa-b772-a6f8b01ad4ec",
+          "id": "de94d273-0e9e-42cd-a09b-1f81e13225e6",
           "name": "Edit Testimonial",
           "request": {
             "description": {
@@ -2100,7 +2100,7 @@
           "event": []
         },
         {
-          "id": "94762ef9-c31a-4178-ab02-ad0efe116272",
+          "id": "245749f2-fdee-42cc-bd10-e67c836b2449",
           "name": "Get Testimonial",
           "request": {
             "description": {
@@ -2142,7 +2142,7 @@
           "event": []
         },
         {
-          "id": "1e096770-aec4-4fe5-80cc-412236fedf12",
+          "id": "992094fa-17da-44d1-ba4e-38c2904b6e9f",
           "name": "Common Id",
           "request": {
             "description": {
@@ -2190,7 +2190,7 @@
       }
     },
     {
-      "id": "d631497d-a24c-4511-82f6-0450d0340fbb",
+      "id": "0f44fa28-7156-42c8-8a92-194f35a8b8aa",
       "name": "BLOG",
       "description": {
         "content": "Routes for blog",
@@ -2198,7 +2198,7 @@
       },
       "item": [
         {
-          "id": "4eb12a5a-f7c6-4b6f-9dd9-0731ef86699a",
+          "id": "ed503b8c-46b0-4ea7-ab1f-8e3b6c686e9a",
           "name": "Add Blog",
           "request": {
             "description": {
@@ -2232,7 +2232,7 @@
           "event": []
         },
         {
-          "id": "070ac39f-22ff-406f-b1e6-e23fcc0b88c5",
+          "id": "f42bb9bd-60e5-46ca-8faf-51c3b403cf56",
           "name": "Edit Blog",
           "request": {
             "description": {
@@ -2266,7 +2266,7 @@
           "event": []
         },
         {
-          "id": "333294d0-059a-465c-9844-20853f35fa00",
+          "id": "4e91e6c7-3632-45d0-aaa1-14067fe62a6f",
           "name": "Get Blog",
           "request": {
             "description": {
@@ -2312,7 +2312,7 @@
           "event": []
         },
         {
-          "id": "bd7e112c-2d67-41e9-b1ed-f6b71d57a271",
+          "id": "87fc4359-6761-4811-a9f5-eedeba66581d",
           "name": "Delete Blog",
           "request": {
             "description": {
@@ -2347,7 +2347,7 @@
           "event": []
         },
         {
-          "id": "f1b48c93-b933-4723-bdd4-046f66f5182b",
+          "id": "3524286d-59f7-4ca8-aac0-66c5ef4e5df5",
           "name": "Get Blog By Id",
           "request": {
             "description": {
@@ -2395,7 +2395,7 @@
       }
     },
     {
-      "id": "2afc15d5-a02d-4f82-895d-cccd0be92e17",
+      "id": "3edb6f83-a836-4352-be3a-5282e7604109",
       "name": "CONTACTUS",
       "description": {
         "content": "Routes for contactUs",
@@ -2403,7 +2403,7 @@
       },
       "item": [
         {
-          "id": "35b81538-c068-4fd4-bdd7-dfb787bbbc55",
+          "id": "db02cd1b-402c-4cf9-93b6-a36b14b63750",
           "name": "Add Contact Us",
           "request": {
             "description": {
@@ -2437,7 +2437,7 @@
           "event": []
         },
         {
-          "id": "8e3eb4a3-a973-4d7b-ac82-181a8c25be9e",
+          "id": "91bd7b25-b4de-4a70-b824-b68a8ec3438c",
           "name": "Edit Contact Us",
           "request": {
             "description": {
@@ -2471,7 +2471,7 @@
           "event": []
         },
         {
-          "id": "71c06b2e-f5f0-41e5-ae2f-c2d44e8e708f",
+          "id": "9eb3310e-6a86-4a62-bf08-58c7e19cda4a",
           "name": "Get Contact Us",
           "request": {
             "description": {
@@ -2513,7 +2513,7 @@
           "event": []
         },
         {
-          "id": "73e51dec-758f-4913-9c49-f31b7bf6cd8c",
+          "id": "c9b1a62d-455a-4373-9852-5619b16296a5",
           "name": "Common Id",
           "request": {
             "description": {
@@ -2561,7 +2561,7 @@
       }
     },
     {
-      "id": "d8e88897-2a40-45e7-922a-1443df903369",
+      "id": "33f74768-9d1d-4904-abc7-b979a8bf1fab",
       "name": "MYACHIEVEMENT",
       "description": {
         "content": "Routes for myAchievement",
@@ -2569,7 +2569,7 @@
       },
       "item": [
         {
-          "id": "86685a4d-a5fb-4e88-ba2a-e78b03fac62b",
+          "id": "fac681d9-0bca-40e0-ae2b-7599ded618e0",
           "name": "Add My Achievement",
           "request": {
             "description": {
@@ -2603,7 +2603,7 @@
           "event": []
         },
         {
-          "id": "79c1f3e1-89ae-4ea1-8a56-52113692416c",
+          "id": "ed3e9fd3-48f3-43f7-b850-2f7788943016",
           "name": "Edit My Achievement",
           "request": {
             "description": {
@@ -2637,7 +2637,7 @@
           "event": []
         },
         {
-          "id": "3dbe265c-7231-4245-be0d-81cb612fd0a5",
+          "id": "e7c8fa69-9b91-4ce7-bbe6-9059c0058c20",
           "name": "Get My Achievement",
           "request": {
             "description": {
@@ -2679,7 +2679,7 @@
           "event": []
         },
         {
-          "id": "1f3977c1-41da-4c69-9159-c74b67c9d58b",
+          "id": "35053e35-0c51-4bca-afaf-21c510216447",
           "name": "Common Id",
           "request": {
             "description": {
@@ -2727,7 +2727,7 @@
       }
     },
     {
-      "id": "f71b3afc-811c-4410-9e48-b30d9c8934ee",
+      "id": "28e9ff35-d267-4d08-b8cb-43c4d4cdcdc3",
       "name": "PRIVACYPOLICY",
       "description": {
         "content": "Routes for privacyPolicy",
@@ -2735,7 +2735,7 @@
       },
       "item": [
         {
-          "id": "48422989-e396-42cd-ba45-cd4394b1acc8",
+          "id": "497692f3-4581-4112-a98f-860c5e31d183",
           "name": "Update Privacy Policy",
           "request": {
             "description": {
@@ -2769,7 +2769,7 @@
           "event": []
         },
         {
-          "id": "c3f1656f-f7c9-4e3d-b244-943c07b4ca9d",
+          "id": "b4094c70-6a7d-4b57-a5cc-4fff4254d316",
           "name": "Get Get",
           "request": {
             "description": {
@@ -2807,7 +2807,7 @@
       }
     },
     {
-      "id": "f18384bd-2234-4455-9aaf-f4238a8b95cb",
+      "id": "4a764124-0af5-4aba-ac20-dece8dd2806d",
       "name": "TERMSCONDITIONS",
       "description": {
         "content": "Routes for termsConditions",
@@ -2815,7 +2815,7 @@
       },
       "item": [
         {
-          "id": "d7759584-e7cd-49a3-8ba3-4a7ce60eb075",
+          "id": "16f90285-32fb-4ca9-b300-a3249d9de120",
           "name": "Update Terms Conditions",
           "request": {
             "description": {
@@ -2849,7 +2849,7 @@
           "event": []
         },
         {
-          "id": "73b5d01c-5ea2-4f8a-a247-f2726a117bb6",
+          "id": "8c2a8b1b-feb7-4ee0-b4c1-0e8445a1d4a3",
           "name": "Get Get",
           "request": {
             "description": {
@@ -2887,7 +2887,7 @@
       }
     },
     {
-      "id": "03e8bb19-0da4-444b-8de2-99c1e697a400",
+      "id": "fa4238be-bb72-4d4d-b2a6-77cd9bcd10d3",
       "name": "SETTING",
       "description": {
         "content": "Routes for setting",
@@ -2895,7 +2895,7 @@
       },
       "item": [
         {
-          "id": "0e223e9d-e2e5-4958-815e-254974a96eb3",
+          "id": "a29c7df4-42c9-40db-8fec-d76168f4ab4c",
           "name": "Update Setting",
           "request": {
             "description": {
@@ -2922,14 +2922,14 @@
             "method": "PUT",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"bookMeeting\": {\n    \"link\": \"sample_link\",\n    \"phoneNo\": {\n      \"countryCode\": \"sample_countryCode\",\n      \"number\": \"sample_number\"\n    },\n    \"email\": \"test@example.com\",\n    \"address\": \"sample_address\"\n  },\n  \"isActive\": true\n}"
+              "raw": "{\n  \"bookMeeting\": {\n    \"link\": \"sample_link\",\n    \"phoneNo\": {\n      \"countryCode\": \"91\",\n      \"number\": \"1234567893\"\n    },\n    \"email\": \"test@example.com\",\n    \"address\": \"sample_address\"\n  },\n  \"isActive\": true\n}"
             }
           },
           "response": [],
           "event": []
         },
         {
-          "id": "d9dd816f-86cb-4548-8783-26c6dccea8ea",
+          "id": "86756ccb-c4bc-4be7-88d9-d33413e67e1f",
           "name": "Get Get",
           "request": {
             "description": {
@@ -2981,7 +2981,7 @@
     }
   ],
   "info": {
-    "_postman_id": "b102dd4b-7c40-41fd-94fc-4de6cda46b87",
+    "_postman_id": "516386ce-25fc-4929-a2f5-1315f4009f58",
     "name": "Delvoura API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {

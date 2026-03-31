@@ -1,8 +1,8 @@
 import { apiResponse, HTTP_STATUS } from "../../common";
-import { blogModel, serviceModel } from "../../database";
-import { checkIdExist, countData, createOne, findAllAndPopulate, getFirstMatch, reqInfo, responseMessage, updateData } from "../../helper";
+import { blogModel } from "../../database";
+import { countData, createOne, findAllAndPopulate, getFirstMatch, reqInfo, responseMessage, updateData } from "../../helper";
 import { IBlogCriteria, IBlogValidate, ICommonIdValidate, IGetBlogValidate } from "../../type";
-import { addBlogSchema, commonIdSchema as deleteBlogSchema, commonIdSchema as getBlogByIdSchema, editBlogSchema, getBlogSchema } from "../../validation";
+import { addBlogSchema, commonIdSchema as deleteBlogSchema, editBlogSchema, commonIdSchema as getBlogByIdSchema, getBlogSchema } from "../../validation";
 
 const ObjectId = require("mongoose").Types.ObjectId;
 
