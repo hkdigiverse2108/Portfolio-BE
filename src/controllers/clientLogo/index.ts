@@ -81,7 +81,7 @@ export const deleteClientLogo = async (req, res) => {
 export const getAllClientLogo = async (req, res) => {
   reqInfo(req);
   try {
-    const { error, value }: IGetCommonValidate = await getClientLogoSchema.validate(req.query);
+    const { error, value }: IGetCommonValidate = getClientLogoSchema.validate(req.query);
     if (error) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, error?.details[0]?.message, {}, {}));
 
     let { page, limit, search, activeFilter } = value;

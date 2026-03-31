@@ -15,6 +15,7 @@ import { awardsRouter } from "./awards";
 import { testimonialDescriptionRouter } from "./testimonialDescription";
 import { testimonialRouter } from "./testimonial";
 import { blogRouter } from "./blog";
+import { contactUsRouter } from "./contactUs";
 
 const router = Router();
 
@@ -33,5 +34,6 @@ router.use("/awards", awardsRouter);
 router.use("/testimonial-description", testimonialDescriptionRouter);
 router.use("/testimonial", testimonialRouter);
 router.use("/blog", blogRouter);
+router.use("/contact-us", contactUsRouter);
 
 export { router };

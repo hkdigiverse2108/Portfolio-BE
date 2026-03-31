@@ -13,3 +13,4 @@ export * as awardsController from "./awards";
 export * as testimonialDescriptionController from "./testimonialDescription";
 export * as testimonialController from "./testimonial";
 export * as blogController from "./blog";
+export * as contactUsController from "./contactUs";
