@@ -14,7 +14,7 @@ const portfolioSocialLinkSchema = Joi.object({
 });
 
 export const addPortfolioSchema = Joi.object<IPortfolio>({
-  thumbnailImage: Joi.string().required(),
+  thumbnailImage: Joi.string().optional(),
   title: Joi.string().required(),
   subTitle: Joi.string().optional(),
   serviceIds: Joi.array().items(objectId()).optional(),
