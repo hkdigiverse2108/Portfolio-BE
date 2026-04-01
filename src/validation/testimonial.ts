@@ -15,7 +15,7 @@ export const editTestimonialSchema = Joi.object<ITestimonial>({
   name: Joi.string().optional(),
   designation: Joi.string().optional(),
   description: Joi.string().optional(),
-  image: Joi.string().optional(),
+  image: Joi.string().optional().allow("", null),
   ...baseApiSchema,
 });
 

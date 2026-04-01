@@ -24,7 +24,7 @@ export const editOurServiceSchema = Joi.object<IOurService>({
   title: Joi.string().optional(),
   shortDescription: Joi.string().optional(),
   description: Joi.string().optional(),
-  thumbnailImage: Joi.string().optional(),
+  thumbnailImage: Joi.string().optional().allow("", null),
   serviceIds: Joi.array().items(objectId()).optional(),
   images: Joi.array().items(Joi.string()).optional(),
   tagLine: Joi.string().optional(),

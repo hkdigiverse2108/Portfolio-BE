@@ -12,8 +12,8 @@ export const addAwardsSchema = Joi.object<IAwards>({
 
 export const editAwardsSchema = Joi.object<IAwards>({
   awardsId: objectId().required(),
-  image: Joi.string().optional(),
-  iconImage: Joi.string().optional(),
+  image: Joi.string().optional().allow("", null),
+  iconImage: Joi.string().optional().allow("", null),
   title: Joi.string().optional(),
   date: Joi.date().optional(),
   ...baseApiSchema,

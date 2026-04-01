@@ -16,7 +16,7 @@ export const addBlogSchema = Joi.object<IBlog>({
 
 export const editBlogSchema = Joi.object<IBlog>({
   blogId: objectId().required(),
-  thumbnailImage: Joi.string().optional(),
+  thumbnailImage: Joi.string().optional().allow("", null),
   serviceId: objectId().optional(),
   date: Joi.date().optional(),
   title: Joi.string().optional(),

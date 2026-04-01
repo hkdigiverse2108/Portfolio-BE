@@ -17,7 +17,7 @@ export const editMyAchievementSchema = Joi.object<IMyAchievement>({
   title: Joi.string().optional(),
   description: Joi.string().optional(),
   link: Joi.string().optional(),
-  image: Joi.string().optional(),
+  image: Joi.string().optional().allow("", null),
   btnTitle: Joi.string().optional(),
   btnLink: Joi.string().optional(),
   ...baseApiSchema,

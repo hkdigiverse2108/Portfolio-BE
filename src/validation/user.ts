@@ -18,7 +18,7 @@ export const updateUserSchema = Joi.object({
   email: Joi.string().optional().allow(""),
   phoneNo: commonContactSchema.optional(),
   password: Joi.string().optional().allow(""),
-  profileImage: Joi.string().optional().allow(""),
+  profileImage: Joi.string().optional().allow("", null),
   otp: Joi.number().optional().allow(null),
   otpExpireTime: Joi.date().optional().allow(null),
   socialMediaLinks: Joi.array().items(socialMediaLinkSchema).optional(),

@@ -12,7 +12,7 @@ export const addClientLogoSchema = Joi.object<IClientLogo>({
 export const editClientLogoSchema = Joi.object<IClientLogo>({
   clientLogoId: objectId().required(),
   name: Joi.string().optional(),
-  image: Joi.string().optional(),
+  image: Joi.string().optional().allow("", null),
   link: Joi.string().optional(),
   ...baseApiSchema,
 });
