@@ -11,9 +11,9 @@ export const addWorkExperienceSchema = Joi.object<IWorkExperience>({
 
 export const editWorkExperienceSchema = Joi.object<IWorkExperience>({
   workExperienceId: objectId().required(),
-  year: Joi.number().optional(),
-  title: Joi.string().optional(),
-  subTitle: Joi.string().optional(),
+  year: Joi.number().optional().allow(null),
+  title: Joi.string().optional().allow("", null),
+  subTitle: Joi.string().optional().allow("", null),
   ...baseApiSchema,
 });
 

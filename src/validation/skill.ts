@@ -13,7 +13,7 @@ export const editSkillSchema = Joi.object<ISkill>({
   skillId: objectId().required(),
   image: Joi.string().optional().allow("", null),
   title: Joi.string().optional(),
-  percentage: Joi.number().optional(),
+  percentage: Joi.number().optional().allow(null),
   ...baseApiSchema,
 });
 

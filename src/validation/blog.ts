@@ -17,12 +17,12 @@ export const addBlogSchema = Joi.object<IBlog>({
 export const editBlogSchema = Joi.object<IBlog>({
   blogId: objectId().required(),
   thumbnailImage: Joi.string().optional().allow("", null),
-  serviceId: objectId().optional(),
-  date: Joi.date().optional(),
-  title: Joi.string().optional(),
-  description: Joi.string().optional(),
+  serviceId: objectId().optional().allow(null),
+  date: Joi.date().optional().allow(null),
+  title: Joi.string().optional().allow("", null),
+  description: Joi.string().optional().allow("", null),
   images: Joi.array().items(Joi.string()).optional(),
-  tagLine: Joi.string().optional(),
+  tagLine: Joi.string().optional().allow("", null),
   tags: Joi.array().items(Joi.string()).optional(),
   ...baseApiSchema,
 });

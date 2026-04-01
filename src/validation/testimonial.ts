@@ -13,8 +13,8 @@ export const addTestimonialSchema = Joi.object<ITestimonial>({
 export const editTestimonialSchema = Joi.object<ITestimonial>({
   testimonialId: objectId().required(),
   name: Joi.string().optional(),
-  designation: Joi.string().optional(),
-  description: Joi.string().optional(),
+  designation: Joi.string().optional().allow("", null),
+  description: Joi.string().optional().allow("", null),
   image: Joi.string().optional().allow("", null),
   ...baseApiSchema,
 });
