@@ -12,8 +12,8 @@ import path from "path";
 import { responseMessage } from "./helper";
 
 const app = express();
-console.log("path.join => ",path.join(__dirname, "..", "..", "public", "images"));
-app.use("/public", express.static(path.join(__dirname, "..", "..", "public", "images")));
+
+app.use("/public", express.static(path.join(__dirname, "..", "..", "public")));
 
 app.use(cors());
 app.use(mongooseConnection);
