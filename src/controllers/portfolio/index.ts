@@ -86,7 +86,7 @@ export const getAllPortfolio = async (req, res) => {
       ...(search && { title: { $regex: search, $options: "si" } }),
       ...(serviceFilter && { serviceIds: { $in: [new ObjectId(serviceFilter)] } }),
     };
-    const options = { sort: { priority: 1 }, skip: (page - 1) * limit, limit };
+    const options = { sort: { createdAt: -1 }, skip: (page - 1) * limit, limit };
 
     const [response, totalData] = await Promise.all([findAllAndPopulate(portfolioModel, criteria, {}, options, { path: "serviceIds", select: "_id name" }), countData(portfolioModel, criteria)]);
     const totalPages = Math.ceil(totalData / limit) || 1;
