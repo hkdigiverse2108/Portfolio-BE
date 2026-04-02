@@ -23,5 +23,6 @@ export const updateUserSchema = Joi.object({
   otpExpireTime: Joi.date().optional().allow(null),
   socialMediaLinks: Joi.array().items(socialMediaLinkSchema).optional(),
   offers: Joi.array().items(Joi.string()).optional(),
+  logoTitle: Joi.string().optional().allow("", null),
   ...baseApiSchema,
 });

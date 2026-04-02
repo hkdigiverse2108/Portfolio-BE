@@ -26,6 +26,7 @@ const userSchema = new mongoose.Schema<IUser>(
     otpExpireTime: { type: Date, default: null },
     socialMediaLinks: { type: [socialMediaLinkSchema], default: [] },
     offers: { type: [String], default: [] },
+    logoTitle: { type: String },
     ...baseCommonFields,
   },
   baseSchemaOptions,

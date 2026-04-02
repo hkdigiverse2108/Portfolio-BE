@@ -18,6 +18,7 @@ export interface IUser extends IBase {
   otpExpireTime?: Date;
   socialMediaLinks?: ISocialMediaLink[];
   offers?: string[];
+  logoTitle?: string;
 }
 
 export type IUserValidate = IValidate & { value: IUser };
