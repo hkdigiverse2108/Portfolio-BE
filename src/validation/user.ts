@@ -3,12 +3,12 @@ import { baseApiSchema, commonContactSchema } from "./common";
 import { SOCIAL_MEDIA_TYPE } from "../common/enum";
 
 const socialMediaLinkSchema = Joi.object({
-  title: Joi.string()
+  icon: Joi.string()
     .valid(...Object.values(SOCIAL_MEDIA_TYPE))
     .default(SOCIAL_MEDIA_TYPE.INSTAGRAM)
     .optional(),
   link: Joi.string().required().allow(""),
-  icon: Joi.string().required().allow(""),
+  title: Joi.string().required().allow(""),
   ...baseApiSchema,
 });
 
