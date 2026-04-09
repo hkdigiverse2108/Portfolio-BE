@@ -1,5 +1,5 @@
 import { apiResponse, HTTP_STATUS } from "../../common";
-import { portfolioModel, serviceModel } from "../../database";
+import { businessCategoryModel, portfolioModel, serviceModel } from "../../database";
 import { checkIdExist, countData, createOne, findAllAndPopulate, getFirstMatch, reqInfo, responseMessage, updateData } from "../../helper";
 import { ICommonIdValidate, IGetPortfolioValidate, IPortfolioCriteria, IPortfolioValidate } from "../../type";
 import { addPortfolioSchema, commonIdSchema as deletePortfolioSchema, commonIdSchema as getPortfolioByIdSchema, editPortfolioSchema, getPortfolioSchema } from "../../validation";
@@ -14,6 +14,7 @@ export const addPortfolio = async (req, res) => {
     if (error) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, error?.details[0].message, {}, {}));
 
     if (value?.serviceIds?.length && !(await Promise.all(value.serviceIds.map((s) => checkIdExist(serviceModel, s, "Service", res)))).every(Boolean)) return;
+    if (value?.businessCategoryIds?.length && !(await Promise.all(value.businessCategoryIds.map((s) => checkIdExist(businessCategoryModel, s, "Business Category", res)))).every(Boolean)) return;
 
     value.createdBy = user?._id;
     value.updatedBy = user?._id;
@@ -36,6 +37,7 @@ export const editPortfolio = async (req, res) => {
     if (error) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, error?.details[0].message, {}, {}));
 
     if (value?.serviceIds?.length && !(await Promise.all(value.serviceIds.map((s) => checkIdExist(serviceModel, s, "Service", res)))).every(Boolean)) return;
+    if (value?.businessCategoryIds?.length && !(await Promise.all(value.businessCategoryIds.map((s) => checkIdExist(businessCategoryModel, s, "Business Category", res)))).every(Boolean)) return;
 
     value.updatedBy = user?._id;
 
@@ -75,7 +77,7 @@ export const getAllPortfolio = async (req, res) => {
     const { error, value }: IGetPortfolioValidate = await getPortfolioSchema.validate(req.query);
     if (error) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, error?.details[0]?.message, {}, {}));
 
-    let { page, limit, search, activeFilter, serviceFilter, featuredFilter } = value;
+    let { page, limit, search, activeFilter, serviceFilter, featuredFilter, businessCategoryFilter } = value;
     page = Number(page);
     limit = Number(limit);
 
@@ -85,10 +87,16 @@ export const getAllPortfolio = async (req, res) => {
       ...(featuredFilter !== undefined && { isFeatured: featuredFilter === true }),
       ...(search && { title: { $regex: search, $options: "si" } }),
       ...(serviceFilter && { serviceIds: { $in: [new ObjectId(serviceFilter)] } }),
+      ...(businessCategoryFilter && { businessCategoryIds: { $in: [new ObjectId(businessCategoryFilter)] } }),
     };
     const options = { sort: { createdAt: -1 }, skip: (page - 1) * limit, limit };
 
-    const [response, totalData] = await Promise.all([findAllAndPopulate(portfolioModel, criteria, {}, options, { path: "serviceIds", select: "_id name" }), countData(portfolioModel, criteria)]);
+    const populate = [
+      { path: "serviceIds", select: "_id name" },
+      { path: "businessCategoryIds", select: "_id name" },
+    ];
+
+    const [response, totalData] = await Promise.all([findAllAndPopulate(portfolioModel, criteria, {}, options, populate), countData(portfolioModel, criteria)]);
     const totalPages = Math.ceil(totalData / limit) || 1;
     const state = { page, limit, totalPages };
 
@@ -105,7 +113,12 @@ export const getPortfolioById = async (req, res) => {
     const { error, value }: ICommonIdValidate = getPortfolioByIdSchema.validate(req.params);
     if (error) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, error?.details[0]?.message, {}, {}));
 
-    const response = await getFirstMatch(portfolioModel, { _id: value?.id, isDeleted: false }, {}, { populate: { path: "serviceIds", select: "_id name" } });
+    const populate = [
+      { path: "serviceIds", select: "_id name" },
+      { path: "businessCategoryIds", select: "_id name" },
+    ];
+
+    const response = await getFirstMatch(portfolioModel, { _id: value?.id, isDeleted: false }, {}, { populate });
     if (!response) return res.status(HTTP_STATUS.NOT_FOUND).json(new apiResponse(HTTP_STATUS.NOT_FOUND, responseMessage?.getDataNotFound("Portfolio"), {}, {}));
 
     return res.status(HTTP_STATUS.OK).json(new apiResponse(HTTP_STATUS.OK, responseMessage?.getDataSuccess("Portfolio"), response, {}));

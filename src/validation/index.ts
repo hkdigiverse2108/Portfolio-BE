@@ -18,3 +18,4 @@ export * from "./contactUs";
 export * from "./myAchievement";
 export * from "./privacyPolicy";
 export * from "./termsConditions";
+export * from "./businessCategory";

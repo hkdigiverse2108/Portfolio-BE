@@ -17,3 +17,4 @@ export * from "./myAchievement";
 export * from "./privacyPolicy";
 export * from "./termsConditions";
 export * from "./setting";
+export * from "./businessCategory";

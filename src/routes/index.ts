@@ -20,6 +20,7 @@ import { myAchievementRouter } from "./myAchievement";
 import { privacyPolicyRouter } from "./privacyPolicy";
 import { termsConditionsRouter } from "./termsConditions";
 import { settingRouter } from "./setting";
+import { businessCategoryRouter } from "./businessCategory";
 
 const router = Router();
 
@@ -43,5 +44,6 @@ router.use("/my-achievement", myAchievementRouter);
 router.use("/privacy-policy", privacyPolicyRouter);
 router.use("/terms-conditions", termsConditionsRouter);
 router.use("/setting", settingRouter);
+router.use("/business-category", businessCategoryRouter);
 
 export { router };

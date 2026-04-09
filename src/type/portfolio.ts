@@ -13,6 +13,7 @@ export interface IPortfolio extends IBase {
   title?: string;
   subTitle?: string;
   serviceIds?: Schema.Types.ObjectId[];
+  businessCategoryIds?: Schema.Types.ObjectId[];
   isFeatured?: boolean;
   link?: string;
   description?: string;
@@ -27,8 +28,8 @@ export interface IPortfolio extends IBase {
 
 export type IPortfolioValidate = IValidate & { value: IPortfolio };
 
-export type IGetPortfolio = ICommonGetValidate & { serviceFilter?: Schema.Types.ObjectId; featuredFilter?: boolean };
+export type IGetPortfolio = ICommonGetValidate & { serviceFilter?: Schema.Types.ObjectId; businessCategoryFilter?: Schema.Types.ObjectId; featuredFilter?: boolean };
 
 export type IGetPortfolioValidate = IValidate & { value: IGetPortfolio };
 
-export type IPortfolioCriteria = ICommonCriteria & { serviceIds: { $in: Schema.Types.ObjectId[] }; featuredFilter?: boolean };
+export type IPortfolioCriteria = ICommonCriteria & { serviceIds: { $in: Schema.Types.ObjectId[] }; businessCategoryIds: { $in: Schema.Types.ObjectId[] }; featuredFilter?: boolean };

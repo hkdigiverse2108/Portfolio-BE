@@ -18,6 +18,7 @@ const portfolioSchema = new mongoose.Schema<IPortfolio>(
     title: { type: String },
     subTitle: { type: String },
     serviceIds: [{ type: Schema.Types.ObjectId, ref: "service" }],
+    businessCategoryIds: [{ type: Schema.Types.ObjectId, ref: "business-category" }],
     isFeatured: { type: Boolean, default: false },
     link: { type: String },
     description: { type: String },

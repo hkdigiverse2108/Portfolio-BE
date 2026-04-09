@@ -18,6 +18,7 @@ export const addPortfolioSchema = Joi.object<IPortfolio>({
   title: Joi.string().required(),
   subTitle: Joi.string().optional(),
   serviceIds: Joi.array().items(objectId()).optional(),
+  businessCategoryIds: Joi.array().items(objectId()).optional(),
   isFeatured: Joi.boolean().optional(),
   link: Joi.string().optional(),
   description: Joi.string().optional(),
@@ -36,6 +37,7 @@ export const editPortfolioSchema = Joi.object<IPortfolio>({
   title: Joi.string().optional(),
   subTitle: Joi.string().optional().allow("", null),
   serviceIds: Joi.array().items(objectId()).optional(),
+  businessCategoryIds: Joi.array().items(objectId()).optional(),
   isFeatured: Joi.boolean().optional(),
   link: Joi.string().optional().allow("", null),
   description: Joi.string().optional().allow("", null),
@@ -51,5 +53,6 @@ export const editPortfolioSchema = Joi.object<IPortfolio>({
 export const getPortfolioSchema = Joi.object<IGetPortfolio>({
   serviceFilter: objectId().optional(),
   featuredFilter: Joi.boolean().optional(),
+  businessCategoryFilter: objectId().optional(),
   ...baseCommonFieldSchema,
 });
