@@ -11,10 +11,19 @@ export const updateSetting = async (req, res) => {
     const { error, value }: ISettingValidate = await updateSettingSchema.validate(req.body);
     if (error) return res.status(HTTP_STATUS.BAD_REQUEST).json(new apiResponse(HTTP_STATUS.BAD_REQUEST, error?.details[0]?.message, {}, {}));
 
-    value.createdBy = user?._id;
-    value.updatedBy = user?._id;
+    const updatePayload: any = {};
+    if (value.bookMeeting !== undefined) updatePayload.bookMeeting = value.bookMeeting;
+    if (value.razorpay !== undefined) updatePayload.razorpay = value.razorpay;
+    if (user?._id) {
+      updatePayload.updatedBy = user._id;
+      updatePayload.createdBy = user._id;
+    }
 
-    let response = await updateData(settingModel, { isDeleted: false }, value, { upsert: true });
+    let response = await settingModel.findOneAndUpdate(
+      { isDeleted: false },
+      { $set: updatePayload },
+      { new: true, upsert: true }
+    );
     return res.status(HTTP_STATUS.OK).json(new apiResponse(HTTP_STATUS.OK, responseMessage?.updateDataSuccess("Setting"), response, {}));
   } catch (error) {
     console.error(error);

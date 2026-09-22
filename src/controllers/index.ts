@@ -19,3 +19,4 @@ export * as privacyPolicyController from "./privacyPolicy";
 export * as termsConditionsController from "./termsConditions";
 export * as settingController from "./setting";
 export * as businessCategoryController from "./businessCategory";
+export * as webinarController from "./webinar";

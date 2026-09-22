@@ -21,6 +21,7 @@ import { privacyPolicyRouter } from "./privacyPolicy";
 import { termsConditionsRouter } from "./termsConditions";
 import { settingRouter } from "./setting";
 import { businessCategoryRouter } from "./businessCategory";
+import { webinarRouter } from "./webinar";
 
 const router = Router();
 
@@ -45,5 +46,7 @@ router.use("/privacy-policy", privacyPolicyRouter);
 router.use("/terms-conditions", termsConditionsRouter);
 router.use("/setting", settingRouter);
 router.use("/business-category", businessCategoryRouter);
+router.use("/webinar", webinarRouter);
+router.use("/book-demo", webinarRouter);
 
 export { router };

@@ -10,6 +10,11 @@ const settingSchema = new mongoose.Schema<ISetting>(
       address: { type: String },
       phoneNo: phoneNoSchema,
     },
+    razorpay: {
+      keyId: { type: String, trim: true, default: "" },
+      keySecret: { type: String, trim: true, default: "" },
+      isEnabled: { type: Boolean, default: true },
+    },
     ...baseCommonFields,
   },
   baseSchemaOptions,

@@ -18,3 +18,5 @@ export * from "./privacyPolicy";
 export * from "./termsConditions";
 export * from "./setting";
 export * from "./businessCategory";
+export * from "./webinar";
+export * from "./webinarRegistration";
