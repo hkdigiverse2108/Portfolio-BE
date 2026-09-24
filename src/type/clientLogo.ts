@@ -5,6 +5,7 @@ export interface IClientLogo extends IBase {
   name?: string;
   image?: string;
   link?: string;
+  category?: "B2C" | "B2B";
   clientLogoId?: Schema.Types.ObjectId;
 }
 

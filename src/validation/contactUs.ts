@@ -5,7 +5,7 @@ import { ICommonGetValidate } from "../type";
 
 export const addContactUsSchema = Joi.object<IContactUs>({
   name: Joi.string().required(),
-  phoneNo: Joi.number().required(),
+  phoneNo: Joi.alternatives().try(Joi.number(), Joi.string()).required(),
   email: Joi.string().email().lowercase(),
   message: Joi.string().optional(),
   ...baseApiSchema,
@@ -14,7 +14,7 @@ export const addContactUsSchema = Joi.object<IContactUs>({
 export const editContactUsSchema = Joi.object<IContactUs>({
   contactUsId: objectId().required(),
   name: Joi.string().optional(),
-  phoneNo: Joi.number().optional(),
+  phoneNo: Joi.alternatives().try(Joi.number(), Joi.string()).optional(),
   email: Joi.string().email().lowercase().optional().allow("", null),
   message: Joi.string().optional().allow("", null),
   ...baseApiSchema,

@@ -7,6 +7,7 @@ const clientLogoSchema = new mongoose.Schema<IClientLogo>(
     name: { type: String },
     image: { type: String },
     link: { type: String },
+    category: { type: String, enum: ["B2C", "B2B"], default: "B2C" },
     ...baseCommonFields,
   },
   baseSchemaOptions,

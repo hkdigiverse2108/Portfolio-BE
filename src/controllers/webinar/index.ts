@@ -74,9 +74,29 @@ export const registerWebinar = async (req, res) => {
 export const getWebinarRegistrations = async (req, res) => {
   reqInfo(req);
   try {
-    const list = await webinarRegistrationModel
-      .find({ isWebinarRegistration: true, isDeleted: false })
-      .sort({ createdAt: -1 });
+    const page = Number(req.query.page);
+    const limit = Number(req.query.limit);
+    const search = req.query.search as string;
+    const status = req.query.status as string;
+
+    const baseCriteria: any = { isWebinarRegistration: true, isDeleted: false };
+
+    // Filter criteria for list query
+    const listCriteria: any = { ...baseCriteria };
+    if (status && status !== "ALL") {
+      listCriteria.paymentStatus = { $regex: new RegExp(`^${status}$`, "i") };
+    }
+    if (search && search.trim()) {
+      const s = search.trim();
+      listCriteria.$or = [
+        { fullName: { $regex: s, $options: "i" } },
+        { email: { $regex: s, $options: "i" } },
+        { phoneNo: { $regex: s, $options: "i" } },
+        { startupName: { $regex: s, $options: "i" } },
+        { razorpayOrderId: { $regex: s, $options: "i" } },
+        { razorpayPaymentId: { $regex: s, $options: "i" } },
+      ];
+    }
 
     const todayStart = getIstStartOfDay();
     const monthStart = getIstStartOfMonth();
@@ -105,7 +125,12 @@ export const getWebinarRegistrations = async (req, res) => {
       },
     };
 
-    list.forEach((item: any) => {
+    // Calculate analytics on all records matching base criteria
+    const allRecords = await webinarRegistrationModel
+      .find(baseCriteria)
+      .sort({ createdAt: -1 });
+
+    allRecords.forEach((item: any) => {
       const itemDate = new Date(item.createdAt);
       const isSuccess = item.paymentStatus === "success";
       const isFailed = item.paymentStatus === "failed";
@@ -149,6 +174,16 @@ export const getWebinarRegistrations = async (req, res) => {
       }
     });
 
+    const totalData = await webinarRegistrationModel.countDocuments(listCriteria);
+
+    let query = webinarRegistrationModel.find(listCriteria).sort({ createdAt: -1 });
+    if (page && limit) {
+      query = query.skip((page - 1) * limit).limit(limit);
+    }
+    const list = await query;
+    const totalPages = limit ? Math.ceil(totalData / limit) || 1 : 1;
+    const state = { page: page || 1, limit: limit || totalData, totalPages };
+
     return res.status(HTTP_STATUS.OK).json(
       new apiResponse(
         HTTP_STATUS.OK,
@@ -156,6 +191,8 @@ export const getWebinarRegistrations = async (req, res) => {
         {
           analytics,
           list,
+          totalData,
+          state,
         },
         {},
       ),
@@ -190,17 +227,29 @@ export const createRazorpayOrder = async (req, res) => {
       isWebinarRegistration: true,
     });
 
-    // 2. Fetch Razorpay credentials from Settings in DB first
+    // 2. Determine Razorpay credentials: try DB setting first, fallback to .env
     const settingDoc = await settingModel.findOne({ isDeleted: false });
-    const key_id = settingDoc?.razorpay?.keyId || process.env.RAZORPAY_KEY_ID || "";
-    const key_secret = settingDoc?.razorpay?.keySecret || process.env.RAZORPAY_KEY_SECRET || "";
+    const dbKeyId = settingDoc?.razorpay?.keyId || "";
+    const dbKeySecret = settingDoc?.razorpay?.keySecret || "";
+    const envKeyId = process.env.RAZORPAY_KEY_ID || "";
+    const envKeySecret = process.env.RAZORPAY_KEY_SECRET || "";
 
-    let orderId = `order_${registration._id}_${Date.now()}`;
+    const candidateKeys: Array<{ key_id: string; key_secret: string; source: string }> = [];
+    if (dbKeyId && dbKeySecret && !dbKeyId.includes("YourRazorpayKeyId")) {
+      candidateKeys.push({ key_id: dbKeyId, key_secret: dbKeySecret, source: "database" });
+    }
+    if (envKeyId && envKeySecret && envKeyId !== dbKeyId) {
+      candidateKeys.push({ key_id: envKeyId, key_secret: envKeySecret, source: "env" });
+    }
+
+    let orderId: string | null = null;
+    let activeKeyId: string = dbKeyId || envKeyId;
+    let lastError: any = null;
     const orderAmountInPaise = Math.round(amount * 100);
 
-    try {
-      if (key_id && key_secret && !key_id.includes("YourRazorpayKeyId")) {
-        const razorpay = new Razorpay({ key_id, key_secret });
+    for (const cand of candidateKeys) {
+      try {
+        const razorpay = new Razorpay({ key_id: cand.key_id, key_secret: cand.key_secret });
         const rzpOrder = await razorpay.orders.create({
           amount: orderAmountInPaise,
           currency: "INR",
@@ -215,10 +264,23 @@ export const createRazorpayOrder = async (req, res) => {
         });
         if (rzpOrder?.id) {
           orderId = rzpOrder.id;
+          activeKeyId = cand.key_id;
+          break;
         }
+      } catch (rzpError: any) {
+        lastError = rzpError;
+        console.warn(`Razorpay order create failed with ${cand.source} key (${cand.key_id}):`, rzpError?.message || rzpError);
       }
-    } catch (rzpError: any) {
-      console.warn("Razorpay API order create warning:", rzpError?.message || rzpError);
+    }
+
+    if (!orderId) {
+      const errMsg =
+        lastError?.error?.description ||
+        lastError?.message ||
+        "Could not initialize Razorpay order. Please verify your Razorpay API Key ID and Secret in Admin Panel Settings.";
+      return res.status(HTTP_STATUS.BAD_REQUEST).json(
+        new apiResponse(HTTP_STATUS.BAD_REQUEST, errMsg, {}, {})
+      );
     }
 
     registration.razorpayOrderId = orderId;
@@ -234,7 +296,7 @@ export const createRazorpayOrder = async (req, res) => {
           amount: orderAmountInPaise,
           displayAmount: amount,
           currency: "INR",
-          razorpayKeyId: key_id,
+          razorpayKeyId: activeKeyId,
           fullName: value.fullName,
           email: value.email,
           phoneNo: value.phoneNo,
@@ -263,21 +325,30 @@ export const verifyRazorpayPayment = async (req, res) => {
       return res.status(HTTP_STATUS.NOT_FOUND).json(new apiResponse(HTTP_STATUS.NOT_FOUND, "Registration not found", {}, {}));
     }
 
-    // Fetch keySecret from DB setting first
+    // Fetch candidate key secrets from DB setting and env
     const settingDoc = await settingModel.findOne({ isDeleted: false });
-    const key_secret = settingDoc?.razorpay?.keySecret || process.env.RAZORPAY_KEY_SECRET || "";
+    const candidateSecrets = [
+      settingDoc?.razorpay?.keySecret,
+      process.env.RAZORPAY_KEY_SECRET,
+    ].filter(Boolean) as string[];
+
     let isValid = false;
 
-    if (razorpaySignature && razorpayPaymentId && razorpayOrderId && key_secret) {
-      const generatedSignature = crypto
-        .createHmac("sha256", key_secret)
-        .update(`${razorpayOrderId}|${razorpayPaymentId}`)
-        .digest("hex");
-      isValid = generatedSignature === razorpaySignature;
+    if (razorpaySignature && razorpayPaymentId && razorpayOrderId) {
+      for (const secret of candidateSecrets) {
+        const generatedSignature = crypto
+          .createHmac("sha256", secret)
+          .update(`${razorpayOrderId}|${razorpayPaymentId}`)
+          .digest("hex");
+        if (generatedSignature === razorpaySignature) {
+          isValid = true;
+          break;
+        }
+      }
     }
 
     // Also support simulated/test mode if keys are sandbox/mock
-    const isMock = !razorpaySignature || !key_secret || key_secret.includes("YourRazorpayKeySecret") || razorpayPaymentId?.startsWith("pay_simulated_");
+    const isMock = !razorpaySignature || candidateSecrets.length === 0 || candidateSecrets.some((s) => s.includes("YourRazorpayKeySecret")) || razorpayPaymentId?.startsWith("pay_simulated_");
 
     if (isValid || isMock) {
       registration.paymentStatus = "success";

@@ -22,6 +22,8 @@ import { termsConditionsRouter } from "./termsConditions";
 import { settingRouter } from "./setting";
 import { businessCategoryRouter } from "./businessCategory";
 import { webinarRouter } from "./webinar";
+import { podcastShowRouter } from "./podcastShow";
+import { brandRouter } from "./brand";
 
 const router = Router();
 
@@ -48,5 +50,7 @@ router.use("/setting", settingRouter);
 router.use("/business-category", businessCategoryRouter);
 router.use("/webinar", webinarRouter);
 router.use("/book-demo", webinarRouter);
+router.use("/podcast-show", podcastShowRouter);
+router.use("/brand", brandRouter);
 
 export { router };

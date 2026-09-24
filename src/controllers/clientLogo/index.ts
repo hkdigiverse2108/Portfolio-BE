@@ -88,13 +88,20 @@ export const getAllClientLogo = async (req, res) => {
     page = Number(page);
     limit = Number(limit);
 
-    const criteria: ICommonCriteria = {
+    const category = (req.query.category || req.query.categoryFilter) as string;
+
+    const criteria: any = {
       isDeleted: false,
       ...(activeFilter !== undefined && { isActive: activeFilter === true }),
       ...(search && { name: { $regex: search, $options: "si" } }),
+      ...(category && { category }),
     };
 
-    const options = { sort: { createdAt: -1 }, skip: (page - 1) * limit, limit };
+    const options: any = { sort: { createdAt: -1 } };
+    if (page && limit) {
+      options.skip = (page - 1) * limit;
+      options.limit = limit;
+    }
 
     const [response, totalData] = await Promise.all([getData(clientLogoModel, criteria, {}, options), countData(clientLogoModel, criteria)])
     const totalPages = Math.ceil(totalData / limit) || 1;

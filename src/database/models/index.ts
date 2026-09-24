@@ -20,3 +20,5 @@ export * from "./setting";
 export * from "./businessCategory";
 export * from "./webinar";
 export * from "./webinarRegistration";
+export * from "./podcastShow";
+export * from "./brand";

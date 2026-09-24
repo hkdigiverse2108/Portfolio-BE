@@ -20,3 +20,5 @@ export * as termsConditionsController from "./termsConditions";
 export * as settingController from "./setting";
 export * as businessCategoryController from "./businessCategory";
 export * as webinarController from "./webinar";
+export * as podcastShowController from "./podcastShow";
+export * as brandController from "./brand";
